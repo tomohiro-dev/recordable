@@ -2,14 +2,15 @@
 ![Laravel 6.20.32](https://img.shields.io/badge/Laravel-6.20.32-red) 
 ![Node 14.17.5](https://img.shields.io/badge/node-14.17.5-green)
 ![Vue 2.6.14](https://img.shields.io/badge/Vue-2.6.14-green) 
+![mysql 8.0.26](https://img.shields.io/badge/MySQL-8.0.26-blue) 
+![nginx 8.0.26](https://img.shields.io/badge/nginx-1.20.*-darkgreen) 
 <img src="https://img.shields.io/badge/-Docker-EEE.svg?logo=docker&style=flat"> 
 <img src="https://img.shields.io/badge/-Terraform-EEE.svg?logo=terraform&logoColor=7B42BC">
 <img src="https://img.shields.io/badge/-GithubActions-EEE.svg?logo=githubactions&logoColor=black">
 
 ## Set up
 main branchで`git clone`を行ってください。`cd`commandで当Directoryへ移動し、開発を進めてください。 \
-Build errorが出た場合は、エラーの内容に従って都度修正を行ってください。 \
-Code formatterはあらかじめ設定しているので、特に設定をせずそのまま利用可能です。 \
+Build errorが出た場合は、エラーの内容に従って都度修正を行ってください。
 
 **【重要】`git commit`時にコード整形を行う場合は、「コード整形のみ」の`feature branch`を切ってください。**
 
@@ -228,6 +229,10 @@ vue.jsを使った認証機能の追加
 php artisan ui vue --auth
 ```
 
+追加しているライブラリについてはWikiを参照してください。
+【TODO:Wikiのリンクを追加】
+
+
 -----------
 
 **よく使うコマンドリスト**
@@ -257,3 +262,9 @@ php artisan route:clear
 //Viewの部分を実装しているとき
 php artisan view:clear
 ```
+
+## Credit
+
+Big thanks to Jonathan, who is a my language exchange mate living in Austria. \
+Studying with English and Japanese. We make this app together. \
+And thanks to multinational friends.
