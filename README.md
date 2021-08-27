@@ -1,8 +1,25 @@
-DockerをベースとしたLaravel, MySQL, nginxの開発環境。
+# Recordable
 
-# 環境構築手順
-## Codeからgit cloneする
-### cloneしたDirectoryに移動
+
+## Set up
+main branchで`git clone`を行ってください。`cd`commandで当Directoryへ移動し、開発を進めてください。 \
+Build errorが出た場合は、エラーの内容に従って都度修正を行ってください。 \
+Code formatterはあらかじめ設定しているので、特に設定をせずそのまま利用可能です。 \
+
+**【重要】`git commit`時にコード整形を行う場合は、「コード整形のみ」の`feature branch`を切ってください。**
+
+## Project構成
+本Projectは、laravel-vue-docker-template-v2の`main` branchをベースに作成しています。 \
+環境構築手順は**Docker container build**以降を参考に進めてください。
+【TODO:リンクを追加する】
+
+## Directory構成
+「編集中」
+infraにterraformを追加したら書きたい
+
+## 環境構築手順
+
+### Docker container build
 移動したタイミングでDockerを一旦立ち上げる
 ```
 docker compose up -d --build
