@@ -1,5 +1,10 @@
 # Recordable
-
+![Laravel 6.20.32](https://img.shields.io/badge/Laravel-6.20.32-red) 
+![Node 14.17.5](https://img.shields.io/badge/node-14.17.5-green)
+![Vue 2.6.14](https://img.shields.io/badge/Vue-2.6.14-green) 
+<img src="https://img.shields.io/badge/-Docker-EEE.svg?logo=docker&style=flat"> 
+<img src="https://img.shields.io/badge/-Terraform-EEE.svg?logo=terraform&logoColor=7B42BC">
+<img src="https://img.shields.io/badge/-GithubActions-EEE.svg?logo=githubactions&logoColor=black">
 
 ## Set up
 main branchで`git clone`を行ってください。`cd`commandで当Directoryへ移動し、開発を進めてください。 \
@@ -10,7 +15,7 @@ Code formatterはあらかじめ設定しているので、特に設定をせず
 
 ## Project構成
 本Projectは、laravel-vue-docker-template-v2の`main` branchをベースに作成しています。 \
-環境構築手順は**Docker container build**以降を参考に進めてください。
+環境構築手順は**Docker container build**以降を参考に進めてください。 \
 【TODO:リンクを追加する】
 
 ## Directory構成
