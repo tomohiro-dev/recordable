@@ -1,6 +1,7 @@
 # Recordable
 ![Laravel 6.20.32](https://img.shields.io/badge/Laravel-6.20.32-red) 
 ![Node 14.17.5](https://img.shields.io/badge/node-14.17.5-green)
+![npm *.*.*](https://img.shields.io/badge/npm-*.*.*-lightgreen) 
 ![Vue 2.6.14](https://img.shields.io/badge/Vue-2.6.14-green) 
 ![mysql 8.0.26](https://img.shields.io/badge/MySQL-8.0.26-blue) 
 ![nginx 8.0.26](https://img.shields.io/badge/nginx-1.20.*-darkgreen) 
