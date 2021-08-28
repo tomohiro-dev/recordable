@@ -227,6 +227,8 @@ app_1  | 172.20.0.3 -  25/Jul/2021:05:48:51 +0000 "GET /index.php" 200
 composer require laravel/ui:1.3.0 --dev
 ```
 
+## Front-Endの設定
+
 vue.jsを使った認証機能の追加
 ```
 php artisan ui vue --auth
