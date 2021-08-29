@@ -234,6 +234,15 @@ vue.jsを使った認証機能の追加
 php artisan ui vue --auth
 ```
 
+webコンテナへ移動
+```
+docker compose exec web ash
+```
+
+```
+npm install && npm run dev
+```
+
 追加しているライブラリについてはWikiを参照してください。
 【TODO:Wikiのリンクを追加】
 
