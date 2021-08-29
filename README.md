@@ -20,7 +20,7 @@ Build errorが出た場合は、エラーの内容に従って都度修正を行
 
 ## Project構成
 本Projectは、laravel-vue-docker-template-v2の`main` branchをベースに作成しています。 \
-環境構築手順は**Docker container build**以降を参考に進めてください。 \
+環境構築手順は**Docker container build**以降を参考に進めてください。 
 
 ## Directory構成
 「編集中」
