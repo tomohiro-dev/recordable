@@ -114,6 +114,7 @@ chmod -R 777 storage bootstrap/cache
 ```
 docker compose down --rmi all --volumes --remove-orphans
 ```
+※migrationしたら基本的には使わないこと。（tableが消える）
 
 ### Docker composeでBuildする
 ```
