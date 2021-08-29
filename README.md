@@ -2,6 +2,7 @@
 日本語学習の仕組みを創るためのサービス提供プロジェクト。
 
 ![Laravel 6.20.32](https://img.shields.io/badge/Laravel-6.20.32-red) 
+![php 7.4.23](https://img.shields.io/badge/php-7.4.23-purple)
 ![Node 14.17.5](https://img.shields.io/badge/node-14.17.5-green)
 ![npm *.*.*](https://img.shields.io/badge/npm-*.*.*-lightgreen) 
 ![Vue 2.6.14](https://img.shields.io/badge/Vue-2.6.14-green) 
