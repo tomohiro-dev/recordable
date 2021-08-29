@@ -70,6 +70,10 @@ http://127.0.0.1/
 
 ### `.env`ファイルの設定
 ```
+cd backend
+```
+
+```
 cp .env.example .env
 ```
 
