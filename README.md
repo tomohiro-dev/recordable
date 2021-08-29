@@ -84,7 +84,7 @@ appコンテナから出ている場合は再度入る
 docker compose exec app bash
 ```
 
-アプリケーションキーを作成する
+アプリケーションキーを作成する（※`.env`にkeyがないことを確認する）
 ```
 php artisan key:generate
 ```
