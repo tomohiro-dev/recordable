@@ -293,22 +293,22 @@ php artisan view:clear
 Package-lock.jsonとpackage.jsonのバージョンが違っていたり、キャッシュが溜まり過ぎてたり・・・？ 的な問題の可能性を疑う。 \
 npmファイルは結構壊れやすかったりもする
 
-# インストールされたjsモジュールを全部消す
+インストールされたjsモジュールを全部消す
 ```
 rm -rf node_modules
 ```
 
-# インストールされたjsモジュールのバージョン情報を消す
+インストールされたjsモジュールのバージョン情報を消す
 ```
 rm package-lock.json
 ```
 
-# npmのキャッシュをクリアする
+npmのキャッシュをクリアする
 ```
 npm cache clear --force
 ```
-
-# 再度jsモジュールを全部入れ直して、実行する
+ 
+再度jsモジュールを全部入れ直して、実行する
 ```
 npm install
 npm run dev
