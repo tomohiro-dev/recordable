@@ -289,8 +289,32 @@ php artisan route:clear
 php artisan view:clear
 ```
 
-## Credit
+### `"ERR! code ELIFECYCLE"`が発生した時
+Package-lock.jsonとpackage.jsonのバージョンが違っていたり、キャッシュが溜まり過ぎてたり・・・？ 的な問題の可能性を疑う。 \
+npmファイルは結構壊れやすかったりもする
 
+# インストールされたjsモジュールを全部消す
+```
+rm -rf node_modules
+```
+
+# インストールされたjsモジュールのバージョン情報を消す
+```
+rm package-lock.json
+```
+
+# npmのキャッシュをクリアする
+```
+npm cache clear --force
+```
+
+# 再度jsモジュールを全部入れ直して、実行する
+```
+npm install
+npm run dev
+```
+
+## Credit
 Big thanks to Jonathan, who is a my language exchange mate living in Austria. \
 Studying with English and Japanese. We make this app together. \
 And thanks to multinational friends.
