@@ -4,7 +4,7 @@
 ![Laravel 6.20.32](https://img.shields.io/badge/Laravel-6.20.32-red) 
 ![php 7.4.23](https://img.shields.io/badge/php-7.4.23-purple)
 ![Node 14.17.5](https://img.shields.io/badge/node-14.17.5-green)
-![npm *.*.*](https://img.shields.io/badge/npm-*.*.*-lightgreen) 
+![npm 6.14.14](https://img.shields.io/badge/npm-6.14.14-lightgreen) 
 ![Vue 2.6.14](https://img.shields.io/badge/Vue-2.6.14-green) 
 ![mysql 8.0.26](https://img.shields.io/badge/MySQL-8.0.26-blue) 
 ![nginx 1.20.1](https://img.shields.io/badge/nginx-1.20.1-darkgreen) 
@@ -242,6 +242,7 @@ docker compose exec web ash
 ```
 npm install && npm run dev
 ```
+※そこそこ時間がかかる
 
 追加しているライブラリについてはWikiを参照してください。
 【TODO:Wikiのリンクを追加】
