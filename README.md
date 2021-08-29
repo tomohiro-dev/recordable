@@ -218,6 +218,7 @@ $ docker compose logs -f app
 app_1  | [2021-07-25 05:48:53] local.DEBUG: welcome route.  
 app_1  | 172.20.0.3 -  25/Jul/2021:05:48:51 +0000 "GET /index.php" 200
 ```
+こんな感じで表示されてたらOK。
 
 ・laravel/uiを追加する
 
