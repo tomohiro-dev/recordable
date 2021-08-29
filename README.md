@@ -157,16 +157,6 @@ local環境で確認
 docker compose exec web nginx -v
 ```
 
-・npm
-```
-npm -V
-```
-
-・Node.js
-```
-node -V
-```
-
 ### Web Browser上で画面を確認する
 ・Laravel
 ```
@@ -181,7 +171,8 @@ http://127.0.0.1:8080/
 
 ## データベースの設定
 ### `.env`ファイルの設定を確認する
-`.env.example`ファイルを書き換えてコピーする
+`.env.example`ファイルを書き換えてコピーする \
+（事前に終わっていたら飛ばす）
 
 ### Migrateする
 ```
@@ -243,6 +234,16 @@ php artisan ui vue --auth
 
 追加しているライブラリについてはWikiを参照してください。
 【TODO:Wikiのリンクを追加】
+
+・npm
+```
+npm -V
+```
+
+・Node.js
+```
+node -V
+```
 
 
 -----------
