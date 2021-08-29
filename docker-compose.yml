@@ -38,7 +38,7 @@ services:
       - DB_CONNECTION=mysql
       - DB_HOST=db
       - DB_PORT=3306
-      - DB_DATABASE=${DB_NAME:-laravel_local}
+      - DB_DATABASE=${DB_NAME:-recordable}
       - DB_USERNAME=${DB_USER:-soregashi27}
       - DB_PASSWORD=${DB_PASS:-soregashidegozaru}
 
@@ -78,7 +78,7 @@ services:
         volume:
           nocopy: true
     environment:
-      - MYSQL_DATABASE=${DB_NAME:-laravel_local}
+      - MYSQL_DATABASE=${DB_NAME:-recordable}
       - MYSQL_USER=${DB_USER:-soregashi27}
       - MYSQL_PASSWORD=${DB_PASS:-soregashidegozaru}
       - MYSQL_ROOT_PASSWORD=${DB_PASS:-soregashidegozaru}
