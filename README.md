@@ -24,8 +24,8 @@ Build errorが出た場合は、エラーの内容に従って都度修正を行
 
 ## Directory構成
 「編集中」
-infraにterraformを追加したら書きたい
-【TODO:ディレクトリーツリーを追加する】
+infraにterraformを追加したら書きたい \
+【TODO:ディレクトリツリーを追加する】
 
 ## 環境構築手順
 
