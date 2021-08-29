@@ -128,7 +128,7 @@ docker ps -a
 ・Laravel
 Docker立ち上げ後確認
 ```
-docker compose app bash
+docker compose exec app bash
 ```
 
 ```
