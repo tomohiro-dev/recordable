@@ -35,6 +35,12 @@ infraにterraformを追加したら書きたい
 docker compose up -d --build
 ```
 
+コンテナの立ち上がりが確認出来たら一度imageとvolumesを削除する
+```
+docker compose down --rmi all --volumes --remove-orphans
+```
+
+
 ## Laravelをインストール
 ### appコンテナに入る
 ```
