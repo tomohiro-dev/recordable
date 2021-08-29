@@ -250,12 +250,12 @@ npm install && npm run dev
 
 ・npm
 ```
-npm -V
+npm -v
 ```
 
 ・Node.js
 ```
-node -V
+node -v
 ```
 
 
