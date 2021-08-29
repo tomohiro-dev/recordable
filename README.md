@@ -62,6 +62,9 @@ composer require --dev friendsofphp/php-cs-fixer:v2.19.x
 ```
 
 ローカルホストへ接続
+```
+http://127.0.0.1/
+```
 500 | servert errorが出ることを確認する（正しい） `composer install`時は `.env`環境変数ファイルは作成されないので、 
 `.env.example`を元にコピーして作成する。
 
