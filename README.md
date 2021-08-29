@@ -21,11 +21,11 @@ Build errorが出た場合は、エラーの内容に従って都度修正を行
 ## Project構成
 本Projectは、laravel-vue-docker-template-v2の`main` branchをベースに作成しています。 \
 環境構築手順は**Docker container build**以降を参考に進めてください。 \
-【TODO:リンクを追加する】
 
 ## Directory構成
 「編集中」
 infraにterraformを追加したら書きたい
+【TODO:ディレクトリーツリーを追加する】
 
 ## 環境構築手順
 
@@ -34,12 +34,6 @@ infraにterraformを追加したら書きたい
 ```
 docker compose up -d --build
 ```
-
-コンテナの立ち上がりが確認出来たら一度imageとvolumesを削除する
-```
-docker compose down --rmi all --volumes --remove-orphans
-```
-
 
 ## Laravelをインストール
 ### appコンテナに入る
