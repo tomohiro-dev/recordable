@@ -69,11 +69,10 @@ composer require --dev friendsofphp/php-cs-fixer:v2.19.x
 ```
 cp .env.example .env
 ```
-DBの設定を行う
 
 
 ### アプリケーションキーをつくる
-appコンテナへ移動する
+appコンテナから出ている場合は再度入る
 ```
 docker compose exec app bash
 ```
