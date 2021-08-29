@@ -15,7 +15,8 @@
 main branchで`git clone`を行ってください。`cd`commandで当Directoryへ移動し、開発を進めてください。 \
 Build errorが出た場合は、エラーの内容に従って都度修正を行ってください。
 
-**【重要】`.php`ファイルを`git commit`する時にコード整形を行う場合は、「コード整形のみ」の`feature branch`を切ってください。**
+**【重要】`.php`ファイルを`git commit`する時にコード整形を行う場合は、「コード整形のみ」の`feature branch`として \
+`feature/000_fixPhpCode`を切ってください。**
 
 ## Project構成
 本Projectは、laravel-vue-docker-template-v2の`main` branchをベースに作成しています。 \
