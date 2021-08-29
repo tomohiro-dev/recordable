@@ -6,7 +6,7 @@
 ![npm *.*.*](https://img.shields.io/badge/npm-*.*.*-lightgreen) 
 ![Vue 2.6.14](https://img.shields.io/badge/Vue-2.6.14-green) 
 ![mysql 8.0.26](https://img.shields.io/badge/MySQL-8.0.26-blue) 
-![nginx 8.0.26](https://img.shields.io/badge/nginx-1.20.*-darkgreen) 
+![nginx 1.20.1](https://img.shields.io/badge/nginx-1.20.1-darkgreen) 
 <img src="https://img.shields.io/badge/-Docker-EEE.svg?logo=docker&style=flat"> 
 <img src="https://img.shields.io/badge/-Terraform-EEE.svg?logo=terraform&logoColor=7B42BC">
 <img src="https://img.shields.io/badge/-GithubActions-EEE.svg?logo=githubactions&logoColor=black">
