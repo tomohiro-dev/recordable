@@ -238,11 +238,12 @@ webコンテナへ移動
 ```
 docker compose exec web ash
 ```
+※軽量化（起動を早くする&CPU、メモリ節約）のためにAlpine Linux shellを使用
 
 ```
 npm install && npm run dev
 ```
-※そこそこ時間がかかる
+※軽量化をしているものの、そこそこ時間がかかる
 
 追加しているライブラリについてはWikiを参照してください。
 【TODO:Wikiのリンクを追加】
