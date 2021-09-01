@@ -39,6 +39,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "canvas-confetti": "^1.4.0",
         "echarts": "^5.1.2",
         "moment": "^2.29.1",
         "vue-echarts": "^6.0.0",
