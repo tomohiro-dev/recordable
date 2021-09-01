@@ -318,4 +318,4 @@ npm run dev
 ## Credit
 Big thanks to Jonathan(Non-developer), who is a my language exchange mate living in Austria. \
 We are learning English and Japanese. We make this app together. \
-Then, thanks to multinational friends.
+And, thanks to multinational friends giving some information.
