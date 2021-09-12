@@ -44,6 +44,9 @@ class CategoryController extends Controller
 
         //CategortyはUser Table内のuser_idとmerge
         $data = array_merge($data, ['user_id' => auth()->user()->id]);
+        $category = Category::create($data);
+
+        return $category->toArray();
     }
 
     /**
