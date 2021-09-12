@@ -28,4 +28,8 @@ Route::put('timers/{id}', 'TimerController@update');
 Route::delete('timers/{id}', 'TimerController@stopRunning');
 Route::get('timers/active', 'TimersController@running');
 
-Route::post('categories')
+Route::post('categories', 'CategoryController@store');
+Route::get('categories', 'CagtegoryController@index');
+
+Route::get('records', 'TimerControler@indexMonth');
+Route::get('records/total', 'TimerController@indexTotal');
