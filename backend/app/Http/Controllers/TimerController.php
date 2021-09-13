@@ -32,7 +32,18 @@ class TimerController extends Controller
     }
     //TODO: ユーザーのTimezone毎に時間が対応するように設定したい（作成時はAsia/Tokyo）
 
-    //TODO: indexTotalで合計時間を算出する処理を追加
+    public function indexTotal() {
+        $timers = Timer::mine()->get()->toArray();
+        $total_seconds = 0;
+        for($i=0; $i < count($timers) ;$i++) {
+            $started_at = new Carbon($timers[$i]['started_at']);
+            $stopprd_at = new Carbon($timers[$i]['stopped_at']);
+            $diff = $started_at->diffInSeconds($stopped_at);
+            $total_seconds += $diff;
+        }
+
+        return round(($total_seconds / 3600), 1);
+    }
 
     /**
      * Show the form for creating a new resource.
