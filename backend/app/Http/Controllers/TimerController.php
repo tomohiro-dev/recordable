@@ -22,6 +22,16 @@ class TimerController extends Controller
         return Timer::mine()->orderBy('started_at', 'desc')->paginate(20)->toArray();
     }
 
+    public function indexMonth() {
+        $this_year = Carbon::today('Asia/Tokyo')->year;
+        $this_month = Carbon::today('Asia/Tokyo')->month;
+        return Timer::mine()
+        ->whereYear('started_at', $this_year)
+        ->whereMonth('started_at', $this_month)
+        ->get();
+    }
+    //TODO: ユーザーのTimezone毎に時間が対応するように設定したい（作成時はAsia/Tokyo）
+
     /**
      * Show the form for creating a new resource.
      *
