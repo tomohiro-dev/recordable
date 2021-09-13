@@ -136,4 +136,8 @@ class TimerController extends Controller
 
         return $timer;
     }
+
+    public function running() {
+        return Timer::mine()->running()->first();
+    }
 }
