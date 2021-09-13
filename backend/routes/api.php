@@ -30,7 +30,7 @@ Route::post('timers/stop', 'TimerController@stopRunning');
 Route::get('timers/active', 'TimerController@running');
 
 Route::post('categories', 'CategoryController@store');
-Route::get('categories', 'CagtegoryController@index');
+Route::get('categories', 'CategoryController@index');
 
 Route::get('records', 'TimerControler@indexMonth');
 Route::get('records/total', 'TimerController@indexTotal');
