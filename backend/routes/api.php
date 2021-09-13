@@ -25,7 +25,8 @@ Route::get('timers', 'TimerController@index');
 Route::post('timers', 'TimerController@store');
 Route::post('timers/save', 'TimerController@save');
 Route::put('timers/{id}', 'TimerController@update');
-Route::delete('timers/{id}', 'TimerController@stopRunning');
+Route::delete('timers/{id}', 'TimerController@destroy');
+Route::post('timers/stop', 'TimerController@stopRunning');
 Route::get('timers/active', 'TimersController@running');
 
 Route::post('categories', 'CategoryController@store');
