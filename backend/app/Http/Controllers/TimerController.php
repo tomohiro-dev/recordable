@@ -140,4 +140,12 @@ class TimerController extends Controller
     public function running() {
         return Timer::mine()->running()->first();
     }
+
+    public function stopRunning() {
+        if ($timer = Timer::mine()->running()->first()) {
+            $timer->update(['stopped_at' => new Carbon]);
+        }
+
+        return $Timer;
+    }
 }
