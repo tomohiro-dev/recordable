@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Timer;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 class TimerController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +19,7 @@ class TimerController extends Controller
      */
     public function index()
     {
-        //
+        return Timer::mine()->orderBy('started_at', 'desc')->paginate(20)->toArray();
     }
 
     /**
@@ -34,7 +40,18 @@ class TimerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $timer =  Timer::mine()->create([
+            'name' => $data['name'],
+            'memo' => $data['memo'],
+            'category_id' => $data['category_id'],
+            'category_name' => $data['category_name'],
+            'category_color' => $data['category_color'],
+            'user_id' => Auth::user()->id,
+            'started_at' => new Carbon,
+            'stopped_at' => null,
+        ]);
+
+        return $timer;
     }
 
     /**
