@@ -32,6 +32,8 @@ class TimerController extends Controller
     }
     //TODO: ユーザーのTimezone毎に時間が対応するように設定したい（作成時はAsia/Tokyo）
 
+    //TODO: indexTotalで合計時間を算出する処理を追加
+
     /**
      * Show the form for creating a new resource.
      *
@@ -104,8 +106,11 @@ class TimerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
-        //
+        $timer = Timer::mine()->find($id);
+        $timer->delete();
+
+        return $timer;
     }
 }
