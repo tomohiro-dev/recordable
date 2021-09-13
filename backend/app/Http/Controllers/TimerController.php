@@ -31,6 +31,7 @@ class TimerController extends Controller
         ->get();
     }
     //TODO: ユーザーのTimezone毎に時間が対応するように設定したい（作成時はAsia/Tokyo）
+    //TODO: サービス使用開始時のタイムラグをユーザーに確認する
 
     public function indexTotal() {
         $timers = Timer::mine()->get()->toArray();
@@ -77,6 +78,26 @@ class TimerController extends Controller
         return $timer;
     }
 
+    public function save(Request $request) {
+        //TODO: varidation処理を追加する
+
+        $started_at = new Carbon($data['started_at']);
+        $stopped_at = new Carbon($data['stopped_at']);
+
+        $timer = Timer::mine()->create([
+            'name' => $data['name'],
+            'memo' => $data['memo'],
+            'category_id' => $data['category_id'],
+            'category_name' => $data['category_name'],
+            'category_color' => $data['category_color'],
+            'user_id' => Auth::user()->id,
+            'started_at' => $started_at,
+            'stopped_at' => $stopped_at,
+        ]);
+
+        return $timer;
+    }
+
     /**
      * Display the specified resource.
      *
@@ -109,6 +130,10 @@ class TimerController extends Controller
     public function update(Request $request, $id)
     {
         //TODO: varidation処理を追加する
+
+
+        $started_at = new Carbon($data['started_at']);
+        $stopped_at = new Carbon($data['stopped_at']);
 
         $timer = Timer::mine()->where('id', $id)->first();
         $timer->name = $data['name'];
