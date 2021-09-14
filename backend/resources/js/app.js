@@ -13,6 +13,7 @@ import App from './App.vue'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import '@mdi/font/css/materialdesignicons.css'
+
 window.Vue = require('vue')
 Vue.use(Vuetify)
 
@@ -31,5 +32,6 @@ new Vue({
   el: '#app',
   router,
   components: { App },
-  template: '<App />'
+  template: '<App />',
+  vuetify: new Vuetify()
 })
