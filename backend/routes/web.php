@@ -11,10 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    // logger('welcome route.');
-    return view('welcome');
-});
-Auth::routes();
+// APIのURL以外のリクエストに対してはindexテンプレートを返す
+// 画面遷移はフロントエンドのVueRouterが制御する
+Route::get('/{any?}', function () {
+    return view('index');
+})->where('any', '.+');
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
+//TODO: 不要なら削除↑
