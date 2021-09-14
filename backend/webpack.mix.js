@@ -17,6 +17,7 @@ mix
     open: false //browserを自動で開かない
   })
   .js('resources/js/app.js', 'public/js')
+  .vue()
   .sass('resources/sass/app.scss', 'public/css')
 
 // Ready to Deploy
