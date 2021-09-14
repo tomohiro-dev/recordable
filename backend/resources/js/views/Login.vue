@@ -1,6 +1,6 @@
 <template>
   <v-row>
-    <h1>ログイン画面</h1>
+    <h1>ログイン画面だよ</h1>
   </v-row>
 </template>
 
