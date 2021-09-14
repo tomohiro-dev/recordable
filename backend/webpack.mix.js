@@ -11,7 +11,13 @@ const mix = require('laravel-mix')
  |
  */
 
-mix.js('resources/js/app.js', 'public/js').sass('resources/sass/app.scss', 'public/css')
+mix
+  .browserSync({
+    proxy: '127.0.0.1',
+    open: false //browserを自動で開かない
+  })
+  .js('resources/js/app.js', 'public/js')
+  .sass('resources/sass/app.scss', 'public/css')
 
 // Ready to Deploy
 //  mix.browserSync('OriginalDomain or IPアドレスを記述')
