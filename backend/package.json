@@ -12,6 +12,7 @@
     "devDependencies": {
         "@babel/core": "^7.15.0",
         "@babel/eslint-parser": "^7.15.0",
+        "@mdi/font": "^6.1.95",
         "axios": "^0.21.1",
         "bootstrap": "^4.0.0",
         "browser-sync": "^2.27.5",
