@@ -7,6 +7,8 @@
 require('./bootstrap')
 
 import Vue from 'vue'
+import router from './router'
+import App from './App.vue'
 
 window.Vue = require('vue')
 
@@ -23,8 +25,7 @@ window.Vue = require('vue')
 
 new Vue({
   el: '#app',
-  components: {
-    App
-  },
-  template: '<h1>¥esssir!</h1>'
+  router,
+  components: { App },
+  template: '<App />'
 })
