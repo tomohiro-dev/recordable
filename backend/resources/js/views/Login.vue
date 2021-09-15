@@ -24,7 +24,7 @@
             label="パスワード"
             prepend-icon="mdi-lock"
             :type="showPassword ? 'text' : 'password'"
-            :append-icon="shouPassword ? 'mdi-eye' : 'mdi-eye-off'"
+            :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
             @click:append="showPassword = !showPassword"
             @keyup.enter="login"
           />
