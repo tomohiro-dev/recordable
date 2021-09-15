@@ -1,15 +1,20 @@
 <template>
-  <div>
-    <main>
-      <div class="container">
-        <RouterView />
-      </div>
-    </main>
-  </div>
+  <v-app>
+    <div class="container">
+      <NavBar />
+      <RouterView />
+    </div>
+  </v-app>
 </template>
 
 <script>
-export default {}
+import NavBar from './components/NavBar.vue'
+
+export default {
+  components: {
+    NavBar
+  }
+}
 </script>
 
 <style></style>
