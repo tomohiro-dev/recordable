@@ -1918,6 +1918,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -38325,115 +38327,126 @@ var render = function() {
     [
       _c("v-spacer"),
       _vm._v(" "),
-      _c("v-col", { staticClass: "mt-n11", attrs: { cols: "12", md: "5" } }),
+      _c("v-col", { staticClass: "mt-n11", attrs: { cols: "9", md: "6" } }),
       _vm._v(" "),
       _c("v-spacer"),
       _vm._v(" "),
       _c(
-        "v-card",
+        "v-col",
+        { attrs: { cols: "12", md: "5" } },
         [
-          _c("v-card-title", [_c("h1", [_vm._v("ログイン画面だよ")])]),
-          _vm._v(" "),
-          _c("v-card-title", { staticClass: "pb-0" }, [
-            _c("h2", { staticClass: "title" }, [_vm._v("ログイン")])
-          ]),
-          _vm._v(" "),
           _c(
-            "v-card-text",
+            "v-card",
             [
-              _c(
-                "v-form",
-                [
-                  _c("v-text-field", {
-                    attrs: {
-                      tabindex: "1",
-                      label: "メールアドレス",
-                      "prepend-icon": "mdi-email"
-                    },
-                    model: {
-                      value: _vm.loginForm.email,
-                      callback: function($$v) {
-                        _vm.$set(_vm.loginForm, "email", $$v)
-                      },
-                      expression: "loginForm.email"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("v-text-field", {
-                    attrs: {
-                      tabindex: "2",
-                      label: "パスワード",
-                      "prepend-icon": "mdi-lock",
-                      type: _vm.showPassword ? "text" : "password",
-                      "append-icon": _vm.shouPassword
-                        ? "mdi-eye"
-                        : "mdi-eye-off"
-                    },
-                    on: {
-                      "click:append": function($event) {
-                        _vm.showPassword = !_vm.showPassword
-                      },
-                      keyup: function($event) {
-                        if (
-                          !$event.type.indexOf("key") &&
-                          _vm._k(
-                            $event.keyCode,
-                            "enter",
-                            13,
-                            $event.key,
-                            "Enter"
-                          )
-                        ) {
-                          return null
-                        }
-                        return _vm.login.apply(null, arguments)
-                      }
-                    },
-                    model: {
-                      value: _vm.loginForm.password,
-                      callback: function($$v) {
-                        _vm.$set(_vm.loginForm, "password", $$v)
-                      },
-                      expression: "loginForm.password"
-                    }
-                  })
-                ],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-card-actions",
-            [
-              _c("v-spacer"),
+              _c("v-card-title", [_c("h1", [_vm._v("ログイン画面だよ")])]),
+              _vm._v(" "),
+              _c("v-card-title", { staticClass: "pb-0" }, [
+                _c("h2", { staticClass: "title" }, [_vm._v("ログイン")])
+              ]),
               _vm._v(" "),
               _c(
-                "v-tooltip",
-                { attrs: { button: "" } },
+                "v-card-text",
                 [
-                  [
-                    _c("v-btn", { attrs: { text: "", color: "success" } }, [
-                      _vm._v("テストログイン")
-                    ])
-                  ],
-                  _vm._v(" "),
                   _c(
-                    "span",
+                    "v-form",
                     [
-                      _c("v-icon", { attrs: { dark: "", left: "" } }, [
-                        _vm._v("mdi-alert-circle")
-                      ]),
-                      _vm._v("一定期間が立つとアカウントは初期化されます。 ")
+                      _c("v-text-field", {
+                        attrs: {
+                          tabindex: "1",
+                          label: "メールアドレス",
+                          "prepend-icon": "mdi-email"
+                        },
+                        model: {
+                          value: _vm.loginForm.email,
+                          callback: function($$v) {
+                            _vm.$set(_vm.loginForm, "email", $$v)
+                          },
+                          expression: "loginForm.email"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("v-text-field", {
+                        attrs: {
+                          tabindex: "2",
+                          label: "パスワード",
+                          "prepend-icon": "mdi-lock",
+                          type: _vm.showPassword ? "text" : "password",
+                          "append-icon": _vm.showPassword
+                            ? "mdi-eye"
+                            : "mdi-eye-off"
+                        },
+                        on: {
+                          "click:append": function($event) {
+                            _vm.showPassword = !_vm.showPassword
+                          },
+                          keyup: function($event) {
+                            if (
+                              !$event.type.indexOf("key") &&
+                              _vm._k(
+                                $event.keyCode,
+                                "enter",
+                                13,
+                                $event.key,
+                                "Enter"
+                              )
+                            ) {
+                              return null
+                            }
+                            return _vm.login.apply(null, arguments)
+                          }
+                        },
+                        model: {
+                          value: _vm.loginForm.password,
+                          callback: function($$v) {
+                            _vm.$set(_vm.loginForm, "password", $$v)
+                          },
+                          expression: "loginForm.password"
+                        }
+                      })
                     ],
                     1
                   )
                 ],
-                2
+                1
               ),
               _vm._v(" "),
-              _c("v-btn", { attrs: { color: "info" } }, [_vm._v("ログイン")])
+              _c(
+                "v-card-actions",
+                [
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "v-tooltip",
+                    { attrs: { button: "" } },
+                    [
+                      [
+                        _c("v-btn", { attrs: { text: "", color: "success" } }, [
+                          _vm._v("テストログイン")
+                        ])
+                      ],
+                      _vm._v(" "),
+                      _c(
+                        "span",
+                        [
+                          _c("v-icon", { attrs: { dark: "", left: "" } }, [
+                            _vm._v("mdi-alert-circle")
+                          ]),
+                          _vm._v(
+                            "一定期間が立つとアカウント情報は初期化されます。 "
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    2
+                  ),
+                  _vm._v(" "),
+                  _c("v-btn", { attrs: { color: "info" } }, [
+                    _vm._v("ログイン")
+                  ])
+                ],
+                1
+              )
             ],
             1
           )
