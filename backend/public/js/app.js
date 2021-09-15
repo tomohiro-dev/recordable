@@ -2100,6 +2100,9 @@ __webpack_require__.r(__webpack_exports__);
 
 vue__WEBPACK_IMPORTED_MODULE_2__.default.use(vue_router__WEBPACK_IMPORTED_MODULE_3__.default);
 var routes = [{
+  path: '*',
+  redirect: '/login'
+}, {
   path: '/',
   component: _views_Login_vue__WEBPACK_IMPORTED_MODULE_0__.default
 }, {
