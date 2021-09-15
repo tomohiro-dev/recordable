@@ -10,22 +10,19 @@ import Vue from 'vue'
 import router from './router'
 import App from './App.vue'
 
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css'
+import '@mdi/font/css/materialdesignicons.css'
+import VueTheMask from 'vue-the-mask'
+
 window.Vue = require('vue')
-
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
-
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+Vue.use(Vuetify)
+Vue.use(VueTheMask)
 
 new Vue({
   el: '#app',
   router,
   components: { App },
-  template: '<App />'
+  template: '<App />',
+  vuetify: new Vuetify()
 })
