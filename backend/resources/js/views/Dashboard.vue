@@ -40,6 +40,37 @@
         </v-card-text>
       </v-card>
     </v-col>
+
+    <v-row>
+      <v-col cols="12" md="5">
+        <span class="title"> <v-icon>mdi-chart-pie</v-icon>内訳</span>
+        <v-tabs v-model="pie">
+          <v-tab>今月（時間）</v-tab>
+        </v-tabs>
+
+        <v-tabs-items v-model="pie">
+          <v-tab-item>
+            <v-card>
+              <div class="py-4">
+                <!-- todo: loading系のアニメーションを追加 -->
+              </div>
+
+              <div class="py-4">
+                <chart></chart>
+                <div>
+                  <v-row aligh="center" justify="center">
+                    <v-col>
+                      <!-- <v-img>TODO: データがない場合の画像を追加</v-img> -->
+                      <p class="mt-2 subtitle-1 text-center">早速勉強を始めましょう！</p>
+                    </v-col>
+                  </v-row>
+                </div>
+              </div>
+            </v-card>
+          </v-tab-item>
+        </v-tabs-items>
+      </v-col>
+    </v-row>
   </span>
 </template>
 
