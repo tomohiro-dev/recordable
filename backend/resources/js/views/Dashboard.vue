@@ -1,6 +1,9 @@
 <template>
   <div>
-    <span class="title"> <v-icon>mdi-file</v-icon>レコード</span>
+    <!-- <span class="title"> <v-icon>mdi-file</v-icon>レコード</span> -->
+    <span class="title"> <v-icon>mdi-timer</v-icon>レコード</span>
+
+    <!-- TODOTODAY: アイコンをタイマーに変えたい！ -->
 
     <v-row>
       <v-col cols="12" sm="4" md="3">
