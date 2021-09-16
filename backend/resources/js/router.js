@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import Login from './views/Login.vue'
 import Register from './views/Register.vue'
 import Dashboard from './views/Dashboard.vue'
+import Timer from './views/Timer.vue'
 
 Vue.use(VueRouter)
 
@@ -19,6 +20,10 @@ const routes = [
   {
     path: '/dashboard',
     component: Dashboard
+  },
+  {
+    path: '/timer',
+    component: Timer
   },
   {
     path: '*',
