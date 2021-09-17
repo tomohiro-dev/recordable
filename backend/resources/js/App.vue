@@ -2,6 +2,7 @@
   <v-app>
     <div class="container">
       <NavBar />
+      <NavDrawer />
       <RouterView />
     </div>
   </v-app>
@@ -9,10 +10,12 @@
 
 <script>
 import NavBar from './components/NavBar.vue'
+import NavDrawer from './components/NavDrawer.vue'
 
 export default {
   components: {
-    NavBar
+    NavBar,
+    NavDrawer
   }
 }
 </script>
