@@ -10,14 +10,16 @@
     <title>Recordable</title>
 
     <script
-        src="{{ mix('js/app.js') }}"
+        src="{{ asset('js/app.js') }}"
         defer
     ></script>
 
     <link
         rel="stylesheet"
-        href="{{asset('js/app.js')}}"
+        href="{{asset('css/app.css')}}"
     >
+
+    <!-- TODO: faviconをここに追加 -->
 
 </head>
 
