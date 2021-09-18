@@ -2,7 +2,9 @@
   <v-app>
     <NavBar />
     <NavDrawer />
-    <RouterView />
+    <v-container fluid>
+      <RouterView />
+    </v-container>
   </v-app>
 </template>
 
