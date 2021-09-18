@@ -1,5 +1,10 @@
 <template>
   <div>
+    <v-snackbar top v-model="snackbar.error" color="error">
+      エラーが発生しました。
+      <v-btn text @click="snackbar.error">閉じる</v-btn>
+    </v-snackbar>
+
     <span class="title"><v-icon>mdi-timer</v-icon>レコード</span>
 
     <v-row>
@@ -102,7 +107,38 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      snackbar: {
+        error: false
+      },
+      timers: {
+        month: []
+      }
+    }
+  },
+  created() {
+    window.axios
+      .get('api/records')
+      .then(response => {
+        timers.month = response.data
+      })
+      .catch(err => {
+        errorMessage = err
+        snackbar.error = true
+      })
+    window.axios
+      .get('api/records/total')
+      .then(response => {
+        record.total = response.data
+      })
+      .catch(err => {
+        errorMessage = err
+        snackbar.error = true
+      })
+  }
+}
 </script>
 
 <style></style>
