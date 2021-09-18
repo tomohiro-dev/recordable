@@ -1,10 +1,12 @@
 <template>
   <v-app>
-    <div class="container">
-      <NavBar />
-      <NavDrawer />
-      <RouterView />
-    </div>
+    <NavBar />
+    <NavDrawer />
+    <v-main>
+      <v-container fluid>
+        <RouterView />
+      </v-container>
+    </v-main>
   </v-app>
 </template>
 
