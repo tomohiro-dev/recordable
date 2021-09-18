@@ -4,6 +4,8 @@
       <v-list-item-title>ユーザーネーム</v-list-item-title>
     </v-list-item>
 
+    <v-divider></v-divider>
+
     <v-list>
       <v-list-item v-for="item in items" :key="item.title" :to="item.url" :disabled="item.disabled">
         <v-list-item-icon v-if="item.badge">
@@ -36,7 +38,8 @@ export default {
         {
           title: 'タイマー',
           icon: 'mdi-clock',
-          url: '/',
+          url: '/timer',
+          //  url: '/',
           disabled: false,
           badge: true
         },
