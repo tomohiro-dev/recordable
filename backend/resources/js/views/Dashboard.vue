@@ -128,7 +128,6 @@ export default {
         errorMessage = err
         snackbar.error = true
       })
-
     window.axios
       .get('api/records/total')
       .then(response => {
