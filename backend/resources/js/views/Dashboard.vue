@@ -83,12 +83,16 @@
         <v-tabs-items>
           <v-tab-item>
             <v-card>
-              <v-row align="center" justify="center">
-                <v-col>
-                  <!-- <v-img>TODO: データがない場合の画像を追加</v-img> -->
-                  <p class="mt-2 subtitle-1 text-center">早速勉強を始めましょう！</p>
-                </v-col>
-              </v-row>
+              <!-- TODO: stackチャート追加 -->
+
+              <div class="py-4">
+                <v-row align="center" justify="center">
+                  <v-col>
+                    <!-- <v-img>TODO: データがない場合の画像を追加</v-img> -->
+                    <p class="mt-2 subtitle-1 text-center">早速勉強を始めましょう！</p>
+                  </v-col>
+                </v-row>
+              </div>
             </v-card>
           </v-tab-item>
         </v-tabs-items>
