@@ -112,6 +112,9 @@ export default {
     return {
       snackbar: {
         error: false
+      },
+      timers: {
+        month: []
       }
     }
   },
