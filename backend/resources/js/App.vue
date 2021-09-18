@@ -1,10 +1,8 @@
 <template>
   <v-app>
-    <div class="container">
-      <NavBar />
-      <NavDrawer />
-      <RouterView />
-    </div>
+    <NavBar />
+    <NavDrawer />
+    <RouterView />
   </v-app>
 </template>
 
