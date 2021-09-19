@@ -1,12 +1,14 @@
 <template>
   <v-navigation-drawer v-if="isLogin" :disable-route-watcher="true" app dark>
+    <!-- TODO: ユーザーの画像を追加予定 Samirai & Oiran -->
+
     <v-list-item class="px-2">
-      <v-list-item-title>ユーザーネーム</v-list-item-title>
+      <v-list-item-title>{{ username }}</v-list-item-title>
     </v-list-item>
 
     <v-divider></v-divider>
 
-    <v-list>
+    <v-list nav>
       <v-list-item v-for="item in items" :key="item.title" :to="item.url" :disabled="item.disabled">
         <v-list-item-icon v-if="item.badge">
           <v-badge v-if="activeTimer" color="pink" dot overlap>
@@ -24,6 +26,8 @@
       </v-list-item>
     </v-list>
 
+    <!-- ここから -->
+
     <div class="pa-2">
       <v-btn block>ログアウト</v-btn>
     </div>
@@ -38,8 +42,8 @@ export default {
         {
           title: 'タイマー',
           icon: 'mdi-clock',
-          url: '/timer',
-          //  url: '/',
+          // url: '/timer',
+          url: '/',
           disabled: false,
           badge: true
         },
@@ -56,6 +60,9 @@ export default {
   methods: {},
   computed: {
     isLogin() {
+      return this.$store.getters['auth/check']
+    },
+    username() {
       return this.$store.getters['auth/check']
     }
   }
