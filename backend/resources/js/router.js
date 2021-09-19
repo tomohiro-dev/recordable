@@ -15,19 +15,32 @@ export default new VueRouter({
   routes: [
     {
       path: '/login',
-      component: Login
+      component: Login,
+      beforeEnter(to, from, next) {
+        //処理を追加
+        //遷移しない場合は今開いている画面にとどまる
+      }
     },
     {
       path: '/register',
-      component: Register
+      component: Register,
+      beforeEnter(to, from, next) {
+        //処理を追加
+      }
     },
     {
       path: '/dashboard',
-      component: Dashboard
+      component: Dashboard,
+      beforeEnter(to, from, next) {
+        //処理を追加
+      }
     },
     {
       path: '/timer',
-      component: Timer
+      component: Timer,
+      beforeEnter(to, from, next) {
+        //処理を追加
+      }
     },
     {
       path: '*',
