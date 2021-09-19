@@ -39,7 +39,10 @@ window.axios.interceptors.request.use(config => {
 // API通信の成功、失敗でresponseの形が変わる（ので・・・）
 // 成功、失敗の両方にresponse objectを入れる
 // 失敗はerror responseの場合とerrorの両方を適用
-window.axios.interceptors.response.use(response => response, (error = error.response || error))
+window.axios.interceptors.response.use(
+  response => response,
+  error => error.response || error
+)
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

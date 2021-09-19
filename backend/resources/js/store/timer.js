@@ -1,13 +1,8 @@
-import moment from 'moment'
-import OK from '../const'
+import { OK } from '../const'
 
 const state = {
   timers: [],
   active: false
-}
-
-const getters = {
-  // TODO: 使わない場合は削除
 }
 
 const mutations = {
@@ -26,7 +21,7 @@ const actions = {
 
     //もし通信に失敗したら、エラーをcommitする
     //TODO: http通信をするためのコードが必要
-    if(response !== OK) {
+    if (response !== OK) {
       store.commit(errorCode, response.data)
 
       return false
@@ -38,13 +33,11 @@ const actions = {
 
     return false
   }
-
-},
+}
 
 export default {
   namespaced: true,
   state,
-  getters, //TODO: 使わない場合は削除
   mutations,
   actions
 }

@@ -6,6 +6,8 @@ import Register from './views/Register.vue'
 import Dashboard from './views/Dashboard.vue'
 import Timer from './views/Timer.vue'
 
+import store from './store'
+
 Vue.use(VueRouter)
 
 const routes = [

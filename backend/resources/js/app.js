@@ -4,8 +4,9 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap')
+// require('./bootstrap')
 
+import './bootstrap'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import router from './router'
@@ -18,7 +19,8 @@ import 'vuetify/dist/vuetify.min.css'
 import '@mdi/font/css/materialdesignicons.css'
 import VueTheMask from 'vue-the-mask'
 
-window.Vue = require('vue')
+// window.Vue = require('vue')
+window.Vue = Vue
 Vue.use(Vuetify)
 Vue.use(VueTheMask)
 Vue.use(VueRouter)

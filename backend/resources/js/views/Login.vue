@@ -9,11 +9,12 @@
     <v-col cols="12" md="5">
       <v-card>
         <v-card-title>
-          <h1>ログイン画面だよ</h1>
+          <h1>Recordableをつかってみよう</h1>
+          <!-- TODO: 文言検討 -->
         </v-card-title>
 
         <v-card-title class="pb-0">
-          <h2 class="title">ログイン</h2>
+          <h2 class="title">アカウントへログイン</h2>
         </v-card-title>
 
         <v-card-text>
@@ -33,15 +34,23 @@
         </v-card-text>
 
         <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-tooltip button>
+          <v-tooltip buttom>
             <template>
               <v-btn text color="success">テストログイン</v-btn>
             </template>
             <span> <v-icon dark left>mdi-alert-circle</v-icon>一定期間が立つとアカウント情報は初期化されます。 </span>
           </v-tooltip>
 
-          <v-btn color="info">ログイン</v-btn>
+          <v-btn
+            tabindex="3"
+            class="target"
+            :disabled="loginForm.email === '' || loginForm.password === ''"
+            color="info"
+            text
+            @click="login"
+          >
+            ログイン
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-col>
@@ -58,6 +67,30 @@ export default {
         email: '',
         password: ''
       }
+    }
+  },
+  created() {
+    this.clearError()
+  },
+  methods: {
+    async login() {
+      await this.$store.dispatch('auth/login', this.loginForm)
+
+      if (this.apiStatus) {
+        this.$router.push('/')
+      }
+    },
+    clearError() {
+      this.$store.commit('auth/SET_LOGIN_ERROR_MESSAGES', null)
+    }
+  },
+  computed: {
+    apiStatus() {
+      return this.$store.state.auth.apiStatus
+    },
+    loginErrors() {
+      this.snackbar = true
+      return this.$store.state.auth.loginErrorMessages
     }
   }
 }
