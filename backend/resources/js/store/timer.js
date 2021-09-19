@@ -1,3 +1,6 @@
+import moment from 'moment'
+import OK from '../const'
+
 const state = {
   timers: [],
   active: false
@@ -10,8 +13,11 @@ const getters = {
 const mutations = {
   SET_TIMERS(state, timers) {
     state.timers = timers
-  }
+  },
   //TODO: 記録中のmutationsを追加
+  SET_ACTIVE_TIMER(state, bool) {
+    state.active = bool
+  }
 }
 
 const actions = {
@@ -20,12 +26,18 @@ const actions = {
 
     //もし通信に失敗したら、エラーをcommitする
     //TODO: http通信をするためのコードが必要
-    if(response !== success) {
+    if(response !== OK) {
       store.commit(errorCode, response.data)
+
       return false
     }
     context.commit('SET_TIMERS', response.data)
   },
+  fetchActive(context, bool) {
+    context.commit('SET_ACTIVE_TIMER', bool)
+
+    return false
+  }
 
 },
 

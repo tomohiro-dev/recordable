@@ -1,4 +1,6 @@
-window._ = require('lodash');
+import Cookies from 'js-cookie'
+
+window._ = require('lodash')
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -7,10 +9,10 @@ window._ = require('lodash');
  */
 
 try {
-    window.Popper = require('popper.js').default;
-    window.$ = window.jQuery = require('jquery');
+  window.Popper = require('popper.js').default
+  window.$ = window.jQuery = require('jquery')
 
-    require('bootstrap');
+  require('bootstrap')
 } catch (e) {}
 
 /**
@@ -19,9 +21,25 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = require('axios');
+window.axios = require('axios')
 
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+
+// requestの設定
+// Cookieからtokenを取り出す
+// headerに添付
+window.axios.interceptors.request.use(config => {
+  const xsrfToken = Cookies.get('XSRF-TOKEN')
+  confog.headers['X-XSRF-TOKEN'] = xsrfToken
+
+  return config
+})
+
+// responseの設定
+// API通信の成功、失敗でresponseの形が変わる（ので・・・）
+// 成功、失敗の両方にresponse objectを入れる
+// 失敗はerror responseの場合とerrorの両方を適用
+window.axios.interceptors.response.use(response => response, (error = error.response || error))
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
