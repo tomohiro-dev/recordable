@@ -5,9 +5,6 @@ const state = {
   active: false
 }
 
-const getters = {
-  // TODO: 使わない場合は削除
-}
 
 const mutations = {
   SET_TIMERS(state, timers) {
@@ -43,7 +40,6 @@ const actions = {
 export default {
   namespaced: true,
   state,
-  getters, //TODO: 使わない場合は削除
   mutations,
   actions
 }
