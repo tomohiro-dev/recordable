@@ -5,7 +5,6 @@ const state = {
   active: false
 }
 
-
 const mutations = {
   SET_TIMERS(state, timers) {
     state.timers = timers
@@ -22,7 +21,7 @@ const actions = {
 
     //もし通信に失敗したら、エラーをcommitする
     //TODO: http通信をするためのコードが必要
-    if(response !== OK) {
+    if (response !== OK) {
       store.commit(errorCode, response.data)
 
       return false
@@ -34,8 +33,7 @@ const actions = {
 
     return false
   }
-
-},
+}
 
 export default {
   namespaced: true,
