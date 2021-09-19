@@ -4,8 +4,8 @@
     <v-col cols="9" md="6" class="mt-n11">
       <!-- <v-img>TODO: 画像を追加</v-img> -->
     </v-col>
-
     <v-spacer></v-spacer>
+
     <v-col cols="12" md="5">
       <v-card>
         <v-card-title>
@@ -14,7 +14,7 @@
         </v-card-title>
 
         <v-card-title class="pb-0">
-          <h2 class="title">アカウントへログイン</h2>
+          <h2 class="title">アカウントへログインする</h2>
         </v-card-title>
 
         <v-card-text>
@@ -54,6 +54,23 @@
         </v-card-actions>
       </v-card>
     </v-col>
+
+    <v-spacer></v-spacer>
+    <template v-if="loginErrors">
+      <v-snackbar v-model="snackbar" multi-line vertical color="error" right bottom>
+        <ul v-if="loginErrors.email">
+          <li v-for="msg in loginErrors.email" :key="msg">
+            <span>{{ msg }}</span>
+          </li>
+        </ul>
+        <ul v-if="loginErrors.password">
+          <li v-for="msg in loginErrors.password" :key="msg">
+            <span>{{ msg }}</span>
+          </li>
+        </ul>
+        <v-btn text dark @click="sackbar = false">閉じる</v-btn>
+      </v-snackbar>
+    </template>
   </v-row>
 </template>
 
