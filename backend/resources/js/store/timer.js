@@ -1,4 +1,3 @@
-import moment from 'moment'
 import OK from '../const'
 
 const state = {
