@@ -13,7 +13,7 @@
         </v-card-title>
 
         <v-card-title class="pb-0">
-          <h2 class="title">ログイン</h2>
+          <h2 class="title">アカウントへログイン</h2>
         </v-card-title>
 
         <v-card-text>
@@ -59,8 +59,35 @@ export default {
         password: ''
       }
     }
+  },
+  created() {
+    this.clearError()
+  },
+  methods: {
+    async login() {
+      await this.$store.dispatch('auth/login', this.loginForm)
+
+      if (this.apiStatus) {
+        this.$router.push('/')
+      }
+    },
+    clearError() {
+      this.$store.commit('auth/SET_LOGIN_ERROR_MESSAGES', null)
+    }
+  },
+  computed: {
+    apiStatus() {
+      return this.$store.state.auth.apiStatus
+    },
+    loginErrors() {
+      this.snackbar = true
+      return this.$store.state.auth.loginErrorMessages
+    }
   }
 }
+
+// authストアのloginアクション呼び出し
+//
 </script>
 
 <style></style>
