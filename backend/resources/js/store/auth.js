@@ -3,7 +3,7 @@ import { OK, CREATED, UNPROCESSABLE_ENTITY } from '../const'
 
 const state = {
   user: null,
-  Status: null,
+  apiStatus: null,
   loginErrorMessages: null,
   registerErrorMessages: null
 }
@@ -31,12 +31,11 @@ const mutations = {
 const actions = {
   async register(context, data) {
     context.commit('SET_API_STATUS', null)
-    const response = await axios.post('api/register', data)
+    const response = await axios.post('/api/register', data)
 
     if (response.status === CREATED) {
       context.commit('SET_API_STATUS', true)
       context.commit('SET_USER', response.data)
-
       return false
     }
 
@@ -57,7 +56,6 @@ const actions = {
     if (response.status === OK) {
       context.commit('SET_API_STATUS', true)
       context.commit('SET_USER', response.data)
-
       return false
     }
 
@@ -73,15 +71,15 @@ const actions = {
 
   async logout(context) {
     context.commit('SET_API_STATUS', null)
-    const response = await axios.post('api/logout')
+    const response = await axios.post('/api/logout')
 
-    if (response.status === OK) {
+    if (response.status == OK) {
       context.commit('SET_API_STATUS', true)
       context.commit('SET_USER', null)
-
       return false
     }
-    context.comit('SET_API_STATUS', false)
+
+    context.commit('SET_API_STATUS', false)
     context.commit('error/SET_CODE', response.status, {
       root: true
     })
@@ -89,16 +87,15 @@ const actions = {
 
   async currentUser(context) {
     context.commit('SET_API_STATUS', null)
-    const response = await axios.get('api/user')
+    const response = await axios.get('/api/user')
     const user = response.data || null
     if (response.status === OK) {
       context.commit('SET_API_STATUS', true)
       context.commit('SET_USER', user)
-
       return false
     }
 
-    context.commit('SET_SPI_STATUS', false)
+    context.commit('SET_API_STATUS', false)
     context.commit('error/SET_CODE', response.status, {
       root: true
     })

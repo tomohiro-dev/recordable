@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <!-- TODO: snackbar追加 -->
     <NavBar />
     <NavDrawer />
     <v-main>
@@ -14,10 +15,33 @@
 import NavBar from './components/NavBar.vue'
 import NavDrawer from './components/NavDrawer.vue'
 
+import { INTERNAL_SERVER_ERROR } from './const'
+
 export default {
   components: {
     NavBar,
     NavDrawer
+  },
+  computed: {
+    // error storeのcode state 取得
+    errorCode() {
+      return this.$store.state.error.code
+    },
+    watch: {
+      errorCode: {
+        handler(val) {
+          if (val === INTERNAL_SERVER_ERROR) {
+            this.systemErrorSnackbar = true
+          }
+        },
+        //createdで呼び出し
+        immediate: true
+      },
+      //同じrouteの異なるパラメータで画面遷移しても、vue-routerは画面を再描画しないのでwatchで監視する
+      $route() {
+        this.$store.commit('error/SET_CODE', null)
+      }
+    }
   }
 }
 </script>

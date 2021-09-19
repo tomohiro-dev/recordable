@@ -94,9 +94,6 @@ export default {
     }
   }
 }
-
-// authストアのloginアクション呼び出し
-//
 </script>
 
 <style></style>
