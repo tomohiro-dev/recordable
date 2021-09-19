@@ -10,31 +10,56 @@ import store from './store'
 
 Vue.use(VueRouter)
 
-const routes = [
-  {
-    path: '/login',
-    component: Login
-  },
-  {
-    path: '/register',
-    component: Register
-  },
-  {
-    path: '/dashboard',
-    component: Dashboard
-  },
-  {
-    path: '/timer',
-    component: Timer
-  },
-  {
-    path: '*',
-    redirect: '/login'
-  }
-]
-
-const router = new VueRouter({
-  routes
+export default new VueRouter({
+  mode: 'history',
+  routes: [
+    {
+      path: '/login',
+      component: Login,
+      beforeEnter(to, from, next) {
+        if (store.getters['auth/check']) {
+          next('/')
+        } else {
+          next()
+        }
+      }
+    },
+    {
+      path: '/register',
+      component: Register,
+      beforeEnter(to, from, next) {
+        if (store.getters['auth/check']) {
+          next('/')
+        } else {
+          next()
+        }
+      }
+    },
+    {
+      path: '/dashboard',
+      component: Dashboard,
+      beforeEnter(to, from, next) {
+        if (store.getters['auth/check']) {
+          next('/login')
+        } else {
+          next()
+        }
+      }
+    },
+    {
+      path: '/',
+      component: Timer,
+      beforeEnter(to, from, next) {
+        if (!store.getters['auth/check']) {
+          next('/login')
+        } else {
+          next()
+        }
+      }
+    },
+    {
+      path: '*',
+      redirect: '/login'
+    }
+  ]
 })
-
-export default router
