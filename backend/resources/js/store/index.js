@@ -14,3 +14,5 @@ const store = new Vuex.Store({
     timer
   }
 })
+
+export default store
