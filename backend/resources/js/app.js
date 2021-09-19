@@ -7,6 +7,7 @@
 require('./bootstrap')
 
 import Vue from 'vue'
+import VueRouter from 'vue-router'
 import router from './router'
 import App from './App.vue'
 
@@ -20,6 +21,7 @@ import VueTheMask from 'vue-the-mask'
 window.Vue = require('vue')
 Vue.use(Vuetify)
 Vue.use(VueTheMask)
+Vue.use(VueRouter)
 
 const createApp = async () => {
   await store.dispatch('auth/currentUser')
