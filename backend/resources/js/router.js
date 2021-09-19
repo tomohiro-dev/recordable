@@ -17,29 +17,44 @@ export default new VueRouter({
       path: '/login',
       component: Login,
       beforeEnter(to, from, next) {
-        //処理を追加
-        //遷移しない場合は今開いている画面にとどまる
+        if (store.getters['auth/check']) {
+          next('/')
+        } else {
+          next()
+        }
       }
     },
     {
       path: '/register',
       component: Register,
       beforeEnter(to, from, next) {
-        //処理を追加
+        if (store.getters['auth/check']) {
+          next('/')
+        } else {
+          next()
+        }
       }
     },
     {
       path: '/dashboard',
       component: Dashboard,
       beforeEnter(to, from, next) {
-        //処理を追加
+        if (store.getters['auth/check']) {
+          next('/login')
+        } else {
+          next()
+        }
       }
     },
     {
-      path: '/timer',
+      path: '/',
       component: Timer,
       beforeEnter(to, from, next) {
-        //処理を追加
+        if (!store.getters['auth/check']) {
+          next('/login')
+        } else {
+          next()
+        }
       }
     },
     {
