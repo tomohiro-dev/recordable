@@ -9,7 +9,7 @@ const mutations = {
 }
 
 export default {
-  namespaved: true,
+  namespaced: true,
   state,
   mutations
 }
