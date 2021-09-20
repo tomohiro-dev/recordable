@@ -58,11 +58,38 @@
         </v-card-text>
 
         <v-spacer></v-spacer>
-        <v-btn tabindex="5" color="success" text @click="register">
+        <v-btn
+          tabindex="5"
+          :disabled="
+            registerForm.name === '' ||
+              registerForm.email === '' ||
+              registerForm.password === '' ||
+              registerForm.password_confirmation === ''
+          "
+          color="success"
+          text
+          @click="register"
+        >
           登録
         </v-btn>
       </v-card>
     </v-col>
+
+    <template v-if="registerErrors">
+      <v-snackbar v-model="snackbar" multi-line vertical color="error" right bottom>
+        <ul v-if="registerErrors.email">
+          <li v-for="msg in registerErrors.email" :key="msg">
+            <span>{{ msg }}</span>
+          </li>
+        </ul>
+        <ul v-if="registerErrors.password">
+          <li v-for="msg in registerErrors.password" :key="msg">
+            <span>{{ msg }}</span>
+          </li>
+        </ul>
+        <v-btn text dark @click="snackbar = false">閉じる</v-btn>
+      </v-snackbar>
+    </template>
   </v-row>
 </template>
 
