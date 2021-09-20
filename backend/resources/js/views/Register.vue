@@ -25,8 +25,13 @@
 
         <v-card-text>
           <v-form>
-            <v-text-field tabindex="1" label="ユーザー名" prepend-icon="mdi-account-circle" />
-            <v-text-field tabindex="2" label="メールアドレス" prepend-icon="mdi-email" />
+            <v-text-field
+              tabindex="1"
+              label="ユーザー名"
+              v-model="registerForm.name"
+              prepend-icon="mdi-account-circle"
+            />
+            <v-text-field tabindex="2" label="メールアドレス" v-model="registerForm.email" prepend-icon="mdi-email" />
             <v-text-field
               tabindex="3"
               label="パスワード"
@@ -34,7 +39,6 @@
               :type="showPassword ? 'text' : 'password'"
               :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
               @click:append="showPassword = !showPassword"
-              @keyup.enter="register"
             />
             <v-text-field
               tabindex="4"
@@ -47,15 +51,8 @@
             />
 
             <small>
-              アカウントを作成することにより、
-              <v-dialog>
-                利用規約
-              </v-dialog>
-              および
-              <v-dialog>
-                プライバシーポリシー
-              </v-dialog>
-              に同意したものとみなされます。
+              アカウントを作成することにより、 利用規約 および プライバシーポリシー に同意したものとみなされます。
+              <!-- TODO: v-dialogを追加 -->
             </small>
           </v-form>
         </v-card-text>
