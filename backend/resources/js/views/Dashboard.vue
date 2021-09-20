@@ -51,12 +51,12 @@
 
     <v-row>
       <v-col cols="12" md="5">
-        <span class="title"> <v-icon>mdi-chart-pie</v-icon>内訳</span>
+        <span class="title"><v-icon class="mr-2 mb-1">mdi-chart-pie</v-icon>内訳</span>
         <v-tabs v-model="pie">
           <v-tab>今月（時間）</v-tab>
         </v-tabs>
 
-        <v-tabs-items>
+        <v-tabs-items v-model="pie">
           <v-tab-item>
             <v-card>
               <div class="py-4">
@@ -64,8 +64,8 @@
               </div>
 
               <div class="py-4">
-                <chart></chart>
-                <div>
+                <chart :options="chartPie" autoresize v-if="!isEmply(chartPie.series[0].data)"></chart>
+                <div v-else class="echarts">
                   <v-row aligh="center" justify="center">
                     <v-col>
                       <!-- <v-img>TODO: データがない場合の画像を追加</v-img> -->
@@ -110,11 +110,40 @@
 export default {
   data() {
     return {
+      loading: {
+        pie: true
+      },
       snackbar: {
         error: false
       },
       timers: {
         month: []
+      },
+      chartPie: {
+        tooltip: {
+          trigger: 'item',
+          formatter: '{b} : {c} ({d}%)'
+        },
+        legend: {
+          bottom: '10',
+          left: 'center'
+        },
+        series: [
+          {
+            name: 'カテゴリー毎の記録',
+            type: 'pie',
+            roseType: 'radius',
+            radius: [15, 95],
+            center: ['50%', '40%'],
+            data: [
+              {
+                value: 1,
+                name: 'Reading',
+                itemStyle: { color: 'FFF' }
+              }
+            ]
+          }
+        ]
       }
     }
   },
@@ -141,4 +170,9 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+.echarts {
+  width: 100%;
+  height: 350px;
+}
+</style>
