@@ -94,7 +94,46 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      snackbar: false,
+      showPassword: false,
+      registerForm: {
+        name: '',
+        email: '',
+        password: '',
+        password_confirmation: ''
+      },
+      termsDialog: false,
+      privacyDialog: false
+    }
+  },
+  created() {
+    this.clearError()
+  },
+  methods: {
+    async register() {
+      await this.$store.dispatch('auth/regsiter', this.registerForm)
+
+      if (this.apiStatus) {
+        this.$router.push('/')
+      }
+    },
+    clearError() {
+      this.$store.commit('auth/SET_REGISTER_ERROR_MESSAGES', null)
+    }
+  },
+  computed: {
+    apiStatus() {
+      return this.$store.state.auth.apiStatus
+    },
+    registerErrors() {
+      this.snackbar = true
+      return this.$store.state.auth.registerErrorMessages
+    }
+  }
+}
 </script>
 
 <style></style>
