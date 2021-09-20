@@ -47,11 +47,14 @@ export default new VueRouter({
       }
     },
     {
+      // path: '/timer',
+      // TODO: ↑開発用なので、サンプルユーザーでログインができるようになったら削除する
       path: '/',
       component: Timer,
       beforeEnter(to, from, next) {
         if (!store.getters['auth/check']) {
           next('/login')
+          //next('/timer')
         } else {
           next()
         }

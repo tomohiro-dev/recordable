@@ -42,8 +42,8 @@ export default {
         {
           title: 'タイマー',
           icon: 'mdi-clock',
-          // url: '/timer',
-          url: '/',
+          url: '/timer',
+          // url: '/',
           disabled: false,
           badge: true
         },
