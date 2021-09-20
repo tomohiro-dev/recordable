@@ -6,18 +6,21 @@
     </v-col>
 
     <v-spacer></v-spacer>
-    <v-col>
+    <v-col cols="12" md="5" class="mt-n11">
       <v-card>
         <v-card-title>
-          <h1>登録画面だよ</h1>
+          <h1 class="display-1 font-weight-bold">日本語をペラペラに</h1>
         </v-card-title>
 
         <v-card-text>
-          <div>登録してね</div>
+          <div class="text--primary subtitle-2">
+            日本語学習を仕組み化してペラペラになるには練習が必要です。
+            <br />学習内容を記録して練習プロセスを見える化してみましょう。
+          </div>
         </v-card-text>
 
-        <v-card-title>
-          <h2>アカウントを作る</h2>
+        <v-card-title class="pb-0">
+          <h2 class="title">アカウントを作る</h2>
         </v-card-title>
 
         <v-card-text>
