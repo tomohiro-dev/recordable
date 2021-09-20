@@ -19,6 +19,8 @@ import 'vuetify/dist/vuetify.min.css'
 import '@mdi/font/css/materialdesignicons.css'
 import VueTheMask from 'vue-the-mask'
 
+import './echarts'
+
 // window.Vue = require('vue')
 window.Vue = Vue
 Vue.use(Vuetify)
