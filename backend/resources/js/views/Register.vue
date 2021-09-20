@@ -1,12 +1,12 @@
 <template>
   <v-row>
     <v-spacer></v-spacer>
-    <v-col>
+    <v-col cols="9" md="6" class="mt-n11">
       <!-- <v-img>TODO: 画像を追加する</v-img> -->
     </v-col>
-
     <v-spacer></v-spacer>
-    <v-col cols="12" md="5" class="mt-n11">
+
+    <v-col cols="12" md="5">
       <v-card>
         <v-card-title>
           <h1 class="display-1 font-weight-bold">日本語をペラペラに</h1>
@@ -74,6 +74,7 @@
         </v-btn>
       </v-card>
     </v-col>
+    <v-spacer></v-spacer>
 
     <template v-if="registerErrors">
       <v-snackbar v-model="snackbar" multi-line vertical color="error" right bottom>
