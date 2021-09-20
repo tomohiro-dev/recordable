@@ -54,8 +54,8 @@
         </v-card-actions>
       </v-card>
     </v-col>
-
     <v-spacer></v-spacer>
+
     <template v-if="loginErrors">
       <v-snackbar v-model="snackbar" multi-line vertical color="error" right bottom>
         <ul v-if="loginErrors.email">
