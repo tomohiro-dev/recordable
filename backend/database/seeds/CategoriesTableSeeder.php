@@ -15,9 +15,11 @@ class CategoriesTableSeeder extends Seeder
     public function run()
     {
         $categories = [
-            'Grammar' => '#5735CE',
-            'Speaking' => '#FFC46D',
-            'Writing' => '#FA0202',
+            'Grammar' => '#F582AE',
+            'Speaking' => '#8BD3DD',
+            'Writing' => '#FF8906',
+            'Reading' => '#E53170',
+            'Online Session' => '#00EBC7'
         ];
 
         foreach ($categories as $name => $key) {
