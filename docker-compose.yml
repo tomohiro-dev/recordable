@@ -82,3 +82,6 @@ services:
       - MYSQL_USER=${DB_USER:-soregashi27}
       - MYSQL_PASSWORD=${DB_PASS:-soregashidegozaru}
       - MYSQL_ROOT_PASSWORD=${DB_PASS:-soregashidegozaru}
+
+  db-test:
+    build: ./infra/docker/mysql
