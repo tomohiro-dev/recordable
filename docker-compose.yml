@@ -11,6 +11,7 @@ services:
       - PMA_HOST=db
       - PMA_USER=soregashi27
       - PMA_PASSWORD=soregashidegozaru
+      # TODO: 表示方法検討
     ports:
       - 8080:80
     volumes:
@@ -83,5 +84,18 @@ services:
       - MYSQL_PASSWORD=${DB_PASS:-soregashidegozaru}
       - MYSQL_ROOT_PASSWORD=${DB_PASS:-soregashidegozaru}
 
-  db-test:
-    build: ./infra/docker/mysql
+  db-testing:
+    image: mysql:8.0
+    volumes:
+      - type: volume
+        source: db-store
+        target: /var/lib/mysql
+    tmpfs:
+      - /var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=${DB_NAME:-recordable}
+      - MYSQL_USER=${DB_USER:-soregashi27}
+      - MYSQL_PASSWORD=${DB_PASS:-soregashidegozaru}
+      - MYSQL_ROOT_PASSWORD=${DB_PASS:-soregashidegozaru}
+    ports:
+      - ${DB_TESTING_PORT:-3307}
