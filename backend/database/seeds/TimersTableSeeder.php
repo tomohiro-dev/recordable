@@ -7,12 +7,11 @@ class TimersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
     public function run()
     {
-        DB::table('timers')->insert([
+        DB::table('timers')->insert(
+            [
             'id' => 1,
             'name' => 'オンライン会話',
             'memo' => 'Erotalk in JapaneseでMatsu-sanと会話をする',
@@ -25,7 +24,7 @@ class TimersTableSeeder extends Seeder
             'category_name' => 'Speaking',
             'category_color' => '#8BD3DD',
         ],
-        [
+            [
             'id' => 2,
             'name' => '日本語文法学習',
             'memo' => '「深めてわかる！日本語文法」を進める',
@@ -38,7 +37,7 @@ class TimersTableSeeder extends Seeder
             'category_name' => 'Writing',
             'category_color' => '#FF8906',
         ],
-        [
+            [
             'id' => 3,
             'name' => '日本語作文',
             'memo' => 'Matsu-sanからもらった課題を進める',
@@ -50,7 +49,8 @@ class TimersTableSeeder extends Seeder
             'category_id' => '3',
             'category_name' => 'Grammar',
             'category_color' => '#F582AE',
-        ]);
+        ]
+        );
 
         //TODO:テスト時にdactoryでダミーデータを100件くらい生成したい
     }
