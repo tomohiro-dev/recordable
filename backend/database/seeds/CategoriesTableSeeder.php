@@ -4,13 +4,10 @@ use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-
 class CategoriesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
     public function run()
     {
@@ -19,7 +16,7 @@ class CategoriesTableSeeder extends Seeder
             'Speaking' => '#8BD3DD',
             'Writing' => '#FF8906',
             'Reading' => '#E53170',
-            'Online Session' => '#00EBC7'
+            'Online Session' => '#00EBC7',
         ];
 
         foreach ($categories as $name => $key) {
