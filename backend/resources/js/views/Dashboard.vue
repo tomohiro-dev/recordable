@@ -64,7 +64,7 @@
               </div>
 
               <div class="py-4">
-                <chart :options="chartPie" autoresize v-if="!isEmply(chartPie.series[0].data)"></chart>
+                <chart :options="chartPie" autoresize v-if="!isEmpty(chartPie.series[0].data)"></chart>
                 <div v-else class="echarts">
                   <v-row aligh="center" justify="center">
                     <v-col>
@@ -150,22 +150,29 @@ export default {
   created() {
     window.axios
       .get('api/records')
-      .then(response => {
+      .then((response) => {
         timers.month = response.data
       })
-      .catch(err => {
+      .catch((err) => {
         errorMessage = err
         snackbar.error = true
       })
     window.axios
       .get('api/records/total')
-      .then(response => {
+      .then((response) => {
         record.total = response.data
       })
-      .catch(err => {
+      .catch((err) => {
         errorMessage = err
         snackbar.error = true
       })
+  },
+  watch: {
+    //Pie Chart logic
+    //月のデータがemptyじゃない時に実行
+    //データをObjectとして保存する
+    //id, value, name, colorをそれぞれvariableで定義
+    //Pie chartへ渡すdata
   }
 }
 </script>
