@@ -279,6 +279,8 @@ node -v
 ```
 docker compose down --rmi all --volumes --remove-orphans
 ```
+※使うタイミング要注意！ データベース上にデータがある場合は基本的には使わない。 \
+データベースを一度リセットしてゼロから開発をスタートさせる場合に使う。
 
 
 ### Laravelのキャッシュクリアコマンド
