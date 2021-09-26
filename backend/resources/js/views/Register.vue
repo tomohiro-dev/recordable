@@ -21,10 +21,16 @@
 
         <v-card-text>
           <v-form>
-            <v-text-field tabindex="1" label="ユーザー名" prepend-icon="mdi-account-circle" />
-            <v-text-field tabindex="2" label="メールアドレス" prepend-icon="mdi-email" />
+            <v-text-field
+              tabindex="1"
+              v-model="registerForm.name"
+              label="ユーザー名"
+              prepend-icon="mdi-account-circle"
+            />
+            <v-text-field tabindex="2" v-model="registerForm.email" label="メールアドレス" prepend-icon="mdi-email" />
             <v-text-field
               tabindex="3"
+              v-model="registerForm.password"
               label="パスワード"
               prepend-icon="mdi-lock"
               :type="showPassword ? 'text' : 'password'"
@@ -34,6 +40,7 @@
             />
             <v-text-field
               tabindex="4"
+              v-model="registerForm.password_confirmation"
               label="パスワード再入力"
               prepend-icon="mdi-lock"
               :type="showPassword ? 'text' : 'password'"
@@ -48,7 +55,20 @@
           </v-form>
         </v-card-text>
 
-        <v-btn tabindex="5" color="success" text @click="register"> 登録する </v-btn>
+        <v-btn
+          tabindex="5"
+          :disabled="
+            registerForm.name === '' ||
+            registerForm.email === '' ||
+            registerForm.password === '' ||
+            registerForm.password_confirmation === ''
+          "
+          color="success"
+          text
+          @click="register"
+        >
+          登録する
+        </v-btn>
       </v-card>
     </v-col>
     <v-spacer></v-spacer>
@@ -70,6 +90,7 @@ export default {
         password: '',
         password_confirmation: ''
       },
+      //TODO: launch後に追加
       termsDialog: false,
       privacyDialog: false
     }
