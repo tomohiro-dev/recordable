@@ -1,12 +1,11 @@
 <template>
   <v-row>
     <v-spacer></v-spacer>
-    <v-col>
+    <v-col cols="9" md="6" class="mt-n11">
       <!-- <v-img>TODO: 画像を追加する</v-img> -->
     </v-col>
-
     <v-spacer></v-spacer>
-    <v-col cols="12" md="5" class="mt-n11">
+    <v-col cols="12" md="5">
       <v-card>
         <v-card-title>
           <h1>登録画面だよ</h1>
@@ -49,10 +48,10 @@
           </v-form>
         </v-card-text>
 
-        <v-spacer></v-spacer>
         <v-btn tabindex="5" color="success" text @click="register"> 登録する </v-btn>
       </v-card>
     </v-col>
+    <v-spacer></v-spacer>
   </v-row>
 </template>
 

@@ -5,7 +5,6 @@
       <!-- <v-img>TODO: 画像を追加</v-img> -->
     </v-col>
     <v-spacer></v-spacer>
-
     <v-col cols="12" md="5">
       <v-card>
         <v-card-title>
