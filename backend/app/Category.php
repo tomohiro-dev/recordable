@@ -10,18 +10,15 @@ class Category extends Model
 
     protected $with = ['user'];
 
-    public function user()
-    {
+    public function user() {
         return $this->belongsTo(user::class);
     }
 
-    public function timers()
-    {
+    public function timers() {
         return $this->hasMany(Timer::class);
     }
 
-    public function scopeMine($query)
-    {
+    public function scopeMine($query) {
         return $query->whereUserId(auth()->user()->id);
     }
 }

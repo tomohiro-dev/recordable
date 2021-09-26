@@ -5,7 +5,6 @@
       <!-- <v-img>TODO: 画像を追加</v-img> -->
     </v-col>
     <v-spacer></v-spacer>
-
     <v-col cols="12" md="5">
       <v-card>
         <v-card-title>
@@ -54,8 +53,8 @@
         </v-card-actions>
       </v-card>
     </v-col>
-    <v-spacer></v-spacer>
 
+    <v-spacer></v-spacer>
     <template v-if="loginErrors">
       <v-snackbar v-model="snackbar" multi-line vertical color="error" right bottom>
         <ul v-if="loginErrors.email">

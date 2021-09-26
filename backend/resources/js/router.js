@@ -14,6 +14,19 @@ export default new VueRouter({
   mode: 'history',
   routes: [
     {
+      // path: '/timer',
+      path: '/',
+      component: Timer,
+      beforeEnter(to, from, next) {
+        if (!store.getters['auth/check']) {
+          next('/login') // path: '/'
+          // next('/') // path: '/timer'
+        } else {
+          next()
+        }
+      }
+    },
+    {
       path: '/login',
       component: Login,
       beforeEnter(to, from, next) {
@@ -41,20 +54,6 @@ export default new VueRouter({
       beforeEnter(to, from, next) {
         if (store.getters['auth/check']) {
           next('/login')
-        } else {
-          next()
-        }
-      }
-    },
-    {
-      path: '/timer',
-      // TODO: ↑開発用なので、サンプルユーザーでログインができるようになったら削除する
-      // path: '/',
-      component: Timer,
-      beforeEnter(to, from, next) {
-        if (!store.getters['auth/check']) {
-          // next('/login')
-          next('/')
         } else {
           next()
         }

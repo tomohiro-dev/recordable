@@ -1,7 +1,5 @@
 <template>
-  <v-navigation-drawer v-if="isLogin" :disable-route-watcher="true" app dark>
-    <!-- TODO: ユーザーの画像を追加（予定) Samirai & Oiran -->
-
+  <v-navigation-drawer v-if="isLogin" :disable-route-watcher="true" app>
     <v-list-item class="px-2">
       <v-list-item-title>{{ username }}</v-list-item-title>
     </v-list-item>
@@ -57,26 +55,9 @@ export default {
       ]
     }
   },
-  methods: {
-    async logout() {
-      if (confirm('今日は勉強を終了しますか？')) {
-        await this.$store.dispatch('auth/logout')
-
-        if (this.apistatus) {
-          this.$router.push('/login')
-        }
-      }
-    }
-  },
   computed: {
-    apistatus() {
-      return this.$store.state.authapiStatus
-    },
     isLogin() {
-      return this.$store.getters['auth/check']
-    },
-    username() {
-      return this.$store.getters['auth/username']
+      return this.$store.state.auth.apiStatus
     }
   }
 }

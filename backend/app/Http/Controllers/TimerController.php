@@ -6,11 +6,9 @@ use App\Timer;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
 class TimerController extends Controller
 {
-    public function __construct()
-    {
+    public function __construct() {
         $this->middleware('auth');
     }
 
@@ -24,25 +22,21 @@ class TimerController extends Controller
         return Timer::mine()->orderBy('started_at', 'desc')->paginate(20)->toArray();
     }
 
-    public function indexMonth()
-    {
+    public function indexMonth() {
         $this_year = Carbon::today('Asia/Tokyo')->year;
         $this_month = Carbon::today('Asia/Tokyo')->month;
         return Timer::mine()
-            ->whereYear('started_at', $this_year)
-            ->whereMonth('started_at', $this_month)
-            ->get();
+        ->whereYear('started_at', $this_year)
+        ->whereMonth('started_at', $this_month)
+        ->get();
     }
-
     //TODO: ユーザーのTimezone毎に時間が対応するように設定したい（作成時はAsia/Tokyo）
     //TODO: サービス使用開始時のタイムラグをユーザーに確認する
 
-    public function indexTotal()
-    {
+    public function indexTotal() {
         $timers = Timer::mine()->get()->toArray();
         $total_seconds = 0;
-
-        for ($i = 0; $i < count($timers); $i++) {
+        for($i=0; $i < count($timers) ;$i++) {
             $started_at = new Carbon($timers[$i]['started_at']);
             $stopprd_at = new Carbon($timers[$i]['stopped_at']);
             $diff = $started_at->diffInSeconds($stopped_at);
@@ -59,17 +53,18 @@ class TimerController extends Controller
      */
     public function create()
     {
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $timer = Timer::mine()->create([
+        $timer =  Timer::mine()->create([
             'name' => $data['name'],
             'memo' => $data['memo'],
             'category_id' => $data['category_id'],
@@ -83,8 +78,7 @@ class TimerController extends Controller
         return $timer;
     }
 
-    public function save(Request $request)
-    {
+    public function save(Request $request) {
         //TODO: varidation処理を追加する
 
         $started_at = new Carbon($data['started_at']);
@@ -107,33 +101,36 @@ class TimerController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         //TODO: varidation処理を追加する
+
 
         $started_at = new Carbon($data['started_at']);
         $stopped_at = new Carbon($data['stopped_at']);
@@ -154,7 +151,7 @@ class TimerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(int $id)
@@ -165,13 +162,11 @@ class TimerController extends Controller
         return $timer;
     }
 
-    public function running()
-    {
+    public function running() {
         return Timer::mine()->running()->first();
     }
 
-    public function stopRunning()
-    {
+    public function stopRunning() {
         if ($timer = Timer::mine()->running()->first()) {
             $timer->update(['stopped_at' => new Carbon]);
         }
