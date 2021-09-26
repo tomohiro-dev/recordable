@@ -9,7 +9,6 @@ const mutations = {
   SET_TIMERS(state, timers) {
     state.timers = timers
   },
-  //TODO: 記録中のmutationsを追加
   SET_ACTIVE_TIMER(state, bool) {
     state.active = bool
   }

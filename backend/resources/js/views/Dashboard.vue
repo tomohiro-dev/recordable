@@ -8,4 +8,9 @@
 export default {}
 </script>
 
-<style></style>
+<style scoped>
+.echarts {
+  width: 100%;
+  height: 350px;
+}
+</style>
