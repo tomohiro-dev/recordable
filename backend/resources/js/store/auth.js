@@ -1,4 +1,4 @@
-import axios from 'axios'
+// import axios from 'axios'
 import { OK, CREATED, UNPROCESSABLE_ENTITY } from '../const'
 
 const state = {
@@ -9,8 +9,8 @@ const state = {
 }
 
 const getters = {
-  check: state => !!state.user,
-  username: state => (state.user ? state.user.name : '')
+  check: (state) => !!state.user,
+  username: (state) => (state.user ? state.user.name : '')
 }
 
 const mutations = {

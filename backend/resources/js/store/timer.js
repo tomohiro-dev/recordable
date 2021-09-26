@@ -22,7 +22,7 @@ const actions = {
     //もし通信に失敗したら、エラーをcommitする
     //TODO: http通信をするためのコードが必要
     if (response !== OK) {
-      store.commit(errorCode, response.data)
+      this.$store.commit('error/SET_CODE', response.data)
 
       return false
     }
