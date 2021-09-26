@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar>
+  <v-app-bar v-if="!isLogin" color="transparent" app flat hide-on-scroll>
     <!-- <v-img>ロゴを追加</v-img> -->
     <v-toolbar-title>
       Recordable
@@ -12,7 +12,13 @@
 </template>
 
 <script>
-export default {}
+export default {
+  computed: {
+    isLogin() {
+      return this.$store.getters['auth/check']
+    }
+  }
+}
 </script>
 
 <style></style>

@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer>
+  <v-navigation-drawer v-if="isLogin" :disable-route-watcher="true" app>
     <v-list-item class="px-2">
       <v-list-item-title>ユーザーネーム</v-list-item-title>
     </v-list-item>
@@ -51,6 +51,11 @@ export default {
           badge: false
         }
       ]
+    }
+  },
+  computed: {
+    isLogin() {
+      return this.$store.state.auth.apiStatus
     }
   }
 }
