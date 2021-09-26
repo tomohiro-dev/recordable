@@ -11,7 +11,7 @@
 |
 */
 
-// APIのURL以外のリクエストに対してはindexテンプレートを返す
+// APIのURL以外のリクエストはindexテンプレート
 // 画面遷移はフロントエンドのVueRouterが制御する
 Route::get('/{any?}', function () {
     return view('index');

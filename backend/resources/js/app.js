@@ -4,7 +4,9 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-// require('./bootstrap')
+// ※削除厳禁
+// backend/resources/js/bootstrap.jsをmoduleとして読み込んで実行
+require('./bootstrap')
 
 import './bootstrap'
 import Vue from 'vue'

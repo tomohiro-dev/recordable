@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Router from 'vue-router'
 
 import Login from './views/Login.vue'
 import Register from './views/Register.vue'
@@ -8,14 +8,15 @@ import Timer from './views/Timer.vue'
 
 import store from './store'
 
-Vue.use(VueRouter)
+Vue.use(Router)
 
-export default new VueRouter({
+// TODO: 画面作成時はbeforeEnterのコメントアウトする
+export default new Router({
   mode: 'history',
   routes: [
     {
-      // path: '/timer',
-      path: '/',
+      path: '/timer',
+      // path: '/', //本番
       component: Timer,
       beforeEnter(to, from, next) {
         if (!store.getters['auth/check']) {
