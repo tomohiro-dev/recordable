@@ -26,22 +26,22 @@ export default {
     // error storeのcode state 取得
     errorCode() {
       return this.$store.state.error.code
-    },
-    watch: {
-      //TODO: snackbar追加時にコメントアウト解除
-      // errorCode: {
-      //   handler(val) {
-      //     if (val === INTERNAL_SERVER_ERROR) {
-      //       this.systemErrorSnackbar = true
-      //     }
-      //   },
-      //   //createdで呼び出し
-      //   immediate: true
-      // },
-      //同じrouteの異なるパラメータで画面遷移しても、vue-routerは画面を再描画しないのでwatchで監視する
-      $route() {
-        this.$store.commit('error/SET_CODE', null)
-      }
+    }
+  },
+  watch: {
+    //TODO: snackbar追加時にコメントアウト解除
+    // errorCode: {
+    //   handler(val) {
+    //     if (val === INTERNAL_SERVER_ERROR) {
+    //       this.systemErrorSnackbar = true
+    //     }
+    //   },
+    //   //createdで呼び出し
+    //   immediate: true
+    // },
+    //同じrouteの異なるパラメータで画面遷移しても、vue-routerは画面を再描画しないのでwatchで監視する
+    $route() {
+      this.$store.commit('error/SET_CODE', null)
     }
   }
 }
