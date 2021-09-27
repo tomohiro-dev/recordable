@@ -10,22 +10,22 @@ import store from './store'
 
 Vue.use(Router)
 
-// TODO: 画面作成時はbeforeEnterのコメントアウトする
+// TODO: 画面作成時はbeforeEnterのコメントアウトする(timer)
 export default new Router({
   mode: 'history',
   routes: [
     {
       path: '/timer',
       // path: '/', //本番
-      component: Timer,
-      beforeEnter(to, from, next) {
-        if (!store.getters['auth/check']) {
-          next('/login') // path: '/'
-          // next('/') // path: '/timer'
-        } else {
-          next()
-        }
-      }
+      component: Timer
+      // beforeEnter(to, from, next) {
+      //   if (!store.getters['auth/check']) {
+      //     next('/login') // path: '/'
+      //     // next('/') // path: '/timer'
+      //   } else {
+      //     next()
+      //   }
+      // }
     },
     {
       path: '/login',
