@@ -8,7 +8,7 @@
 // backend/resources/js/bootstrap.jsをmoduleとして読み込んで実行
 require('./bootstrap')
 
-import './bootstrap'
+import './bootstrap' //削除
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import router from './router'
