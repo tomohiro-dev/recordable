@@ -32,22 +32,6 @@
 
     <!-- 記録が一覧で並んでいる時の画面 -->
 
-    <!-- タイマー追加ボタン -->
-    <v-speed-dial v-model="fab" fab bottom right fixed direction="top" transition="slide-reversse-transition">
-      <template v-slot:activator>
-        <v-hover v-slot:default="{ hover }">
-          <v-btn v-model="fab" color="#696969" dark fab x-large :elevation="hover ? 12 : 6">
-            <v-icon v-if="fab">mdi-close</v-icon>
-            <v-icon v-else>mdi-plus</v-icon>
-          </v-btn>
-        </v-hover>
-      </template>
-
-      <v-btn fab dark small color="#696969" @click.stop="dialog.newTimer = true">
-        <v-icon>mdi-timer-outline</v-icon>
-      </v-btn>
-    </v-speed-dial>
-
     <!-- 新規作成タイマー -->
     <div class="text-center">
       <v-dialog v-model="dialog.newTimer" width="500">
