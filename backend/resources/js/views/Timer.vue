@@ -26,10 +26,21 @@
           </v-btn>
         </v-hover>
       </template>
-      <v-btn v-if="isEmpty(counter.timer.name)" fab dark small color="#696969" @click.stop="dialog.newTimer = true">
+      <v-btn
+      v-if="isEmpty(counter.timer.name)"
+      fab
+      dark
+      small
+      color="#696969"
+      @click.stop="dialog.newTimer = true">
         <v-icon>mdi-timer-outline</v-icon>
       </v-btn>
-      <v-btn fab dark small color="#696969">
+      <v-btn
+      fab
+      dark
+      small
+      color="#696969"
+      @click.stop="dialog.saveTimer = true">
         <v-icon>mdi-playlist-plus</v-icon>
       </v-btn>
     </v-speed-dial>
@@ -349,10 +360,10 @@
                       :timePickerProps="editTimePickerProps"
                     >
                       <template slot="dateIcon">
-                        <v-icon color="#00ACEE">mdi-calendar</v-icon>
+                        <v-icon color="#696969">mdi-calendar</v-icon>
                       </template>
                       <template slot="timeIcon">
-                        <v-icon color="#00ACEE">mdi-clock-outline</v-icon>
+                        <v-icon color="#696969">mdi-clock-outline</v-icon>
                       </template>
                       <template slot="actions" slot-scope="{ parent }">
                         <v-btn text color="primary" @click="parent.okHandler">保存</v-btn>
@@ -603,8 +614,14 @@ export default {
       windowSize: {
         width: window.innerWidth
       },
+      timePickerProps: {
+        format: "24hr"
+      },
       editTimePickerProps: {
         format: '24hr'
+      },
+      datePickerProps: {
+        color: "#696969"
       }
     }
   },
