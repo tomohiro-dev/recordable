@@ -4,10 +4,23 @@
     <!-- componentとして切り出してもいいかも -->
 
     <!-- タイマー追加ボタン -->
-    <v-speed-dial v-model="fab" fab bottom right fixed direction="top" transition="slide-y-reverse-transition">
+    <v-speed-dial
+    v-model="fab"
+    fab
+    bottom
+    right
+    fixed
+    direction="top"
+    transition="slide-y-reverse-transition">
       <template v-slot:activator>
         <v-hover v-slot:default="{ hover }">
-          <v-btn v-model="fab" color="#696969" dark fab x-large :elevation="hover ? 12 : 6">
+          <v-btn
+          v-model="fab"
+          color="#696969"
+          dark
+          fab
+          x-large
+          :elevation="hover ? 12 : 6">
             <v-icon v-if="fab">mdi-close</v-icon>
             <v-icon v-else>mdi-plus</v-icon>
           </v-btn>
@@ -305,7 +318,10 @@
                         <v-card-actions>
                           <v-spacer></v-spacer>
                           <v-btn text @click="menu.saveTimerCategory = false">閉じる</v-btn>
-                          <v-btn color="primary" text :disabled="newCategory.name === ''" @click="createCategory()"
+                          <v-btn
+                          color="primary"
+                          text
+                          :disabled="newCategory.name === ''" @click="createCategory()"
                             >保存
                           </v-btn>
                         </v-card-actions>
@@ -481,6 +497,39 @@
             </v-container>
             <small>*は必須項目です。</small>
           </v-card-text>
+
+          <!-- 削除ボタン -->
+          <v-menu v-model="menu.delete" :close-on-content="false" :nudge-width="200" offset-x>
+            <template v-slot:action="{ on }">
+              <v-btn text color="red lighten-1" v-on="on">削除</v-btn>
+            </template>
+            <v-card>
+              <v-card-title>
+                <span class="headline">記録を削除します</span>
+              </v-card-title>
+              <v-card-text>本当によろしいですか？</v-card-text>
+
+              <v-card-action>
+                <v-spacer></v-spacer>
+                <v-btn text @click="menu.delete = false">閉じる</v-btn>
+                <v-btn
+                color="blue darken-1"
+                text
+                @click="updateTimer()"
+                :disabled="
+                saveTimer.name.length > 30 ||
+                saveTimer.name === '' ||
+                saveTimer.category === '' ||
+                (saveTimer.memo && saveTimer.memo.length > 140) ||
+                saveTimer.started_at === '' ||
+                saveTimer.stopped_at === '' ||
+                (!saveTimer.time.hours && !saveTimer.time.minutes && !saveTimer.time.seconds)
+              ">
+              保存</v-btn>
+                </v-btn>
+              </v-card-action>
+            </v-card>
+          </v-menu>
         </v-card>
       </v-dialog>
     </div>
