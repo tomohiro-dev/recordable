@@ -1,35 +1,32 @@
 module.exports = {
   root: true,
   parserOptions: {
-    parser: "babel-eslint"
+    parser: 'babel-eslint'
   },
   env: {
     browser: true
   },
-  extends: [
-    "plugin:vue/recommended",
-    "plugin:prettier/recommended",
-    "prettier/vue"
-  ],
-  plugins: ["vue", "prettier"],
+  extends: ['plugin:vue/recommended', 'plugin:prettier/recommended', 'prettier/vue'],
+  plugins: ['vue', 'prettier'],
   rules: {
-    "vue/no-v-html": "off",
-    "vue/prop-name-casing": "off",
-    "no-console": "off",
-    "no-unused-vars": "off",
+    'vue/no-v-html': 'off',
+    'vue/prop-name-casing': 'off',
+    'no-console': 'off',
+    'no-unused-vars': 'off',
+    'unexpected-character-in-attribute-name': false,
 
-    "prettier/prettier": [
-      "error",
+    'prettier/prettier': [
+      'error',
       {
         printWidth: 120,
         tabWidth: 2,
         useTabs: false,
         singleQuote: true,
-        trailingComma: "all",
+        trailingComma: 'all',
         bracketSpacing: true,
-        arrowParens: "avoid",
+        arrowParens: 'avoid',
         semi: false
       }
     ]
   }
-};
+}
