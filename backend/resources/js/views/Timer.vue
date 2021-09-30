@@ -395,6 +395,95 @@
         </v-card>
       </v-dialog>
     </div>
+
+    <!-- タイマーの編集 -->
+    <div class="text-center">
+      <v-dialog v-model="dialog.editTimer" width="500">
+        <v-card>
+          <v-card-title class="grey--text text--darken-2 headline" :class="{ title: windowSize.width < 600 }">
+            <v-icon class="mr-2">mdi-update </v-icon>
+            レコードを編集する
+            <v-spacer></v-spacer>
+          </v-card-title>
+          <v-card-text :class="{ 'px-4': windowSize.width < 600 }">
+            <v-container class="pt-0">
+              <v-row>
+                <v-col cols="12">
+                  <v-select
+                    v-model="editTimer"
+                    :items="categories"
+                    item-text="name"
+                    item-value="value"
+                    label="カテゴリーを選択する"
+                    return-object
+                    required
+                    prepend-icon="mdi-folder"
+                    :rules="rules.category"
+                  >
+                  </v-select>
+                </v-col>
+
+                <!-- メモ入力 -->
+                <v-col cols="12">
+                  <v-text-area
+                    v-model="editTimer.memo"
+                    label="メモ"
+                    type="text"
+                    prepend-icon="mdi-texgt-box"
+                    :rules="rules.memo"
+                    :counter="140"
+                  >
+                  </v-text-area>
+                </v-col>
+
+                <!-- 開始時刻 -->
+                <v-col cols="12">
+                  <v-datatime-picker
+                    v-model="editTimer.started_at"
+                    :text-field-props="textFieldProps"
+                    :timePickerProps="timePickerProps"
+                    :datePickerProps="datePickerProps"
+                    label="開始時刻* / 計測期間*"
+                  >
+                    <template slot="dateIcon">
+                      <v-icon>mdi-calender</v-icon>
+                    </template>
+                    <template slot="timeIcon">
+                      <v-icon>mdi-clock-outline</v-icon>
+                    </template>
+                    <template slot="actions" slot-scope="{ parent }">
+                      <v-btn text color="primary" @click="parent.okHandler"> 保存 </v-btn>
+                    </template>
+                  </v-datatime-picker>
+                </v-col>
+
+                <!-- 計測期間入力 -->
+                <v-col cols="4">
+                  <v-select
+                    v-model="editTimer.time.hours"
+                    label="時間"
+                    required
+                    prepend-icon="mdi-timer-sand-full"
+                    :items="time.hours"
+                  >
+                  </v-select>
+                </v-col>
+                <v-spacer></v-spacer>
+
+                <v-col cols="4">
+                  <v-select v-model="editTimer.time.minutes" label="分" required :items="time.minutes"> </v-select>
+                </v-col>
+                <v-spacer></v-spacer>
+                <v-col cols="4">
+                  <v-select v-model="editTimer.time.seconds" label="秒" required :items="time.seconds"> </v-select>
+                </v-col>
+              </v-row>
+            </v-container>
+            <small>*は必須項目です。</small>
+          </v-card-text>
+        </v-card>
+      </v-dialog>
+    </div>
   </div>
 </template>
 
