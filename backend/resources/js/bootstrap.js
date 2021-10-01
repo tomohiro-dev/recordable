@@ -28,7 +28,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 // requestの設定
 // Cookieからtokenを取り出す
 // headerに添付
-window.axios.interceptors.request.use(config => {
+window.axios.interceptors.request.use((config) => {
   const xsrfToken = Cookies.get('XSRF-TOKEN')
   confog.headers['X-XSRF-TOKEN'] = xsrfToken
 
@@ -40,8 +40,8 @@ window.axios.interceptors.request.use(config => {
 // 成功、失敗の両方にresponse objectを入れる
 // 失敗はerror responseの場合とerrorの両方を適用
 window.axios.interceptors.response.use(
-  response => response,
-  error => error.response || error
+  (response) => response,
+  (error) => error.response || error
 )
 
 /**
