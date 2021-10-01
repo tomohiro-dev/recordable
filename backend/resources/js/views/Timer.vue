@@ -4,16 +4,38 @@
     <!-- componentとして切り出してもいいかも -->
 
     <!-- タイマー追加ボタン -->
-    <v-speed-dial v-model="fab" fab bottom right fixed direction="top" transition="slide-y-reverse-transition">
+    <v-speed-dial
+      v-model="fab"
+      fab
+      bottom
+      right
+      fixed
+      direction="top"
+      transition="slide-y-reverse-transition"
+    >
       <template v-slot:activator>
         <v-hover v-slot:default="{ hover }">
-          <v-btn v-model="fab" color="#696969" dark fab x-large :elevation="hover ? 12 : 6">
+          <v-btn
+            v-model="fab"
+            color="#696969"
+            dark
+            fab
+            x-large
+            :elevation="hover ? 12 : 6"
+          >
             <v-icon v-if="fab">mdi-close</v-icon>
             <v-icon v-else>mdi-plus</v-icon>
           </v-btn>
         </v-hover>
       </template>
-      <v-btn v-if="isEmpty(counter.timer.name)" fab dark small color="#696969" @click.stop="dialog.newTimer = true">
+      <v-btn
+        v-if="isEmpty(counter.timer.name)"
+        fab
+        dark
+        small
+        color="#696969"
+        @click.stop="dialog.newTimer = true"
+      >
         <v-icon>mdi-timer-outline</v-icon>
       </v-btn>
       <v-btn fab dark small color="#696969" @click.stop="dialog.saveTimer = true">
@@ -87,7 +109,12 @@
                   </v-col>
                   <!-- カテゴリ追加ボタン -->
                   <div class="text-center">
-                    <v-menu v-model="menu.newTimerCategory" :close-on-content-click="false" :nudge-width="200" offset-x>
+                    <v-menu
+                      v-model="menu.newTimerCategory"
+                      :close-on-content-click="false"
+                      :nudge-width="200"
+                      offset-x
+                    >
                       <template v-slot:activator="{ on }">
                         <v-btn text color="grey lighten-1" v-on="on">
                           <v-icon color="light-green accent-4">mdi-plus</v-icon>カテゴリーを追加する
@@ -146,7 +173,11 @@
                         <v-card-actions>
                           <v-spacer></v-spacer>
                           <v-btn text @click="menu.newTimerCategory = false">閉じる</v-btn>
-                          <v-btn color="primary" text :disabled="newCategory.name === ''" @click="createCategory()"
+                          <v-btn
+                            color="primary"
+                            text
+                            :disabled="newCategory.name === ''"
+                            @click="createCategory()"
                             >保存
                           </v-btn>
                         </v-card-actions>
@@ -175,7 +206,12 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn text @click="dialog.newTimer = false">閉じる</v-btn>
-            <v-btn color="blue darken-1" text @click="createTimer()" :disabled="!newTimerValid">スタート</v-btn>
+            <v-btn
+              color="blue darken-1"
+              text
+              @click="createTimer()"
+              :disabled="!newTimerValid"
+            >スタート</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -305,7 +341,11 @@
                         <v-card-actions>
                           <v-spacer></v-spacer>
                           <v-btn text @click="menu.saveTimerCategory = false">閉じる</v-btn>
-                          <v-btn color="primary" text :disabled="newCategory.name === ''" @click="createCategory()"
+                          <v-btn
+                            color="primary"
+                            text
+                            :disabled="newCategory.name === ''"
+                            @click="createCategory()"
                             >保存
                           </v-btn>
                         </v-card-actions>
@@ -400,7 +440,10 @@
     <div class="text-center">
       <v-dialog v-model="dialog.editTimer" width="500">
         <v-card>
-          <v-card-title class="grey--text text--darken-2 headline" :class="{ title: windowSize.width < 600 }">
+          <v-card-title
+            class="grey--text text--darken-2 headline"
+            :class="{ title: windowSize.width < 600 }"
+          >
             <v-icon class="mr-2">mdi-update </v-icon>
             レコードを編集する
             <v-spacer></v-spacer>
@@ -471,11 +514,22 @@
                 <v-spacer></v-spacer>
 
                 <v-col cols="4">
-                  <v-select v-model="editTimer.time.minutes" label="分" required :items="time.minutes"> </v-select>
+                  <v-select
+                    v-model="editTimer.time.minutes"
+                    label="分"
+                    required
+                    :items="time.minutes"
+                  ></v-select>
                 </v-col>
                 <v-spacer></v-spacer>
                 <v-col cols="4">
-                  <v-select v-model="editTimer.time.seconds" label="秒" required :items="time.seconds"></v-select>
+                  <v-select
+                    v-model="editTimer.time.seconds"
+                    label="秒"
+                    required
+                    :items="time.seconds"
+                  >
+                  </v-select>
                 </v-col>
               </v-row>
             </v-container>
@@ -483,7 +537,12 @@
           </v-card-text>
 
           <!-- 削除ボタン -->
-          <v-menu v-model="menu.delete" :close-on-content="false" :nudge-width="200" offset-x>
+          <v-menu
+            v-model="menu.delete"
+            :close-on-content="false"
+            :nudge-width="200"
+            offset-x
+          >
             <template v-slot:action="{ on }">
               <v-btn text color="red lighten-1" v-on="on">削除</v-btn>
             </template>
@@ -621,7 +680,9 @@ export default {
         .then((response) => {
           this.categories.push(response.data)
           // TODO: コード整形見直し()と;を削除 | おそらくveturの設定
-          ;(this.newCategory.name = ''), (this.newTimerCategory = false), (this.menu.saveTimerCategory = false)
+          this.newCategory.name = '',
+          this.newTimerCategory = false,
+          this.menu.saveTimerCategory = false
         })
         .catch((err) => {})
     }
