@@ -4,43 +4,19 @@
     <!-- componentとして切り出してもいいかも -->
 
     <!-- タイマー追加ボタン -->
-    <v-speed-dial
-    v-model="fab"
-    fab
-    bottom
-    right
-    fixed
-    direction="top"
-    transition="slide-y-reverse-transition">
+    <v-speed-dial v-model="fab" fab bottom right fixed direction="top" transition="slide-y-reverse-transition">
       <template v-slot:activator>
         <v-hover v-slot:default="{ hover }">
-          <v-btn
-          v-model="fab"
-          color="#696969"
-          dark
-          fab
-          x-large
-          :elevation="hover ? 12 : 6">
+          <v-btn v-model="fab" color="#696969" dark fab x-large :elevation="hover ? 12 : 6">
             <v-icon v-if="fab">mdi-close</v-icon>
             <v-icon v-else>mdi-plus</v-icon>
           </v-btn>
         </v-hover>
       </template>
-      <v-btn
-      v-if="isEmpty(counter.timer.name)"
-      fab
-      dark
-      small
-      color="#696969"
-      @click.stop="dialog.newTimer = true">
+      <v-btn v-if="isEmpty(counter.timer.name)" fab dark small color="#696969" @click.stop="dialog.newTimer = true">
         <v-icon>mdi-timer-outline</v-icon>
       </v-btn>
-      <v-btn
-      fab
-      dark
-      small
-      color="#696969"
-      @click.stop="dialog.saveTimer = true">
+      <v-btn fab dark small color="#696969" @click.stop="dialog.saveTimer = true">
         <v-icon>mdi-playlist-plus</v-icon>
       </v-btn>
     </v-speed-dial>
@@ -329,10 +305,7 @@
                         <v-card-actions>
                           <v-spacer></v-spacer>
                           <v-btn text @click="menu.saveTimerCategory = false">閉じる</v-btn>
-                          <v-btn
-                          color="primary"
-                          text
-                          :disabled="newCategory.name === ''" @click="createCategory()"
+                          <v-btn color="primary" text :disabled="newCategory.name === ''" @click="createCategory()"
                             >保存
                           </v-btn>
                         </v-card-actions>
@@ -498,16 +471,11 @@
                 <v-spacer></v-spacer>
 
                 <v-col cols="4">
-                  <v-select
-                    v-model="editTimer.time.minutes"
-                    label="分"
-                    required
-                    :items="time.minutes">
-                  </v-select>
+                  <v-select v-model="editTimer.time.minutes" label="分" required :items="time.minutes"> </v-select>
                 </v-col>
                 <v-spacer></v-spacer>
                 <v-col cols="4">
-                  <v-select v-model="editTimer.time.seconds" label="秒" required :items="time.seconds"> </v-select>
+                  <v-select v-model="editTimer.time.seconds" label="秒" required :items="time.seconds"></v-select>
                 </v-col>
               </v-row>
             </v-container>
@@ -529,20 +497,21 @@
                 <v-spacer></v-spacer>
                 <v-btn text @click="menu.delete = false">閉じる</v-btn>
                 <v-btn
-                color="blue darken-1"
-                text
-                @click="updateTimer()"
-                :disabled="
-                saveTimer.name.length > 30 ||
-                saveTimer.name === '' ||
-                saveTimer.category === '' ||
-                (saveTimer.memo && saveTimer.memo.length > 140) ||
-                saveTimer.started_at === '' ||
-                saveTimer.stopped_at === '' ||
-                (!saveTimer.time.hours && !saveTimer.time.minutes && !saveTimer.time.seconds)
-              ">
-              保存</v-btn>
-                </v-btn>
+                  color="blue darken-1"
+                  text
+                  @click="updateTimer()"
+                  :disabled="
+                    saveTimer.name.length > 30 ||
+                    saveTimer.name === '' ||
+                    saveTimer.category === '' ||
+                    (saveTimer.memo && saveTimer.memo.length > 140) ||
+                    saveTimer.started_at === '' ||
+                    saveTimer.stopped_at === '' ||
+                    (!saveTimer.time.hours && !saveTimer.time.minutes && !saveTimer.time.seconds)
+                  "
+                >
+                  保存</v-btn
+                >
               </v-card-action>
             </v-card>
           </v-menu>
@@ -620,13 +589,13 @@ export default {
         width: window.innerWidth
       },
       timePickerProps: {
-        format: "24hr"
+        format: '24hr'
       },
       editTimePickerProps: {
         format: '24hr'
       },
       datePickerProps: {
-        color: "#696969"
+        color: '#696969'
       }
     }
   },
