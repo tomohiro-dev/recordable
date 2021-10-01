@@ -1,19 +1,20 @@
 module.exports = {
   root: true,
   parserOptions: {
-    parser: 'babel-eslint'
+    sourceType: 'module',
+    ecmaVersion: 2015
   },
   env: {
     browser: true
   },
-  extends: ['plugin:vue/recommended', 'plugin:prettier/recommended', 'prettier/vue'],
+  extends: ['plugin:vue/recommended', 'plugin:prettier/recommended', 'prettier'],
   plugins: ['vue', 'prettier'],
   rules: {
     'vue/no-v-html': 'off',
     'vue/prop-name-casing': 'off',
     'no-console': 'off',
     'no-unused-vars': 'off',
-    'unexpected-character-in-attribute-name': false,
+    'unexpected-character-in-attribute-name': true,
 
     'prettier/prettier': [
       'error',
