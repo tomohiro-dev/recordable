@@ -498,7 +498,12 @@
                 <v-spacer></v-spacer>
 
                 <v-col cols="4">
-                  <v-select v-model="editTimer.time.minutes" label="分" required :items="time.minutes"> </v-select>
+                  <v-select
+                    v-model="editTimer.time.minutes"
+                    label="分"
+                    required
+                    :items="time.minutes">
+                  </v-select>
                 </v-col>
                 <v-spacer></v-spacer>
                 <v-col cols="4">

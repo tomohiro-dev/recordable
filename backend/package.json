@@ -7,7 +7,9 @@
         "watch-poll": "npm run watch -- --watch-poll",
         "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --disable-host-check --config=node_modules/laravel-mix/setup/webpack.config.js",
         "prod": "npm run production",
-        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --config=node_modules/laravel-mix/setup/webpack.config.js"
+        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "lint": "eslint --ext .js,.vue",
+        "lint:fix": "eslint --fix --ext .js,.vue"
     },
     "devDependencies": {
         "@babel/core": "^7.15.0",
@@ -50,6 +52,7 @@
         "echarts": "^5.1.2",
         "js-cookie": "^2.2.1",
         "moment": "^2.29.1",
+        "prettier": "^2.4.1",
         "vue-color": "^2.8.1",
         "vue-countup-v2": "^4.0.0",
         "vue-echarts": "^6.0.0",
