@@ -2,7 +2,6 @@
  *Httpステータスコード
  */
 
-//  変更
 export const OK = 200
 export const CREATED = 201
 export const UNPROCESSABLE_ENTITY = 422
