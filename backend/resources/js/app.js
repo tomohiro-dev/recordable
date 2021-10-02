@@ -4,11 +4,11 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-// ※削除厳禁
+import './bootstrap' //bootstrap.jsのaxios設定を読み込み
+
 // backend/resources/js/bootstrap.jsをmoduleとして読み込んで実行
 require('./bootstrap')
 
-import './bootstrap' //削除
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import router from './router'
