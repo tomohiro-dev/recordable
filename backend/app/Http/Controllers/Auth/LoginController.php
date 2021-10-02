@@ -45,4 +45,10 @@ class LoginController extends Controller
         return $user;
         throw new \Exception('予期せぬエラー');
     }
+
+    protected function loggedOut(Request $request)
+    {
+        $request->session()->regenerate();
+        return response()->json();
+    }
 }
