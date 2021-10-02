@@ -11,13 +11,16 @@ class LoginApiTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function setUp(): void //エラーになる？
+    public function setUp(): void
     {
         parent::setUp();
 
         $this->user = factory(User::class)->create();
     }
 
+     /**
+     * @test
+     */
     public function should_returnRegisterdNewUser()
     {
         $response = $this->json('POST', route('login'), [
