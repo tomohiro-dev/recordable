@@ -30,7 +30,12 @@
               label="ユーザー名"
               prepend-icon="mdi-account-circle"
             />
-            <v-text-field tabindex="2" v-model="registerForm.email" label="メールアドレス" prepend-icon="mdi-email" />
+            <v-text-field
+              tabindex="2"
+              v-model="registerForm.email"
+              label="メールアドレス"
+              prepend-icon="mdi-email"
+            />
             <v-text-field
               tabindex="3"
               v-model="registerForm.password"
