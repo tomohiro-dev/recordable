@@ -7,7 +7,7 @@
     </v-toolbar-title>
     <v-spacer></v-spacer>
     <v-btn class="me-7" to="/login" text>ログイン</v-btn>
-    <v-btn to="/register">新規登録</v-btn>
+    <v-btn to="/register" text>新規登録</v-btn>
   </v-app-bar>
 </template>
 
