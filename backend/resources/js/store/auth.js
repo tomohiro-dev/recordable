@@ -72,7 +72,7 @@ const actions = {
     context.commit('SET_API_STATUS', null)
     const response = await axios.post('/api/logout')
 
-    if (response.status == OK) {
+    if (response.status === OK) {
       context.commit('SET_API_STATUS', true)
       context.commit('SET_USER', null)
       return false

@@ -15,17 +15,17 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/timer',
-      // path: '/', //本番
-      component: Timer
-      // beforeEnter(to, from, next) {
-      //   if (!store.getters['auth/check']) {
-      //     next('/login') // path: '/'
-      //     // next('/') // path: '/timer'
-      //   } else {
-      //     next()
-      //   }
-      // }
+      // path: '/timer',
+      path: '/', //本番
+      component: Timer,
+      beforeEnter(to, from, next) {
+        if (!store.getters['auth/check']) {
+          next('/login') // path: '/'
+          // next('/') // path: '/timer'
+        } else {
+          next()
+        }
+      }
     },
     {
       path: '/login',

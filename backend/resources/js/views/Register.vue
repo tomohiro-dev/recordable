@@ -30,7 +30,12 @@
               label="ユーザー名"
               prepend-icon="mdi-account-circle"
             />
-            <v-text-field tabindex="2" v-model="registerForm.email" label="メールアドレス" prepend-icon="mdi-email" />
+            <v-text-field
+              tabindex="2"
+              v-model="registerForm.email"
+              label="メールアドレス"
+              prepend-icon="mdi-email"
+            />
             <v-text-field
               tabindex="3"
               v-model="registerForm.password"
@@ -99,8 +104,10 @@ export default {
   },
   methods: {
     async register() {
+      console.log(this.registerForm) //TODO: feature/2504の問題が解決したら消す
       // authストアのresigterアクションを呼び出す
       await this.$store.dispatch('auth/register', this.registerForm)
+
       // 通信に成功した場合は
       if (this.apiStatus) {
         // トップページに移動する

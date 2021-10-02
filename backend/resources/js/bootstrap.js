@@ -1,4 +1,4 @@
-import Cookies from 'js-cookie'
+import { getCookieValue } from './util'
 
 window._ = require('lodash')
 
@@ -29,8 +29,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 // Cookieからtokenを取り出す
 // headerに添付
 window.axios.interceptors.request.use((config) => {
-  const xsrfToken = Cookies.get('XSRF-TOKEN')
-  confog.headers['X-XSRF-TOKEN'] = xsrfToken
+  confog.headers['X-XSRF-TOKEN'] = getCookieValue('XSRF-TOKEN')
 
   return config
 })

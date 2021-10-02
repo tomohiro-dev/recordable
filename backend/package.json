@@ -50,7 +50,6 @@
     "canvas-confetti": "^1.4.0",
     "countup.js": "^2.0.8",
     "echarts": "^5.1.2",
-    "js-cookie": "^2.2.1",
     "moment": "^2.29.1",
     "prettier": "^2.4.1",
     "vue-color": "^2.8.1",
