@@ -12,11 +12,8 @@ class RegisterApiTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * A basic feature test example.
-     *
      * @test
      */
-
      public function should_createAndReturnNewUser()
      {
          $data = [
