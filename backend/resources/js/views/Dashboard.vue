@@ -70,7 +70,7 @@
               <div class="py-4">
                 <div class="echarts d-flex justify-center align-center">
                   <vue-loading
-                   type="bars"
+                   type="bubbles"
                    color="#696969"
                    :size="{ width: '50px', height: '50px' }"
                   >
@@ -115,7 +115,7 @@
               <div class="py-4" v-if="loading.stack">
                 <div class="echarts d-flex justify-center align-center">
                   <vue-loading
-                   type="bars"
+                   type="bubbles"
                    color="#696969"
                    :size="{ width: '50px', height: '50px' }"
                   >
