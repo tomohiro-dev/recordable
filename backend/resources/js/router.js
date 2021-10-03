@@ -20,17 +20,18 @@ export default new Router({
       component: NavDrawer
     },
     {
-      // path: '/timer',
-      path: '/', //本番
-      component: Timer,
-      beforeEnter(to, from, next) {
-        if (!store.getters['auth/check']) {
-          next('/login') // path: '/'
-          // next('/') // path: '/timer'
-        } else {
-          next()
-        }
-      }
+      path: '/timer',
+      // path: '/', //本番
+      component: Timer
+      // beforeEnter(to, from, next) {
+      //   if (!store.getters['auth/check']) {
+      //     next('/login') // path: '/'
+      //     // next('/') // path: '/timer'
+      //   } else {
+      //     next()
+      //   }
+      // }
+      // 画面開発中はコメントアウト
     },
     {
       path: '/login',

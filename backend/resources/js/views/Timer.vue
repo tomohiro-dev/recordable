@@ -3,6 +3,67 @@
     <!-- TODO: snackbar系は上にまとめる -->
     <!-- componentとして切り出してもいいかも -->
 
+    <!-- vue loading -->
+    <!-- <template v-if="loading">
+      <v-row :style="`height:${windowSize.height}px`" align="center" justify="center">
+        <v-col>
+          <vue-loading
+            type="bars"
+            color="#B0BEC5"
+            :size="{ width: '50px', height: '50px' }"
+          ></vue-loading>
+        </v-col>
+      </v-row>
+    </template> -->
+
+    <!-- 一覧表示 -->
+    <template>
+      <template v-if="!isEmpty(timersArray)">
+        <span class="title">
+          {{ formatDate(timers[0].started_at )}}
+        </span>
+        <v-data-table
+          :headers="headers"
+          :items="timers"
+          :items-per-page="100"
+          class="elevation-1 mb-4"
+          :hide-default-header="windowSize.width < 600"
+          hide-default-footer
+          @click:row="openEditTimer"
+        >
+          <template v-slot:item.name="{ item }">
+            <span>{{ item.name }}</span>
+          </template>
+
+          <template v-slot:item.memo="{ item }">
+            <small class="text-muted">{{ item.memo }}</small>
+          </template>
+
+          <template v-slot:item.category="{ item }">
+            <span
+             :style="{ backgroundColor: item.category_color }"
+             style="display: inline-block; height: 10px; width: 10px; border-radius: 50%"
+            >
+            </span>
+            <span :style="{ color: item.category_color }">
+              {{ item.category_name }}
+            </span>
+          </template>
+
+          <template v-slot:item.started_at="{ item }">
+            {{ formatTimer(item) }}
+          </template>
+
+          <template v-slot:item.time="{ item }">
+            <span v-if="showTimer(item)">{{ activeTimerString }}</span>
+            <span v-else>{{ calculaterTimeSpent(item) }}</span>
+          </template>
+        </v-data-table>
+      </template>
+
+    </template>
+
+
     <!-- タイマー追加ボタン -->
     <v-speed-dial
       v-model="fab"
@@ -635,6 +696,41 @@ export default {
         minutes: [],
         seconds: []
       },
+      headers: [
+        // TODO: barみたいな名前にrefactoring
+        {
+          text: "記録の内容",
+          align: "start",
+          sortable: false,
+          value: "name",
+          width: "30%"
+        },
+        {
+          text: "メモ",
+          value: "memo",
+          sortable: false,
+          width: "30%"
+        },
+        {
+          text: "カテゴリー",
+          value: "category",
+          sortable: "false",
+          width: "15%"
+        },
+        {
+          text: "時刻",
+          value: "started_at",
+          sortable: "false",
+          width: "15%"
+        },
+        {
+          text: "計測期間",
+          value: "time",
+          sortable: "false",
+          width: "10%"
+        }
+      ],
+      timersArray: [],
       categories: [],
       fab: false, //floatingActionBtn（名前変えるかも）
       counter: { seconds: 0, timer: { name: '', category: '' } },
@@ -685,6 +781,14 @@ export default {
           this.menu.saveTimerCategory = false
         })
         .catch((err) => {})
+    },
+    openEditTimer(event) {
+      const item = event
+      if (item.id === this.counter.timer.id) {
+        return false
+      }
+      this.editTimer.id = item.id
+      this.editTimer.name = item.name
     }
   }
 }
