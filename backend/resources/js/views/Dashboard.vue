@@ -83,9 +83,10 @@
                   <chart
                    :options="chartPie"
                    autoresize
+                   v-if="!isEmpty(chartPie.series[0].data)"
                   >
                   </chart>
-                  <v-row>
+                  <v-row align="center" justify="center">
                     <v-col>
                       <!-- <v-img>TODO: 画像追加</v-img> -->
                       <p class="mt-2 subtitle-1 text-center">データがありません。</p>
@@ -156,6 +157,9 @@ export default {
   },
   data() {
     return {
+      timers: {
+        month: []
+      },
       record: {
         today: 0,
         thisWeek: 0,
@@ -174,7 +178,42 @@ export default {
           trigger: "item",
           formatter: "{b} : {c}時間 ({d}%)"
           // formatter: "{b} : {c}H ({d}%)"
+        },
+        series: [
+          {
+            name: "カテゴリー毎の記録",
+            type: "pie",
+            roseType: "radius",
+            center: ["50%", "38%"],
+            data: [
+              // {
+              // value: 3,
+              // name: Writing,
+              // itemStyle: { color: "#696969" }
+              // }
+            ]
+          }
+        ]
+      },
+      chartstackWeek: {
+        tooltip: {
+          trigger: "axis",
+          axisPointer: {
+            type: "shadow"
+          }
+        },
+
+      }
+    }
+  },
+  methods: {
+    isEmpty: function(val) {
+      if(!val) {
+        if(val !== 0 && val !== false) {
+          return true
         }
+      } else if (typeof val == "object") {
+        return Object.keys(val).length === 0
       }
     }
   },
@@ -207,7 +246,7 @@ export default {
         //今日のレコードの経過秒を初期化する
         //今日のレコード経過分を計算する
 
-        //表示する値を定義する
+
 
         function thisWeek(val) {
           return (
@@ -229,21 +268,128 @@ export default {
         /*
         *今月のレコード
         */
-        //今月のレコードのみに絞るための関数
-        //計測中のタイマー
-        //今月と同じ日付の記録のみに絞る
+       let amountThisMonth = 0;
 
-        //今月のレコード定義
-        //今月のレコードの経過秒を初期化する
-        //今月のレコード経過分を計算する
+       for (let i = 0; i < this.timers.month.length; i++) {
+         const started_at = moment(this.timers.month[i].started_at)
+         if (this.timers.month[i].stopped_at === null) {
+           continue
+         }
+         const stopped_at = moment(this.timers.month[i].stopped_at)
+         amountThisMonth += stopped_at.diff(started_at, "seconds")
+       }
 
-        //表示する値を定義する
+       this.record.thisMonth = Math.round(amountThisMonth / 3600)
+
+
 
         /*
-        *Pie Chartへ今月のデータを表表示
+        *Pie Chartへ今月のデータを表へ表示
         */
         //今月のデータがある場合に実行（データが空ではない）
+        //TODO: ↑コメント削除
+        if(!this.empty(this.timers.month)) {
+          let data = [
+            {
+             id,
+             value,
+             name,
+             itemStyle: { color }
+            }
+          ]
 
+          let started_at = moment(this.timers.month[0].started_at)
+          let stopped_at = moment(this.timers.month[0].stopped_at)
+          let id = this.timers.month[0].category_id
+          let value = stopped_at.diff(started_at, "seconds")
+          let name = this.timers.month[0].category_name
+          let color = this.timers.month[0].category_color
+
+          for (let i = 1; i < this.timers.month.length; i++) {
+            if (this.timers.month[i].stopped_at === null) {
+              continue
+            }
+            let started_at = moment(this.timers.month[i].started_at)
+            let stopped_at = moment(this.timers.month[i].stopped_at)
+            let value = stopped_at.diff(started_at, "seconds")
+            let added = false
+            for (let j = 0; j < data.length; j++) {
+              if (data[j]["id"] === this.timers.month[i].category_id) {
+                data[j]["value"] += value
+                added = true
+                break
+              }
+            }
+
+            if (added === false) {
+              let id = this.timers.month[i].category_id
+              let name = this.timers.month[i].category_name
+              let color = this.timers.month[i].category_color
+              data.push({
+                id,
+                value,
+                name,
+                itemStyle: { color }
+              })
+            }
+          }
+
+          //降順に並び替える
+          //TODO: a,bをrifactoring
+          function compare(a, b) {
+            let comparison = 0
+            if (a.value > b.value) {
+              comparison = 1
+            } else {
+              comparison = -1
+            }
+            return comparison * -1
+          }
+
+          //計測期間を長い順番で並び替える
+          data.sort(compare)
+
+          for (let i = 0; i < data.length; i++) {
+            data[i].value = Math.round((data[i].value / 3600) * 10) / 10
+          }
+          this.chartPie.series[0].data = data
+          this.loading.pie = false
+        } else {
+          this.loading.pie = false
+        }
+
+        if(!this.isEmpty(timers_this_week)) {
+          let series = [
+            {
+              id: timers_this_week[0]["category_id"],
+              name: timers_this_week[0]["category_name"],
+              type: "bar",
+              color: timers_this_week[0]["category_color"],
+              stack: "vistors",
+              barWidth: "50%"
+            }
+          ]
+
+          for (let i = 1; i < timers_this_week.length; i++) {
+            let isSame = false;
+            for (let j = 0; j < categories.length; j++) {
+              if (categories[j]["id"] === timers_this_week[i]["category_id"]) {
+                isSame = true;
+                categories[j]["data"].push(timers_this_week[i]);
+                break;
+              }
+            }
+          }
+
+          if (isSame === false) {
+            categories.push({
+             id: timers_this_week[i]["category_id"],
+             data: [timers_this_week[i]]
+            })
+          }
+        }
+
+        // 日毎のデータ作成
 
       }
 
