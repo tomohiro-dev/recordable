@@ -5,6 +5,7 @@ import Login from './views/Login.vue'
 import Register from './views/Register.vue'
 import Dashboard from './views/Dashboard.vue'
 import Timer from './views/Timer.vue'
+import NavDrawer from './components/NavDrawer.vue' //TODO:画面作成後削除
 
 import store from './store'
 
@@ -14,6 +15,10 @@ Vue.use(Router)
 export default new Router({
   mode: 'history',
   routes: [
+    {
+      path: '/navdrawer',
+      component: NavDrawer
+    },
     {
       // path: '/timer',
       path: '/', //本番
