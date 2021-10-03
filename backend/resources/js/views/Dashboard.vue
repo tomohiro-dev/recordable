@@ -54,6 +54,52 @@
       </v-col>
     </v-row>
 
+    <v-row>
+      <v-col cols="12" md="5">
+        <span class="title">
+          <v-icon class="mr-2 mb-1">mdi-chart-pie</v-icon>内訳
+        </span>
+
+        <v-tabs v-model="pie">
+          <v-tab>今月（時間）</v-tab>
+        </v-tabs>
+
+        <v-tab v-model="pie">
+          <v-tab-item>
+            <v-card>
+              <div class="py-4">
+                <div class="echarts d-flex justify-center align-center">
+                  <vue-loading
+                   type="bars"
+                   color="#696969"
+                   :size="{ width: '50px', height: '50px' }"
+                  >
+                  </vue-loading>
+                </div>
+
+                <div>
+                  <p>データない</p>
+                </div>
+              </div>
+            </v-card>
+          </v-tab-item>
+        </v-tab>
+      </v-col>
+
+      <v-col cols="12" md="7">
+        <span class="title">
+          <v-icon class="mr-2 mb-1">mdi-equalizer</v-icon>週間
+        </span>
+
+        <v-tabs v-model="stack">
+          <v-tab>今週（分）</v-tab>
+        </v-tabs>
+      </v-col>
+
+
+
+    </v-row>
+
   </div>
 </template>
 
