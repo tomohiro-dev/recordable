@@ -168,7 +168,14 @@ export default {
       },
       stack: "",
       pie: "",
-      errorMessage: ""
+      errorMessage: "",
+      chartPie: {
+        tooltip: {
+          trigger: "item",
+          formatter: "{b} : {c}時間 ({d}%)"
+          // formatter: "{b} : {c}H ({d}%)"
+        }
+      }
     }
   },
   computed: {
@@ -182,6 +189,65 @@ export default {
       return moment()
         .format("YYYY年M月")
         // .format("YYYY,M")
+    }
+  },
+  watch: {
+    "timers.month": {
+      handler: function(val) {
+        const now = moment();
+
+        /*
+        *今日のレコード
+        */
+        //今日のレコードのみに絞るための関数
+        //計測中のタイマー
+        //今日と同じ日付の記録のみに絞る
+
+        //今日のレコード定義
+        //今日のレコードの経過秒を初期化する
+        //今日のレコード経過分を計算する
+
+        //表示する値を定義する
+
+        function thisWeek(val) {
+          return (
+            val.stopped_at !== null &&
+            moment(val.started_at).week() === now.week()
+          )
+        }
+
+        const timers_this_week = this.timers.month.filter(thisWeek)
+        let amountThisWeek = 0
+
+        for (let i = 0; i < timers_this_week.length; i++) {
+          const started_at = moment(timers_this_week[i].started_at)
+          const stopped_at = moment(timers_this_week[i].stopped_at)
+          amountThisWeek += stopped_at.diff(started_at, "seconds")
+        }
+        this.recordThisWeek = Math.round((amountThisWeek / 3600) * 10) / 10
+
+        /*
+        *今月のレコード
+        */
+        //今月のレコードのみに絞るための関数
+        //計測中のタイマー
+        //今月と同じ日付の記録のみに絞る
+
+        //今月のレコード定義
+        //今月のレコードの経過秒を初期化する
+        //今月のレコード経過分を計算する
+
+        //表示する値を定義する
+
+        /*
+        *Pie Chartへ今月のデータを表表示
+        */
+        //今月のデータがある場合に実行（データが空ではない）
+
+
+      }
+
+
     }
   }
 }
