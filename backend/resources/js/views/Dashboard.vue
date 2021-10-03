@@ -232,7 +232,7 @@ export default {
   },
   watch: {
     "timers.month": {
-      handler: function(val) {
+      handler: function() {
         const now = moment();
 
         /*
@@ -437,9 +437,21 @@ export default {
           categories[i].data = data
         }
         //seriesObject merge to data of category
+        for (let i = 0; i < categories.length; j++) {
+          for (let j = 0; j < categories.length; j++) {
+              if (series[i].id === categories[j].id) {
+                series[i] = Object.assign(series[i], categories[j]);
+                break;
+              }
+            }
+          }
+
+          for (let i = 0; i < series.length; i++) {
+            for (let j = 0; j < series[i].data.length; i++) {
+              series[i].data[j] = Math.round((series[i].data[j] / 60) * 10) / 10
+            }
+          }
       }
-
-
     }
   }
 }
