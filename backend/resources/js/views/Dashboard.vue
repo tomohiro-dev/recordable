@@ -125,6 +125,7 @@
 
               <div class="py-4" else>
                 <chart
+                 v-if="!isEmpty(this.chartStackWeek.series)"
                  :options="chartStackWeek"
                  autoresize
                 >
@@ -195,7 +196,7 @@ export default {
           }
         ]
       },
-      chartstackWeek: {
+      chartStackWeek: {
         tooltip: {
           trigger: "axis",
           axisPointer: {
