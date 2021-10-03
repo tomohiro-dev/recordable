@@ -20,12 +20,17 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import '@mdi/font/css/materialdesignicons.css'
 import VueTheMask from 'vue-the-mask'
+import DatetimePicker from 'vuetify-datetime-picker'
+import VueLoading from 'vue-loading-template'
+import './echarts'
 
 // window.Vue = require('vue')
 window.Vue = Vue
 Vue.use(Vuetify)
 Vue.use(VueTheMask)
 Vue.use(VueRouter)
+Vue.use(DatetimePicker)
+Vue.use(VueLoading)
 
 const createApp = async () => {
   await store.dispatch('auth/currentUser')
