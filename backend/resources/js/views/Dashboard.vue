@@ -33,10 +33,21 @@
 
       <v-col cols="12" sm="4" md="3">
         <v-card>
-          <v-card-title class="pb-2">今日({{ thisMonth }})</v-card-title>
+          <v-card-title class="pb-2">今月({{ thisMonth }})</v-card-title>
           <v-divider class="my-0 mx-4"></v-divider>
           <v-card-text class="display-2">
             <ICountUp :sndVal="record.thisMonth" />
+            <span class="headline">時間</span>
+          </v-card-text>
+        </v-card>
+      </v-col>
+
+      <v-col cols="12" sm="4" md="3">
+        <v-card>
+          <v-card-title class="pb-2">合計</v-card-title>
+          <v-divider class="my-0 mx-4"></v-divider>
+          <v-card-text class="display-2">
+            <ICountUp :sndVal="record.total" />
             <span class="headline">時間</span>
           </v-card-text>
         </v-card>
