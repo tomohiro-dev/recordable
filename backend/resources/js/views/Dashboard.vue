@@ -148,6 +148,7 @@
 
 <script>
 import ICountUp from "vue-countup-v2"
+import moment from "moment"
 
 export default {
   components: {
@@ -170,6 +171,19 @@ export default {
       errorMessage: ""
     }
   },
+  computed: {
+    thisWeek() {
+      return moment()
+        .day(0)
+        .format("M月D日")
+      // .format("M/D")
+    },
+    thisMonth() {
+      return moment()
+        .format("YYYY年M月")
+        // .format("YYYY,M")
+    }
+  }
 }
 </script>
 
