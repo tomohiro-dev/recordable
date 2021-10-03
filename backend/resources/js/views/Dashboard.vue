@@ -401,7 +401,42 @@ export default {
         }
 
         // 日毎のデータ作成
+        //TODO: i,jをrefactoring
+        for (let i = 0; i < categories.length; i++) {
+          let data = [0, 0, 0, 0, 0, 0, 0]
+          for (let j = 0; j < categories[i].data.length; j++) {
+            const started_at = moment(categories[i].data[j].started_at)
+            const stopped_at = moment(categories[i].data[j].stopped_at)
+            const diff = stopped_at.diff(started_at, "seconds")
+            const day = started_at.day()
 
+            switch (day) {
+              case 0:
+                data[0] += diff
+                    break
+                  case 1:
+                    data[1] += diff
+                    break
+                  case 2:
+                    data[2] += diff
+                    break
+                  case 3:
+                    data[3] += diff
+                    break
+                  case 4:
+                    data[4] += diff
+                    break
+                  case 5:
+                    data[5] += diff
+                    break
+                  case 6:
+                    data[6] += diff
+                    break
+            }
+          }
+          categories[i].data = data
+        }
+        //seriesObject merge to data of category
       }
 
 
