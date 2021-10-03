@@ -26,7 +26,7 @@ Asana内で管理している、他のチケット番号と被らないよう注
 環境構築手順は**Docker container build**以降を参考に進めてください。 \
 また、容量の肥大化を予防するために、Infrastructure（以下Infra）は別Repositoryで作成しています。 \
 Infraの設定は**recordable-infra** Repository下で`main` branchから独自でBranchを切って開発を進めてください。
-
+【TODO:Repositoryリンクを追加】
 
 ## Directory構成
 「編集中」
