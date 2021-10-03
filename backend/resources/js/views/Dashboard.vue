@@ -11,7 +11,7 @@
           <v-card-title class="pb-2">今日</v-card-title>
           <v-divider class="my-0 mx-4"></v-divider>
           <v-card-text class="display-2">
-            <ICountUp :sndVal="record.today" />
+            <ICountUp :endVal="record.today" />
             <span class="headline">分</span>
           </v-card-text>
         </v-card>
@@ -23,7 +23,7 @@
           <v-divider class="my-0 mx-4"></v-divider>
           <v-card-text class="display-2">
             <ICountUp
-             :endVal="record.thisweek"
+             :endVal="record.thisWeek"
              :options="{ decimals: '.', decimalPlaces: 1}"
             />
             <span class="headline">時間</span>
@@ -36,7 +36,7 @@
           <v-card-title class="pb-2">今月({{ thisMonth }})</v-card-title>
           <v-divider class="my-0 mx-4"></v-divider>
           <v-card-text class="display-2">
-            <ICountUp :sndVal="record.thisMonth" />
+            <ICountUp :endVal="record.thisMonth" />
             <span class="headline">時間</span>
           </v-card-text>
         </v-card>
@@ -47,7 +47,7 @@
           <v-card-title class="pb-2">合計</v-card-title>
           <v-divider class="my-0 mx-4"></v-divider>
           <v-card-text class="display-2">
-            <ICountUp :sndVal="record.total" />
+            <ICountUp :endVal="record.total" />
             <span class="headline">時間</span>
           </v-card-text>
         </v-card>
@@ -165,7 +165,7 @@ export default {
         today: 0,
         thisWeek: 0,
         thisMonth: 0,
-        todal: 0
+        total: 0
       },
       loading: {
         pie: true,
