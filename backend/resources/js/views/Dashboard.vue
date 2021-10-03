@@ -238,16 +238,27 @@ export default {
         /*
         *今日のレコード
         */
-        //今日のレコードのみに絞るための関数
-        //計測中のタイマー
-        //今日と同じ日付の記録のみに絞る
+        function today(val) {
+          return (
+            val.stopped_at !== null &&
+            moment(val.started_at).isSame(now, "day")
+          );
+        }
+        const timers_today = this.timers.month.filter(today)
+        let amountToday = 0
 
-        //今日のレコード定義
-        //今日のレコードの経過秒を初期化する
-        //今日のレコード経過分を計算する
+        for (let i = 0; i < timers_today.length; i++) {
+          const started_at = moment(timers_today[i].started_at)
+          const stopped_at = moment(timers_today[i].stopped_at)
+          amountToday += stopped_at.diff(started_at, "seconds")
+        }
+
+        this.record.today = Math.round(amountToday / 60)
 
 
-
+        /*
+        *今週のレコード
+        */
         function thisWeek(val) {
           return (
             val.stopped_at !== null &&
@@ -375,7 +386,7 @@ export default {
             for (let j = 0; j < categories.length; j++) {
               if (categories[j]["id"] === timers_this_week[i]["category_id"]) {
                 isSame = true;
-                categories[j]["data"].push(timers_this_week[i]);
+                categories[j]["data"].push(timers_this_week[i])
                 break;
               }
             }
