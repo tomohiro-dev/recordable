@@ -8,13 +8,22 @@
       <v-row :style="`height:${windowSize.height}px`" align="center" justify="center">
         <v-col>
           <vue-loading
-            type="bars"
+            type="bubbles"
             color="#B0BEC5"
             :size="{ width: '50px', height: '50px' }"
           ></vue-loading>
         </v-col>
       </v-row>
     </template> -->
+
+   <!-- loading animation -->
+    <template v-if="loading">
+      <v-row :style="`height:${windowSize.height}px`" align="center" justify="center">
+        <v-col>
+          <vue-loading type="bars" color="#B0BEC5" :size="{ width: '50px', height: '50px' }"></vue-loading>
+        </v-col>
+      </v-row>
+    </template>
 
     <!-- 一覧表示 -->
     <template>
