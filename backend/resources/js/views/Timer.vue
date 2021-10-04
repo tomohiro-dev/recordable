@@ -17,13 +17,13 @@
     </template> -->
 
    <!-- loading animation -->
-    <template v-if="loading">
+    <!-- <template v-if="loading">
       <v-row :style="`height:${windowSize.height}px`" align="center" justify="center">
         <v-col>
           <vue-loading type="bars" color="#B0BEC5" :size="{ width: '50px', height: '50px' }"></vue-loading>
         </v-col>
       </v-row>
-    </template>
+    </template> -->
       <!-- loading animation fin -->
 
     <!-- 一覧表示 -->
@@ -71,11 +71,13 @@
         </v-data-table>
       </template>
 
-        <v-row v-if="!lastPage" justify="center">
-          <v-btn :loading="infiniteLoading" @click="loadMore">
-            <v-icon left>mdi-chevron-down</v-icon>もっと見る
-          </v-btn>
-        </v-row>
+        <!-- <v-row v-if="!lastPage" justify="center"> -->
+          <!-- <v-btn :loading="infiniteLoading" @click="loadMore"> -->
+            <!-- <v-btn> -->
+              <!-- TODO: loading編集時に削除するタグ -->
+            <!-- <v-icon left>mdi-chevron-down</v-icon>もっと見る -->
+          <!-- </v-btn> -->
+        <!-- </v-row> -->
 
 
 
@@ -771,7 +773,7 @@ export default {
       datePickerProps: {
         color: '#696969'
       },
-      loading: true,
+      // loading: true,
       infiniteLoading: false
     }
   },
@@ -809,7 +811,12 @@ export default {
       }
       this.editTimer.id = item.id
       this.editTimer.name = item.name
-    }
+    },
+    // timersArray: {
+    //   handler: function() {
+    //     this.loading = false
+    //   }
+    // }
   }
 }
 </script>
