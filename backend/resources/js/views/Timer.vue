@@ -24,6 +24,7 @@
         </v-col>
       </v-row>
     </template>
+      <!-- loading animation fin -->
 
     <!-- 一覧表示 -->
     <template>
@@ -70,6 +71,23 @@
         </v-data-table>
       </template>
 
+        <v-row v-if="!lastPage" justify="center">
+          <v-btn :loading="infiniteLoading" @click="loadMore">
+            <v-icon left>mdi-chevron-down</v-icon>もっと見る
+          </v-btn>
+        </v-row>
+
+
+
+
+      <!-- 記録がない時の画面 -->
+      <v-row align="center" justify="center">
+        <v-col cols="10" md="4">
+          <!-- <v-img>TODO: 画像を追加</v-img> -->
+          <p class="mt-2 title text-center">千里の道も一歩から。</p>
+          <p class="text-center">学習の準備はできましたか？学習を始めましょう！</p>
+        </v-col>
+      </v-row>
     </template>
 
 
@@ -113,14 +131,6 @@
       </v-btn>
     </v-speed-dial>
 
-    <!-- 記録がない時の画面 -->
-    <v-row align="center" justify="center">
-      <v-col cols="10" md="4">
-        <!-- <v-img>TODO: 画像を追加</v-img> -->
-        <p class="mt-2 title text-center">千里の道も一歩から。</p>
-        <p class="text-center">学習の準備はできましたか？学習を始めましょう！</p>
-      </v-col>
-    </v-row>
 
     <!-- 記録が一覧で並んでいる時の画面 -->
 
@@ -482,7 +492,7 @@
             <small>*は必須項目です</small>
           </v-card-text>
 
-          <v-card-acitons>
+          <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn text @click="dialog.saveTimer = false">閉じる</v-btn>
             <v-btn
@@ -501,7 +511,7 @@
             >
               保存</v-btn
             >
-          </v-card-acitons>
+          </v-card-actions>
         </v-card>
       </v-dialog>
     </div>
@@ -760,7 +770,9 @@ export default {
       },
       datePickerProps: {
         color: '#696969'
-      }
+      },
+      loading: true,
+      infiniteLoading: false
     }
   },
   methods: {
@@ -784,7 +796,6 @@ export default {
         })
         .then((response) => {
           this.categories.push(response.data)
-          // TODO: コード整形見直し()と;を削除 | おそらくveturの設定
           this.newCategory.name = '',
           this.newTimerCategory = false,
           this.menu.saveTimerCategory = false
