@@ -1,4 +1,4 @@
-import { OK } from '../const'
+import { OK } from '../util'
 
 const state = {
   timers: [],

@@ -20,8 +20,8 @@ export default new Router({
       component: NavDrawer
     },
     {
-      path: '/timer',
-      // path: '/', //本番
+      // path: '/timer',
+      path: '/', //本番
       component: Timer
       // beforeEnter(to, from, next) {
       //   if (!store.getters['auth/check']) {
@@ -35,36 +35,36 @@ export default new Router({
     },
     {
       path: '/login',
-      component: Login,
-      beforeEnter(to, from, next) {
-        if (store.getters['auth/check']) {
-          next('/')
-        } else {
-          next()
-        }
-      }
+      component: Login
+      // beforeEnter(to, from, next) {
+      //   if (store.getters['auth/check']) {
+      //     next('/')
+      //   } else {
+      //     next()
+      //   }
+      // }
     },
     {
       path: '/register',
-      component: Register,
-      beforeEnter(to, from, next) {
-        if (store.getters['auth/check']) {
-          next('/')
-        } else {
-          next()
-        }
-      }
+      component: Register
+      // beforeEnter(to, from, next) {
+      //   if (store.getters['auth/check']) {
+      //     next('/')
+      //   } else {
+      //     next()
+      //   }
+      // }
     },
     {
       path: '/dashboard',
-      component: Dashboard,
-      beforeEnter(to, from, next) {
-        if (store.getters['auth/check']) {
-          next('/login')
-        } else {
-          next()
-        }
-      }
+      component: Dashboard
+      // beforeEnter(to, from, next) {
+      //   if (store.getters['auth/check']) {
+      //     next('/login')
+      //   } else {
+      //     next()
+      //   }
+      // }
     },
     {
       path: '*',

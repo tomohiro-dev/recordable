@@ -15,7 +15,7 @@
 import NavBar from './components/NavBar.vue'
 import NavDrawer from './components/NavDrawer.vue'
 
-// import { INTERNAL_SERVER_ERROR } from './const'
+// import { INTERNAL_SERVER_ERROR } from './util'
 
 export default {
   components: {
