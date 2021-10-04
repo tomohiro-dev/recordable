@@ -416,14 +416,14 @@
 
                   <!-- メモの入力 -->
                   <v-col cols="12">
-                    <v-text-area
+                    <v-textarea
                       v-model="editTimer.memo"
                       label="メモ"
                       type="text"
                       prepend-icon="mdi-text-box"
                       :rules="rules.memo"
                       :counter="140"
-                    ></v-text-area>
+                    ></v-textarea>
                   </v-col>
 
                   <v-col cols="12">
@@ -529,7 +529,7 @@
 
                 <!-- メモ入力 -->
                 <v-col cols="12">
-                  <v-text-area
+                  <v-textarea
                     v-model="editTimer.memo"
                     label="メモ"
                     type="text"
@@ -537,7 +537,7 @@
                     :rules="rules.memo"
                     :counter="140"
                   >
-                  </v-text-area>
+                  </v-textarea>
                 </v-col>
 
                 <!-- 開始時刻 -->
