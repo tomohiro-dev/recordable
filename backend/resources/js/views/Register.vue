@@ -104,7 +104,7 @@ export default {
   },
   methods: {
     async register() {
-      console.log(this.registerForm) //TODO: feature/2504の問題が解決したら消す
+      console.log(this.registerForm) //TODO: feature/2505の問題が解決したら消す
       // authストアのresigterアクションを呼び出す
       await this.$store.dispatch('auth/register', this.registerForm)
 
