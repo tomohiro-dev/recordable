@@ -22,49 +22,48 @@ export default new Router({
     {
       // path: '/timer',
       path: '/', //本番
-      component: Timer
-      // beforeEnter(to, from, next) {
-      //   if (!store.getters['auth/check']) {
-      //     next('/login') // path: '/'
-      //     // next('/') // path: '/timer'
-      //   } else {
-      //     next()
-      //   }
-      // }
+      component: Timer,
+      beforeEnter(to, from, next) {
+        if (!store.getters['auth/check']) {
+          next('/login')
+        } else {
+          next()
+        }
+      }
       // 画面開発中はコメントアウト
     },
     {
       path: '/login',
-      component: Login
-      // beforeEnter(to, from, next) {
-      //   if (store.getters['auth/check']) {
-      //     next('/')
-      //   } else {
-      //     next()
-      //   }
-      // }
+      component: Login,
+      beforeEnter(to, from, next) {
+        if (store.getters['auth/check']) {
+          next('/')
+        } else {
+          next()
+        }
+      }
     },
     {
       path: '/register',
-      component: Register
-      // beforeEnter(to, from, next) {
-      //   if (store.getters['auth/check']) {
-      //     next('/')
-      //   } else {
-      //     next()
-      //   }
-      // }
+      component: Register,
+      beforeEnter(to, from, next) {
+        if (store.getters['auth/check']) {
+          next('/')
+        } else {
+          next()
+        }
+      }
     },
     {
       path: '/dashboard',
-      component: Dashboard
-      // beforeEnter(to, from, next) {
-      //   if (store.getters['auth/check']) {
-      //     next('/login')
-      //   } else {
-      //     next()
-      //   }
-      // }
+      component: Dashboard,
+      beforeEnter(to, from, next) {
+        if (!store.getters['auth/check']) {
+          next('/login')
+        } else {
+          next()
+        }
+      }
     },
     {
       path: '*',

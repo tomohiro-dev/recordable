@@ -8,7 +8,7 @@
 
 
   <v-navigation-drawer :disable-route-watcher="true" app>
-    <!-- ↑画面開発用 -->
+    <!-- ↑画面開発用画面関係なく表示される -->
     <v-list-item class="px-2">
       <!-- <v-menu top offset-x :close-on-content-click="false">
         <template v-slot:activator="{ on }">
@@ -18,9 +18,9 @@
         </template>
       </v-menu> -->
 
-      <!-- <v-list-item-title>{{ username }}</v-list-item-title> -->
-      <v-list-item-title>ユーザーネーム</v-list-item-title>
-      <!-- TODO: ユーザーネームの表示に成功したら削除 -->
+      <v-list-item-title>{{ username }}</v-list-item-title>
+      <!-- <v-list-item-title>ユーザーネーム</v-list-item-title> -->
+      <!-- TODO: （ユーザーネームの表示に成功：済）画面開発完了後に削除 -->
     </v-list-item>
 
     <v-divider></v-divider>
@@ -129,7 +129,7 @@ export default {
       return this.$store.state.auth.apiStatus
     },
     username() {
-      return this.$storegetters["auth/username"]
+      return this.$store.getters["auth/username"]
     },
     activeTimer() {
       return this.$store.state.timer.active

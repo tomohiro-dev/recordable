@@ -113,6 +113,7 @@ export default {
         // トップページに移動する
         this.$router.push('/')
       }
+      console.log('Wow, Register success!!')
     },
     clearError() {
       this.$store.commit('auth/SET_REGISTER_ERROR_MESSAGES', null)
