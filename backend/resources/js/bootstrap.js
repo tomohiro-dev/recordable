@@ -29,7 +29,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 // Cookieからtokenを取り出す
 // headerに添付
 window.axios.interceptors.request.use((config) => {
-  confog.headers['X-XSRF-TOKEN'] = getCookieValue('XSRF-TOKEN')
+  config.headers['X-XSRF-TOKEN'] = getCookieValue('XSRF-TOKEN')
 
   return config
 })

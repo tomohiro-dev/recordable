@@ -59,6 +59,7 @@
       <v-snackbar v-model="snackbar" multi-line vertical color="error" right bottom>
         <ul v-if="loginErrors.email">
           <li v-for="msg in loginErrors.email" :key="msg">
+            <!-- TODO: 先頭の点をcssで削除する -->
             <span>{{ msg }}</span>
           </li>
         </ul>
@@ -95,7 +96,7 @@ export default {
       if (this.apiStatus) {
         this.$router.push('/')
       }
-      console.log('login')
+      console.log('login success!!')
     },
     clearError() {
       this.$store.commit('auth/SET_LOGIN_ERROR_MESSAGES', null)

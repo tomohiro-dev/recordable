@@ -20,17 +20,16 @@ export default new Router({
       component: NavDrawer
     },
     {
-      path: '/timer',
-      // path: '/', //本番
-      component: Timer
-      // beforeEnter(to, from, next) {
-      //   if (!store.getters['auth/check']) {
-      //     next('/login') // path: '/'
-      //     // next('/') // path: '/timer'
-      //   } else {
-      //     next()
-      //   }
-      // }
+      // path: '/timer',
+      path: '/', //本番
+      component: Timer,
+      beforeEnter(to, from, next) {
+        if (!store.getters['auth/check']) {
+          next('/login')
+        } else {
+          next()
+        }
+      }
       // 画面開発中はコメントアウト
     },
     {
@@ -59,7 +58,7 @@ export default new Router({
       path: '/dashboard',
       component: Dashboard,
       beforeEnter(to, from, next) {
-        if (store.getters['auth/check']) {
+        if (!store.getters['auth/check']) {
           next('/login')
         } else {
           next()

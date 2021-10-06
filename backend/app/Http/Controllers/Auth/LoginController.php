@@ -43,7 +43,7 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         return $user;
-        throw new \Exception('予期せぬエラー');
+        // throw new \Exception('予期せぬエラー');
     }
 
     protected function loggedOut(Request $request)

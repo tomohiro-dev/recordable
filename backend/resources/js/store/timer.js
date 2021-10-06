@@ -1,4 +1,4 @@
-import { OK } from '../const'
+import { OK } from '../util'
 
 const state = {
   timers: [],
@@ -9,7 +9,7 @@ const mutations = {
   SET_TIMERS(state, timers) {
     state.timers = timers
   },
-  SET_ACTIVE_TIMER(state, bool) {
+  SET_ACTIVETIMER(state, bool) {
     state.active = bool
   }
 }
@@ -28,7 +28,7 @@ const actions = {
     context.commit('SET_TIMERS', response.data)
   },
   fetchActive(context, bool) {
-    context.commit('SET_ACTIVE_TIMER', bool)
+    context.commit('SET_ACTIVETIMER', bool)
 
     return false
   }
