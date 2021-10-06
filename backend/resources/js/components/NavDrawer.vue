@@ -1,13 +1,9 @@
 <template>
-  <!-- <v-navigation-drawer
+  <v-navigation-drawer
     v-if="isLogin"
     :disable-route-watcher="true"
     app
-  > -->
-    <!-- ↑本番用 -->
-
-
-  <v-navigation-drawer :disable-route-watcher="true" app>
+  >
     <!-- ↑画面開発用画面関係なく表示される -->
     <v-list-item class="px-2">
       <!-- <v-menu top offset-x :close-on-content-click="false">
@@ -126,7 +122,7 @@ export default {
       return this.$store.state.auth.apiStatus
     },
     isLogin() {
-      return this.$store.state.auth.apiStatus
+      return this.$store.getters["auth/check"]
     },
     username() {
       return this.$store.getters["auth/username"]
