@@ -20,7 +20,8 @@ mix
   .vue()
   .sass('resources/sass/app.scss', 'public/css')
 
-mix.sourceMaps().js('node_modules/popper.js/dist/popper.js', 'public/js').sourceMaps()
+// mix.sourceMaps().js('node_modules/popper.js/dist/popper.js', 'public/js').sourceMaps()
+// TODO: source-map-explorerをinstallする
 
 // Ready to Deploy
 //  mix.browserSync('OriginalDomain or IPアドレスを記述')
