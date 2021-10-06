@@ -114,7 +114,7 @@
             :elevation="hover ? 12 : 6"
           >
             <v-icon v-if="fab">mdi-close</v-icon>
-            <v-icon v-else>mdi-plus</v-icon>
+            <v-icon v-else>mdi-play</v-icon>
           </v-btn>
         </v-hover>
       </template>
