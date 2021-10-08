@@ -817,6 +817,18 @@ export default {
     //     this.loading = false
     //   }
     // }
+  },
+  computed: {
+    swatchStyle() {
+      return {
+        backgroundColor: this.nreCategory.color,
+        cursor: "pointer",
+        height: "30px",
+        width: "30px",
+        borderRadius: this.menu.newTimerColor ? "50%" : "4px",
+        transition: "border-radius 200ms ease-in-out"
+      }
+    }
   }
 }
 </script>
