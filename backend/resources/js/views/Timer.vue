@@ -3,94 +3,22 @@
     <!-- TODO: snackbar系は上にまとめる -->
     <!-- componentとして切り出してもいいかも -->
 
-    <!-- vue loading -->
-    <!-- <template v-if="loading">
-      <v-row :style="`height:${windowSize.height}px`" align="center" justify="center">
-        <v-col>
-          <vue-loading
-            type="bubbles"
-            color="#B0BEC5"
-            :size="{ width: '50px', height: '50px' }"
-          ></vue-loading>
-        </v-col>
-      </v-row>
-    </template> -->
+    <!-- 計算中のタイマーをsnackbarで表示 -->
+    <!-- 計算中のタイマーをsnackbarで表示 fin -->
 
-   <!-- loading animation -->
-    <!-- <template v-if="loading">
-      <v-row :style="`height:${windowSize.height}px`" align="center" justify="center">
-        <v-col>
-          <vue-loading type="bars" color="#B0BEC5" :size="{ width: '50px', height: '50px' }"></vue-loading>
-        </v-col>
-      </v-row>
-    </template> -->
-      <!-- loading animation fin -->
+    <!-- 記録完了のsnackbar -->
+    <!-- 記録完了のsnackbar fin -->
 
-    <!-- 一覧表示 -->
-    <template>
-      <template v-if="!isEmpty(timersArray)">
-        <span class="title">
-          {{ formatDate(timers[0].started_at )}}
-        </span>
-        <v-data-table
-          :headers="headers"
-          :items="timers"
-          :items-per-page="100"
-          class="elevation-1 mb-4"
-          :hide-default-header="windowSize.width < 600"
-          hide-default-footer
-          @click:row="openEditTimer"
-        >
-          <template v-slot:item.name="{ item }">
-            <span>{{ item.name }}</span>
-          </template>
+    <!-- 更新完了時のsnackbar -->
+    <!-- 更新完了時のsnackbar fin -->
 
-          <template v-slot:item.memo="{ item }">
-            <small class="text-muted">{{ item.memo }}</small>
-          </template>
+    <!-- 記録削除時のsnackbar -->
+    <!-- 記録削除時のsnackbar fin -->
 
-          <template v-slot:item.category="{ item }">
-            <span
-             :style="{ backgroundColor: item.category_color }"
-             style="display: inline-block; height: 10px; width: 10px; border-radius: 50%"
-            >
-            </span>
-            <span :style="{ color: item.category_color }">
-              {{ item.category_name }}
-            </span>
-          </template>
-
-          <template v-slot:item.started_at="{ item }">
-            {{ formatTimer(item) }}
-          </template>
-
-          <template v-slot:item.time="{ item }">
-            <span v-if="showTimer(item)">{{ activeTimerString }}</span>
-            <span v-else>{{ calculaterTimeSpent(item) }}</span>
-          </template>
-        </v-data-table>
-      </template>
-
-        <!-- <v-row v-if="!lastPage" justify="center"> -->
-          <!-- <v-btn :loading="infiniteLoading" @click="loadMore"> -->
-            <!-- <v-btn> -->
-              <!-- TODO: loading編集時に削除するタグ -->
-            <!-- <v-icon left>mdi-chevron-down</v-icon>もっと見る -->
-          <!-- </v-btn> -->
-        <!-- </v-row> -->
+    <!-- サーバーエラーのsnackbar -->
+    <!-- サーバーエラーのsnackbar fin -->
 
 
-
-
-      <!-- 記録がない時の画面 -->
-      <v-row align="center" justify="center">
-        <v-col cols="10" md="4">
-          <!-- <v-img>TODO: 画像を追加</v-img> -->
-          <p class="mt-2 title text-center">千里の道も一歩から。</p>
-          <p class="text-center">学習の準備はできましたか？学習を始めましょう！</p>
-        </v-col>
-      </v-row>
-    </template>
 
 
     <!-- タイマー追加ボタン -->
@@ -132,9 +60,83 @@
         <v-icon>mdi-playlist-plus</v-icon>
       </v-btn>
     </v-speed-dial>
+    <!-- タイマー追加ボタン fin -->
 
+   <!-- loading animation -->
+    <!-- <template v-if="loading">
+      <v-row :style="`height:${windowSize.height}px`" align="center" justify="center">
+        <v-col>
+          <vue-loading type="bars" color="#B0BEC5" :size="{ width: '50px', height: '50px' }"></vue-loading>
+        </v-col>
+      </v-row>
+    </template> -->
+      <!-- loading animation fin -->
 
-    <!-- 記録が一覧で並んでいる時の画面 -->
+    <!-- 一覧表示 (loadingがv-if) v-else -->
+    <template>
+      <template v-if="!isEmpty(timersArray[0][0])">
+        <template v-for="timers in timersArray">
+          <span class="title">
+            {{ formatDate(timers[0].started_at )}}
+          </span>
+            <v-data-table
+              :headers="headers"
+              :items="timers"
+              :items-per-page="100"
+              class="elevation-1 mb-4"
+              :hide-default-header="windowSize.width < 600"
+              hide-default-footer
+              @click:row="openEditTimer"
+              >
+              <template v-slot:item.name="{ item }">
+                <span>{{ item.name }}</span>
+                </template>
+
+              <template v-slot:item.memo="{ item }">
+                <small class="text-muted">{{ item.memo }}</small>
+                </template>
+
+              <template v-slot:item.category="{ item }">
+                <span
+                 :style="{ backgroundColor: item.category_color }"
+                 style="display: inline-block; height: 10px; width: 10px; border-radius: 50%"
+                >
+                </span>
+                <span :style="{ color: item.category_color }">
+                  {{ item.category_name }}
+                </span>
+                </template>
+
+              <template v-slot:item.started_at="{ item }">
+                {{ formatTimer(item) }}
+                </template>
+
+              <template v-slot:item.time="{ item }">
+                <span v-if="showTimer(item)">{{ activeTimerString }}</span>
+                <span v-else>{{ calculaterTimeSpent(item) }}</span>
+              </template>
+            </v-data-table>
+        </template>
+
+          <!-- <v-row v-if="!lastPage" justify="center"> -->
+            <!-- <v-btn :loading="infiniteLoading" @click="loadMore"> -->
+              <!-- <v-btn> -->
+                <!-- TODO: ↑loading編集時に削除するタグ -->
+              <!-- <v-icon left>mdi-chevron-down</v-icon>もっと見る -->
+            <!-- </v-btn> -->
+          <!-- </v-row> -->
+      </template>
+
+          <!-- 記録がない時の画面 -->
+      <v-row v-else align="center" justify="center">
+        <v-col cols="10" md="4">
+          <!-- <v-img>TODO: 画像を追加</v-img> -->
+          <p class="mt-2 title text-center">千里の道も一歩から。</p>
+          <p class="text-center">学習の準備はできましたか？学習を始めましょう！</p>
+        </v-col>
+      </v-row>
+    </template>
+
 
     <!-- 新規作成タイマー -->
     <div class="text-center">
@@ -169,7 +171,7 @@
                       :items="categories"
                       item-text="name"
                       item-value="value"
-                      label="カテゴリー*を追加してください"
+                      label="カテゴリーを追加してください*"
                       return-object
                       required
                       prepend-icon="mdi-folder"
@@ -241,7 +243,11 @@
                                       </template>
                                       <v-card>
                                         <v-card-text class="pa-0">
-                                          <v-color-picker v-model="newCategory.color" flat show-swatches />
+                                          <v-color-picker
+                                            v-model="newCategory.color"
+                                            flat
+                                            show-swatches
+                                          />
                                         </v-card-text>
                                       </v-card>
                                     </v-menu>
@@ -254,14 +260,17 @@
 
                         <v-card-actions>
                           <v-spacer></v-spacer>
-                          <v-btn text @click="menu.newTimerCategory = false">閉じる</v-btn>
+                          <v-btn
+                            text
+                            @click="menu.newTimerCategory = false"
+                          >閉じる</v-btn>
                           <v-btn
                             color="primary"
                             text
                             :disabled="newCategory.name === ''"
                             @click="createCategory()"
-                            >保存
-                          </v-btn>
+                            >
+                            保存</v-btn>
                         </v-card-actions>
                       </v-card>
                     </v-menu>
@@ -337,7 +346,7 @@
                       label="カテゴリーを追加してください*"
                       return-object
                       required
-                      prepend-ion="mdi-folder"
+                      prepend-icon="mdi-folder"
                       disabled
                     >
                     </v-select>
@@ -348,7 +357,7 @@
                       :items="categories"
                       item-text="name"
                       item-value="value"
-                      label="カテゴリーを選択する"
+                      label="カテゴリーを選択する*"
                       return-object
                       required
                       prepend-icon="mdi-folder"
@@ -380,13 +389,14 @@
                           <v-container>
                             <v-row>
                               <v-col cols="12">
+                                <!-- カテゴリー名入力 -->
                                 <v-text-field
                                   v-model="newCategory.name"
                                   label="カテゴリー名を入力"
                                   prepend-icon="mdi-folder-plus"
-                                >
-                                </v-text-field>
+                                ></v-text-field>
 
+                                <!-- カラーコード選択 -->
                                 <v-text-field
                                   prepend-icon="mdi-format-color-fill"
                                   v-mask="mask"
@@ -406,10 +416,13 @@
                                       <template v-slot:activator="{ on }">
                                         <div :style="swatchStyle" v-on="on" />
                                       </template>
-
                                       <v-card>
                                         <v-card-text class="pa-0">
-                                          <v-color-picker v-model="newCategory.color" flat show-swatches />
+                                          <v-color-picker
+                                            v-model="newCategory.color"
+                                            flat
+                                            show-swatches
+                                          />
                                         </v-card-text>
                                       </v-card>
                                     </v-menu>
@@ -422,7 +435,10 @@
 
                         <v-card-actions>
                           <v-spacer></v-spacer>
-                          <v-btn text @click="menu.saveTimerCategory = false">閉じる</v-btn>
+                          <v-btn
+                            text
+                            @click="menu.saveTimerCategory = false"
+                           >閉じる</v-btn>
                           <v-btn
                             color="primary"
                             text
@@ -438,7 +454,8 @@
                   <!-- メモの入力 -->
                   <v-col cols="12">
                     <v-textarea
-                      v-model="editTimer.memo"
+                      color="#696969"
+                      v-model="saveTimer.memo"
                       label="メモ"
                       type="text"
                       prepend-icon="mdi-text-box"
@@ -447,6 +464,7 @@
                     ></v-textarea>
                   </v-col>
 
+                  <!-- 開始時刻の入力 -->
                   <v-col cols="12">
                     <v-datetime-picker
                       v-model="saveTimer.started_at"
@@ -466,6 +484,7 @@
                     </v-datetime-picker>
                   </v-col>
 
+                  <!-- 計測期間入力 -->
                   <v-col cols="4">
                     <v-select
                       v-model="saveTimer.time.hours"
@@ -474,6 +493,17 @@
                       required
                       prepend-icon="mdi-timer-sand-full"
                       :items="time.hours"
+                    >
+                    </v-select>
+                  </v-col>
+
+                  <v-col cols="4">
+                    <v-select
+                      v-model="saveTimer.time.minutes"
+                      color="#696969"
+                      label="分"
+                      required
+                      :items="time.minutes"
                     >
                     </v-select>
                   </v-col>
@@ -505,14 +535,13 @@
                 saveTimer.name.length > 30 ||
                 saveTimer.name === '' ||
                 saveTimer.category === '' ||
-                (saveTimer.memo && saveTimer.memo.length > 140) ||
+                saveTimer.memo && saveTimer.memo.length > 140 ||
                 saveTimer.started_at === '' ||
                 saveTimer.stopped_at === '' ||
                 (!saveTimer.time.hours && !saveTimer.time.minutes && !saveTimer.time.seconds)
               "
             >
-              保存</v-btn
-            >
+              保存</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -526,7 +555,7 @@
             class="grey--text text--darken-2 headline"
             :class="{ title: windowSize.width < 600 }"
           >
-            <v-icon class="mr-2">mdi-update </v-icon>
+            <v-icon class="mr-2">mdi-update</v-icon>
             レコードを編集する
             <v-spacer></v-spacer>
           </v-card-title>
@@ -534,8 +563,21 @@
             <v-container class="pt-0">
               <v-row>
                 <v-col cols="12">
+                  <v-text-field
+                   v-model="editTimer.name"
+                   label="記録する内容"
+                   required
+                   prepend-icon="mdi-border-color"
+                   :rules="rules.name"
+                   :counter="30"
+                  >
+                  </v-text-field>
+                </v-col>
+
+                <!-- カテゴリー選択 -->
+                <v-col cols="12">
                   <v-select
-                    v-model="editTimer"
+                    v-model="editTimer.category"
                     :items="categories"
                     item-text="name"
                     item-value="value"
@@ -563,7 +605,7 @@
 
                 <!-- 開始時刻 -->
                 <v-col cols="12">
-                  <v-datatime-picker
+                  <v-datetime-picker
                     v-model="editTimer.started_at"
                     :text-field-props="textFieldProps"
                     :timePickerProps="timePickerProps"
@@ -577,9 +619,9 @@
                       <v-icon>mdi-clock-outline</v-icon>
                     </template>
                     <template slot="actions" slot-scope="{ parent }">
-                      <v-btn text color="primary" @click="parent.okHandler"> 保存 </v-btn>
+                      <v-btn text color="primary" @click="parent.okHandler">保存</v-btn>
                     </template>
-                  </v-datatime-picker>
+                  </v-datetime-picker>
                 </v-col>
 
                 <!-- 計測期間入力 -->
@@ -619,6 +661,7 @@
           </v-card-text>
 
           <!-- 削除ボタン -->
+        <v-card-actions>
           <v-menu
             v-model="menu.delete"
             :close-on-content="false"
@@ -634,29 +677,32 @@
               </v-card-title>
               <v-card-text>本当によろしいですか？</v-card-text>
 
-              <v-card-action>
+              <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn text @click="menu.delete = false">閉じる</v-btn>
-                <v-btn
-                  color="blue darken-1"
-                  text
-                  @click="updateTimer()"
-                  :disabled="
-                    saveTimer.name.length > 30 ||
-                    saveTimer.name === '' ||
-                    saveTimer.category === '' ||
-                    (saveTimer.memo && saveTimer.memo.length > 140) ||
-                    saveTimer.started_at === '' ||
-                    saveTimer.stopped_at === '' ||
-                    (!saveTimer.time.hours && !saveTimer.time.minutes && !saveTimer.time.seconds)
-                  "
-                >
-                  保存</v-btn
-                >
-              </v-card-action>
+                <v-btn color="red lighten-1" text @click="deleteTimer()">実行</v-btn>
+              </v-card-actions>
             </v-card>
           </v-menu>
-        </v-card>
+
+          <v-spacer></v-spacer>
+            <v-btn
+              color="blue darken-1"
+              text
+              @click="updateTimer()"
+              :disabled="
+                editTimer.name.length > 30 ||
+                editTimer.name === '' ||
+                editTimer.category === '' ||
+                (editTimer.memo && editTimer.memo.length > 140) ||
+                editTimer.started_at === '' ||
+                editTimer.stopped_at === ''
+              "
+              >
+              保存
+            </v-btn>
+        </v-card-actions>
+       </v-card>
       </v-dialog>
     </div>
   </div>
@@ -674,16 +720,6 @@ export default {
       newCategory: {
         name: '',
         color: '#696969'
-      },
-      // inputTimerRules（名前変えるかも）
-      rules: {
-        category: [(value) => !!value || '選択してください。'],
-        memo: [(value) => (value || '').length <= 140 || '最大140文字までです。'],
-        require: [(value) => !!value || '入力してください。'],
-        name: [
-          (value) => !!value || '入力してください。',
-          (value) => (value || '').length <= 30 || '最大30文字までです。'
-        ]
       },
       saveTimer: {
         id: '',
@@ -705,18 +741,32 @@ export default {
       },
       dialog: {
         newTimer: false,
-        saveTimer: false
+        saveTimer: false,
+        editTimer: false
         // 記録の編集
       },
       menu: {
         saveTimerCategory: false,
         newTimerCategory: false
       },
+        // inputTimerRules（名前変えるかも）
+        rules: {
+          category: [(value) => !!value || '選択してください。'],
+          memo: [(value) => (value || '').length <= 140 || '最大140文字までです。'],
+          require: [(value) => !!value || '入力してください。'],
+          name: [
+            (value) => !!value || '入力してください。',
+            (value) => (value || '').length <= 30 || '最大30文字までです。'
+          ]
+        },
       time: {
         hours: [],
         minutes: [],
         seconds: []
       },
+      timers: [],
+      timersArray: [[]],
+      categories: [],
       headers: [
         // TODO: barみたいな名前にrefactoring
         {
@@ -751,10 +801,9 @@ export default {
           width: "10%"
         }
       ],
-      timersArray: [],
-      categories: [],
       fab: false, //floatingActionBtn（名前変えるかも）
       counter: { seconds: 0, timer: { name: '', category: '' } },
+      activeTimerString: false,
       newTimerValid: false,
       mask: '#XXXXXXXX', //カラーコードの入力制御(colorCodeMaskにするかも),
       textFieldProps: {
@@ -762,10 +811,14 @@ export default {
         color: '#696969' //TODO: 色変更
       },
       windowSize: {
-        width: window.innerWidth
+        width: window.innerWidth,
+        height: window.innerHeight
       },
+      // loading: true,
+      // lastPage: false,
       timePickerProps: {
-        format: '24hr'
+        format: '24hr',
+        color: "#696969"
       },
       editTimePickerProps: {
         format: '24hr'
@@ -802,8 +855,34 @@ export default {
           this.newTimerCategory = false,
           this.menu.saveTimerCategory = false
         })
-        .catch((err) => {})
+        .catch((err) => {
+          this.errorMessage = err
+          //snackbarを表示させる
+        })
     },
+    /**
+     * 新規カテゴリーを作成
+     */
+    createCategory: function() {
+      window.axios
+        .post("api/categories", {
+          name: this.newCategory.name,
+          color: this.newCategory.color
+        })
+        .then(response => {
+          this.categories.push(response.data)
+          this.newCategory.name = ""
+          this.menu.newTimerCategory = false
+        })
+        .catch(err => {
+          this.errorMessage = err
+          //snackbarを表示させる
+        })
+    },
+
+    /**
+     * タイマー編集用のmodal
+     */
     openEditTimer(event) {
       const item = event
       if (item.id === this.counter.timer.id) {
@@ -821,7 +900,7 @@ export default {
   computed: {
     swatchStyle() {
       return {
-        backgroundColor: this.nreCategory.color,
+        backgroundColor: this.newCategory.color,
         cursor: "pointer",
         height: "30px",
         width: "30px",
