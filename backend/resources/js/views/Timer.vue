@@ -709,6 +709,8 @@
 </template>
 
 <script>
+import { TheMask } from "vue-the-mask"
+
 export default {
   data() {
     return {
@@ -805,7 +807,7 @@ export default {
       counter: { seconds: 0, timer: { name: '', category: '' } },
       activeTimerString: false,
       newTimerValid: false,
-      mask: '#XXXXXXXX', //カラーコードの入力制御(colorCodeMaskにするかも),
+      mask: '!#XXXXXXXX', //カラーコードの入力制御(colorCodeMaskにするかも),
       textFieldProps: {
         prependIcon: 'mdi-clock',
         color: '#696969' //TODO: 色変更
@@ -865,7 +867,7 @@ export default {
       windows.axios
         .post('api/categories', {
           name: this.newCategory.name,
-          color: this.nreCategory.color
+          color: this.newCategory.color
         })
         .then((response) => {
           this.categories.push(response.data)
