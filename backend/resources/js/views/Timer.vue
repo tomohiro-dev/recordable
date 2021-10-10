@@ -843,6 +843,24 @@ export default {
       return false
       //値を返す
     },
+    // TODO: データを追加してloadmoreボタンを使う時にコメントアウトを解除
+    // loadMore() {
+    //   this.infiniteLoading = true
+    //   window.axios
+    //     .get("/api/timers", {
+    //       params: {
+    //         page: this.page + 1
+    //       }
+    //     })
+    //     .then(response => {
+    //       this.page += 1
+    //       this.timers.push(...response.data.data)
+    //       this.infiniteLoading = false
+    //       if (this.page === response.data.last_page) {
+    //         this.lastPage = true
+    //       }
+    //     })
+    // },
     createCategory: function () {
       windows.axios
         .post('api/categories', {
@@ -908,6 +926,10 @@ export default {
         transition: "border-radius 200ms ease-in-out"
       }
     }
+  },
+
+  watch: {
+    // 記録の監視
   }
 }
 </script>
