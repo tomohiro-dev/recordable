@@ -274,6 +274,10 @@ node -v
 ```
 差分を表示して整形できる
 
+### phpunitでtestする
+```
+./vendor/bin/phpunit --testdox
+```
 
 ### Docker Image, Volumes, networkを一括消去
 ```
