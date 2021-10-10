@@ -15,16 +15,18 @@ class CategoriesTableSeeder extends Seeder
     public function run()
     {
         $categories = [
-            'Grammar' => '#5735CE',
-            'Speaking' => '#FFC46D',
-            'Writing' => '#FA0202',
+            'Reading' => '#696969',
+            'Writing' => '#696969',
+            'Listening' => '#696969',
+            'Grammar' => '#696969',
+            'Online Lession' => '#696969'
         ];
 
         foreach ($categories as $name => $key) {
             DB::table('categories')->insert([
                 'name' => $name,
                 'color' => $key,
-                'user_id' => 1,
+                'user_id' => 4,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]);
