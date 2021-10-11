@@ -813,6 +813,7 @@ export default {
           width: "10%"
         }
       ],
+      page: 1,
       fab: false, //floatingActionBtn（名前変えるかも）
       counter: { seconds: 0, timer: { name: '', category: '' } },
       activeTimerString: false,
@@ -842,6 +843,13 @@ export default {
       // loading: true,
       infiniteLoading: false
     }
+  },
+  created() {
+    window.axios
+      .get("/api/categories")
+      .then(response => {
+        this.categories = response.data
+      })
   },
   methods: {
     onResize() {
@@ -880,8 +888,12 @@ export default {
     //       }
     //     })
     // },
+
+    /**
+     * 新規カテゴリーを作成
+     */
     createCategory: function () {
-      windows.axios
+      window.axios
         .post('api/categories', {
           name: this.newCategory.name,
           color: this.newCategory.color
@@ -893,27 +905,8 @@ export default {
           this.menu.saveTimerCategory = false
         })
         .catch((err) => {
-          this.errorMessage = err
-          //snackbarを表示させる
-        })
-    },
-    /**
-     * 新規カテゴリーを作成
-     */
-    createCategory: function() {
-      window.axios
-        .post("api/categories", {
-          name: this.newCategory.name,
-          color: this.newCategory.color
-        })
-        .then(response => {
-          this.categories.push(response.data)
-          this.newCategory.name = ""
-          this.menu.newTimerCategory = false
-        })
-        .catch(err => {
-          this.errorMessage = err
-          //snackbarを表示させる
+          this.errorMessage = err,
+          this.snackbar.error = true
         })
     },
 
