@@ -37,7 +37,10 @@
             <template>
               <v-btn text color="success">テストログイン</v-btn>
             </template>
-            <span> <v-icon dark left>mdi-alert-circle</v-icon>一定期間が立つとアカウント情報は初期化されます。 </span>
+            <span>
+              <v-icon dark left>mdi-alert-circle</v-icon>
+              一定期間が立つとアカウント情報は初期化されます。
+            </span>
           </v-tooltip>
 
           <v-btn
@@ -68,7 +71,7 @@
             <span>{{ msg }}</span>
           </li>
         </ul>
-        <v-btn text dark @click="sackbar = false">閉じる</v-btn>
+        <v-btn text dark @click="snackbar = false">CLOSE</v-btn>
       </v-snackbar>
     </template>
   </v-row>
@@ -114,4 +117,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+ul {
+  list-style: none;
+}
+</style>
