@@ -6,17 +6,20 @@
     <!-- 計算中のタイマーをsnackbarで表示 -->
     <!-- 計算中のタイマーをsnackbarで表示 fin -->
 
-    <!-- 記録完了のsnackbar -->
-    <!-- 記録完了のsnackbar fin -->
+    <v-snackbar top v-model="snackbar.updated" color="success">
+      The record has been rewritten.
+      <v-btn text @click="snackbar.updated = false">CLOSE</v-btn>
+    </v-snackbar>
 
-    <!-- 更新完了時のsnackbar -->
-    <!-- 更新完了時のsnackbar fin -->
-
-    <!-- 記録削除時のsnackbar -->
-    <!-- 記録削除時のsnackbar fin -->
-
-    <!-- サーバーエラーのsnackbar -->
-    <!-- サーバーエラーのsnackbar fin -->
+    <v-snackbar top v-model="snackbar.deleted" color="error">
+      The record has been deleted.
+      <v-btn text @click="snackbar.deleted = false">CLOSE</v-btn>
+    </v-snackbar>
+    <!-- サーバーエラー時 -->
+    <v-snackbar top v-model="snackbar.error" color="error" :multi-line="true">
+      An error has occurred. message：{{ errorMessage }}
+      <v-btn text @click="snackbar.error = false">閉じる</v-btn>
+    </v-snackbar>
 
 
 
@@ -714,6 +717,13 @@ import { TheMask } from "vue-the-mask"
 export default {
   data() {
     return {
+      snackbar: {
+        //Timer,
+        done: false,
+        updated: false,
+        deleted: false,
+        error: false
+      },
       newTimer: {
         name: '',
         memo: '',
@@ -807,6 +817,7 @@ export default {
       counter: { seconds: 0, timer: { name: '', category: '' } },
       activeTimerString: false,
       newTimerValid: false,
+      errorMessage: "",
       mask: '!#XXXXXXXX', //カラーコードの入力制御(colorCodeMaskにするかも),
       textFieldProps: {
         prependIcon: 'mdi-clock',
