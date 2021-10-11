@@ -39,7 +39,7 @@
             <v-text-field
               tabindex="3"
               v-model="registerForm.password"
-              label="パスワード"
+              label="パスワード(8 or more characters)"
               prepend-icon="mdi-lock"
               :type="showPassword ? 'text' : 'password'"
               :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
