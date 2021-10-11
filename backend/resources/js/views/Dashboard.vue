@@ -1,7 +1,9 @@
 <template>
   <div>
-    <!-- TODO: snackbarの追加 -->
-
+    <v-snackbar top v-model="snackbar.error" color="error">
+      An error has occurred. message：{{ errorMessage }}
+      <v-btn text @click="snackbar.error = false">CLOSE</v-btn>
+    </v-snackbar>
     <span class="title">
       <v-icon class="mr-2 mb-1">mdi-archive-clock</v-icon>レコード
     </span>
@@ -170,6 +172,9 @@ export default {
       loading: {
         pie: true,
         stack: true
+      },
+      snackbar: {
+        error: false
       },
       stack: "",
       pie: "",
