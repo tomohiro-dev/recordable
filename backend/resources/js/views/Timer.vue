@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="body" v-resize="onResize">
     <!-- TODO: snackbar系は上にまとめる -->
     <!-- componentとして切り出してもいいかも -->
 
@@ -833,6 +833,12 @@ export default {
     }
   },
   methods: {
+    onResize() {
+      this.windowSize = {
+      width: window.innerWidth,
+      height: window.innerHeight
+      }
+    },
     // 値が空( null or undefined or ''(空文字) or [](空の配列) or {}(空のオブジェクト) )を判定
     isEmpty: function (val) {
       if (!val) {
