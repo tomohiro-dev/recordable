@@ -33,7 +33,7 @@
             <v-text-field
               tabindex="2"
               v-model="registerForm.email"
-              label="メールアドレス"
+              label="MailAddress"
               prepend-icon="mdi-email"
             />
             <v-text-field
@@ -79,6 +79,21 @@
       </v-card>
     </v-col>
     <v-spacer></v-spacer>
+    <template v-if="registerErrors">
+      <v-snackbar v-model="snackbar" multi-line vertical color="error" right bottom>
+        <ul v-if="registerErrors.email">
+          <li v-for="msg in registerErrors.email" :key="msg">
+            <span>{{ msg }}</span>
+          </li>
+        </ul>
+        <ul v-if="registerErrors.password">
+          <li v-for="msg in registerErrors.password" :key="msg">
+            <span>{{ msg }}</span>
+          </li>
+        </ul>
+        <v-btn text dark @click="snackbar = false">CLOSE</v-btn>
+      </v-snackbar>
+    </template>
   </v-row>
 </template>
 
@@ -131,4 +146,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+ul {
+  list-style: none;
+}
+</style>
