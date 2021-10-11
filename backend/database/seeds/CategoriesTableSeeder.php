@@ -19,7 +19,7 @@ class CategoriesTableSeeder extends Seeder
             'Writing' => '#696969',
             'Listening' => '#696969',
             'Grammar' => '#696969',
-            'Online Lession' => '#696969'
+            'Online Lesson' => '#696969'
         ];
 
         foreach ($categories as $name => $key) {
