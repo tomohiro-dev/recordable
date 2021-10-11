@@ -60,7 +60,7 @@
         <v-icon>mdi-timer-outline</v-icon>
       </v-btn>
       <v-btn fab dark small color="#696969" @click.stop="dialog.saveTimer = true">
-        <v-icon>mdi-playlist-plus</v-icon>
+        <v-icon>mdi-book-edit-outline</v-icon>
       </v-btn>
     </v-speed-dial>
     <!-- タイマー追加ボタン fin -->
@@ -316,7 +316,7 @@
       <v-dialog v-model="dialog.saveTimer" width="500">
         <v-card>
           <v-card-title class="headline">
-            <v-icon class="mr-2" color="#696969">mdi-playlist-plus</v-icon>マニュアルモード
+            <v-icon class="mr-2" color="#696969">mdi-book-edit-outline</v-icon>マニュアルモード
           </v-card-title>
 
           <v-card-text :class="{ 'px-4': windowSize.width < 600 }">
