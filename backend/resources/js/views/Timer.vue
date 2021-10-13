@@ -850,6 +850,9 @@ export default {
       .then(response => {
         this.categories = response.data
       })
+
+    this._arrayHours()
+    this._arrayMinutes()
   },
   methods: {
     onResize() {
@@ -888,6 +891,21 @@ export default {
     //       }
     //     })
     // },
+    _arrayHours() {
+      let i = 0
+      //TODO: refactoringする | hourPullDownとか
+      for (i; i <= 24; i++) {
+        this.time.hours.push(i)
+      }
+    },
+    _arrayMinutes() {
+      let i = 0
+      //TODO: refactoringする | hourPullDownとか
+      for (i; i <= 59; i++) {
+        this.time.minutes.push(i)
+        this.time.seconds.push(i)
+      }
+    },
 
     /**
      * 新規カテゴリーを作成
@@ -909,6 +927,51 @@ export default {
           this.snackbar.error = true
         })
     },
+
+    /**
+     * 新規のタイマーを手入力で保存する
+     */
+    addTimer() {
+      window.axios
+        .post(`/api/timers/save`, {
+          name: this.saveTimer.name,
+          memo: this.saveTimer.memo,
+          category_id: this.saveTimer.category.id,
+          category_name: this.saveTimer.category.name,
+          category_color: this.saveTimer.category.color,
+          started_at: this.saveTimer.started_at,
+          stopped_at: this.saveTimer.stopped_at
+        })
+        .then(response => {
+          const savedTimer = response.data
+          const oldestTimer = this.timers[this.timers.length - 1]
+
+          if (this.lastPage || moment(savedTimer.started_at).isAfter(oldestTimer.sterted_at))
+          {
+            this.timers.push(savedTimer)
+            this.timers.sort(function(a,b) {
+              return a.started_at < b.started_at ? 1 : -1
+            })
+          }
+
+          this.dialog.saveTimer = false
+          this.snackbar.done = true
+          this.saveTimer = {
+            name: "",
+            category: "",
+            memo: "",
+            started_at: new Date(),
+            stopped_at: "",
+            time: {hours: "", minutes: "", seconds: ""}
+          }
+        })
+        .catch(err => {
+          this.errorMessage = err
+          this.snackbar.error = true
+        })
+    },
+
+
 
     /**
      * タイマー編集用のmodal

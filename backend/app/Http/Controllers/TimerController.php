@@ -64,6 +64,13 @@ class TimerController extends Controller
      */
     public function store(Request $request)
     {
+        $data = $request->validate([
+            'name' => 'required|max:30',
+            'memo' => 'nullable|max140',
+            'caategory_id' => 'nullable',
+            'category_name' => 'nullable|max:20',
+            'category_color' => 'nullable'
+        ]);
         $timer =  Timer::mine()->create([
             'name' => $data['name'],
             'memo' => $data['memo'],
@@ -79,7 +86,15 @@ class TimerController extends Controller
     }
 
     public function save(Request $request) {
-        //TODO: varidation処理を追加する
+        $data = $request->validate([
+            'name' => 'required|max:30',
+            'memo' => 'nullable|max:140',
+            'category_id' => 'nullable',
+            'category_name' => 'nullable|max:20',
+            'category_color' => 'nullable',
+            'started_at' => 'required',
+            'stopped_at' => 'required'
+        ]);
 
         $started_at = new Carbon($data['started_at']);
         $stopped_at = new Carbon($data['stopped_at']);
@@ -129,7 +144,15 @@ class TimerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //TODO: varidation処理を追加する
+        $data = $request->validate([
+            'name' => 'required|max:30',
+            'memo' => 'nullable|max:140',
+            'category_id' => 'nullable',
+            'category_name' => 'nullable|max:20',
+            'category_color' => 'nullable',
+            'started_at' => 'required',
+            'stopped_at' => 'required'
+        ]);
 
 
         $started_at = new Carbon($data['started_at']);
