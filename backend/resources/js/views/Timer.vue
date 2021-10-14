@@ -891,21 +891,6 @@ export default {
     //       }
     //     })
     // },
-    _arrayHours() {
-      let i = 0
-      //TODO: refactoringする | hourPullDownとか
-      for (i; i <= 24; i++) {
-        this.time.hours.push(i)
-      }
-    },
-    _arrayMinutes() {
-      let i = 0
-      //TODO: refactoringする | hourPullDownとか
-      for (i; i <= 59; i++) {
-        this.time.minutes.push(i)
-        this.time.seconds.push(i)
-      }
-    },
 
     /**
      * 新規カテゴリーを作成
@@ -984,11 +969,74 @@ export default {
       this.editTimer.id = item.id
       this.editTimer.name = item.name
     },
+    updateTimer() {
+      window.axios
+        .put(`api/timers/${this.editTimer.id}`, {
+          name: this.editTimer.name,
+          memo: this.editTimer.memo,
+          category_id: this.editTimer.category.id,
+          category_name: this.editTimer.category.name,
+          category_color: this.editTimer.category.color,
+          started_at: this.editTimer.started_at,
+          stopped_at: this.editTimer.stopped_at
+
+        })
+        .then(response => {
+          const updatedTimer = response.data
+          const timer = this.timers.find(
+            timer => timer.id === updatedTimer["id"]
+          )
+
+          const startedBefore = moment(timer.started_at)
+          const startedAfter = moment(new Date(updatedTimer["started_at"]))
+
+          //Timer valueをupdate
+          timer.name = this.editTimer.name
+          timer.memo = this.editTimer.memo
+          timer.category_id = this.editTimer.category.id
+          timer.category_name = this.editTimer.category.name
+          timer.category_color = this.editTimer.category.color
+          timer.started_at = updatedTimer["started_at"]
+          timer.stopped_at = updatedTimer["stopped_at"]
+
+          //もし日付が更新されたら
+          //timersを日付の新しい順番に並び替える
+          //TODO: refactoring to a(beforeUpdateTimerとか) and b(updatedTimerとか)
+          if (!startedBefore.isSame(startdAfter)) {
+            this.timers.sort(function(a, b) {
+              return a.started_at < b.started_at ? 1 : -1
+            })
+          }
+          //TODO: 見せ方に関するロジックを追加する？
+
+          this.dialog.editTimer = false
+          this.snackbar.updated = true
+        })
+        .catch(err => {
+          this.errorMessage = err
+          this.snackbar.error = true
+        })
+    },
     // timersArray: {
-    //   handler: function() {
-    //     this.loading = false
+      //   handler: function() {
+        //     this.loading = false
     //   }
     // }
+    _arrayHours() {
+      let i = 0
+      //TODO: refactoringする | hourPullDownとか
+      for (i; i <= 24; i++) {
+        this.time.hours.push(i)
+      }
+    },
+    _arrayMinutes() {
+      let i = 0
+      //TODO: refactoringする | hourPullDownとか
+      for (i; i <= 59; i++) {
+        this.time.minutes.push(i)
+        this.time.seconds.push(i)
+      }
+    }
   },
   computed: {
     swatchStyle() {
