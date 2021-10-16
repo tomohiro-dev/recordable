@@ -116,7 +116,7 @@
 
               <template v-slot:item.time="{ item }">
                 <span v-if="showTimer(item)">{{ activeTimerString }}</span>
-                <span v-else>{{ calculaterTimeSpent(item) }}</span>
+                <span v-else>{{ calculateTimeSpent(item) }}</span>
               </template>
             </v-data-table>
         </template>
@@ -815,7 +815,7 @@ export default {
       page: 1,
       fab: false, //floatingActionBtn（名前変えるかも）
       counter: { seconds: 0, timer: { name: '', category: '' } },
-      // activeTimerString: "Calculating...",
+      activeTimerString: "Calculating...",
       newTimerValid: false,
       errorMessage: "",
       mask: '!#XXXXXXXX', //カラーコードの入力制御(colorCodeMaskにするかも) ...そもそも不要かも
@@ -827,8 +827,8 @@ export default {
         width: window.innerWidth,
         height: window.innerHeight
       },
-      // loading: true,
-      // lastPage: false,
+      loading: true,
+      lastPage: false,
       timePickerProps: {
         format: '24hr',
         color: "#696969"
@@ -895,7 +895,7 @@ export default {
     },
     _padNumber: number => (number > 9 ? number : "0" + number),
 
-    _readableTimerFromSeconds: function(seconds) {
+    _readableTimeFromSeconds: function(seconds) {
       const hours = 3600 > seconds ? 0 : parseInt(seconds / 3600, 10)
       return {
         hours: this._padNumber(hours),
@@ -1247,7 +1247,41 @@ export default {
       }
     },
     timers: {
-      // 記録の監視、日毎に分けてtimersArrayをつくる
+      handler: function() {
+        this.timersArray = [[]];
+        if (this.timers[0] !== null) {
+          // timers[0]をtimesArray[0]に格納
+          this.timersArray[0].push(this.timers[0]);
+          //timersでループを回す
+          for (let i = 0; i < this.timers.length - 1; i++) {
+            // timers[1]のstarted_atの年月日がtimers[0]のstarted_atの年月日と同じ場合、timers[1]を配列に格納
+            if (
+              moment(this.timers[i].started_at).isSame(
+                moment(this.timers[i + 1].started_at),
+                "day"
+              )
+            ) {
+              this.timersArray[this.timersArray.length - 1].push(
+                this.timers[i + 1]
+              );
+            } else {
+              // 異なる場合は新たに配列を作成する
+              this.timersArray.push([]);
+              this.timersArray[this.timersArray.length - 1].push(
+                this.timers[i + 1]
+              );
+            }
+          }
+        }
+      }
+    },
+    "dialog.newTimer": {
+      handler: function(val) {
+        if(!this.dialog.newTimer) {
+          this.$refs.newTimerForm.resetValidation()
+        }
+      },
+      deep: true
     },
     "dialog.saveTimer": {
       handler: function(val) {
@@ -1257,11 +1291,11 @@ export default {
       },
       deep: true
     },
-  //  timersArray: {
-  //      handler: function() {
-  //          this.loading = false
-  //    }
-  //  }
+    timersArray: {
+        handler: function() {
+            this.loading = false
+      }
+    }
   }
 }
 </script>
