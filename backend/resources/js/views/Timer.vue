@@ -18,7 +18,7 @@
     <!-- サーバーエラー時 -->
     <v-snackbar top v-model="snackbar.error" color="error" :multi-line="true">
       An error has occurred. message：{{ errorMessage }}
-      <v-btn text @click="snackbar.error = false">閉じる</v-btn>
+      <v-btn text @click="snackbar.error = false">CLOSE</v-btn>
     </v-snackbar>
 
 
@@ -69,7 +69,7 @@
     <!-- <template v-if="loading">
       <v-row :style="`height:${windowSize.height}px`" align="center" justify="center">
         <v-col>
-          <vue-loading type="bars" color="#B0BEC5" :size="{ width: '50px', height: '50px' }"></vue-loading>
+          <vue-loading type="bubbles" color="#B0BEC5" :size="{ width: '50px', height: '50px' }"></vue-loading>
         </v-col>
       </v-row>
     </template> -->
@@ -121,13 +121,11 @@
             </v-data-table>
         </template>
 
-          <!-- <v-row v-if="!lastPage" justify="center"> -->
-            <!-- <v-btn :loading="infiniteLoading" @click="loadMore"> -->
-              <!-- <v-btn> -->
-                <!-- TODO: ↑loading編集時に削除するタグ -->
-              <!-- <v-icon left>mdi-chevron-down</v-icon>もっと見る -->
-            <!-- </v-btn> -->
-          <!-- </v-row> -->
+          <v-row v-if="!lastPage" justify="center">
+            <v-btn :loading="infiniteLoading" @click="loadMore">
+              <v-icon left>mdi-chevron-down</v-icon>もっと見る
+            </v-btn>
+          </v-row>
       </template>
 
           <!-- 記録がない時の画面 -->
