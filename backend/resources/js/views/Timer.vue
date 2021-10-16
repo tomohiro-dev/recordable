@@ -958,58 +958,32 @@ export default {
           this.snackbar.error = true
         })
     },
-    // 値が空( null or undefined or ''(空文字) or [](空の配列) or {}(空のオブジェクト) )を判定
-    isEmpty: function (val) {
-      if (!val) {
-        if (val !== 0 && val !== false) {
-          return true
-        }
-      } else if (typeof val == 'object') {
-        return Object.keys(val).length === 0
-      }
-      return false
-      //値を返す
-    },
-    // TODO: データを追加してloadmoreボタンを使う時にコメントアウトを解除
-    // loadMore() {
-    //   this.infiniteLoading = true
-    //   window.axios
-    //     .get("/api/timers", {
-    //       params: {
-    //         page: this.page + 1
-    //       }
-    //     })
-    //     .then(response => {
-    //       this.page += 1
-    //       this.timers.push(...response.data.data)
-    //       this.infiniteLoading = false
-    //       if (this.page === response.data.last_page) {
-    //         this.lastPage = true
-    //       }
-    //     })
-    // },
-
-    /**
-     * 新規カテゴリーを作成
-     */
-    createCategory: function () {
+    createTimer: function() {
       window.axios
-        .post('api/categories', {
-          name: this.newCategory.name,
-          color: this.newCategory.color
+        .post(`/api/timers`, {
+          name: this.newTimer.name,
+          memo: this.newTimer.memo,
+          category_id: this.newTimer.category["id"],
+          category_name: this.newTimer.category["name"]
+            ? this.newTimer.category["name"]
+            : "カテゴリー未登録",
+          category_color: this.newTimer.category["color"]
+            ? this.newTimer.category["color"]
+            : "#696969"
         })
-        .then((response) => {
-          this.categories.push(response.data)
-          this.newCategory.name = '',
-          this.newTimerCategory = false,
-          this.menu.saveTimerCategory = false
+        .then(response => {
+          this.timers.unshift(response.data)
+          this.startTimer(response.data)
+          this.newTimer.name = ""
+          this.newTimer.memo = ""
+          this.newTimer.category = ""
+          this.dialog.newTimer = false
         })
-        .catch((err) => {
-          this.errorMessage = err,
+        .catch(err => {
+          this.errorMessage = err
           this.snackbar.error = true
         })
     },
-
     /**
      * 新規のタイマーを手入力で保存する
      */
@@ -1053,8 +1027,26 @@ export default {
         })
     },
 
-
-
+    /**
+     * 新規カテゴリーを作成
+     */
+    createCategory: function () {
+      window.axios
+        .post('api/categories', {
+          name: this.newCategory.name,
+          color: this.newCategory.color
+        })
+        .then((response) => {
+          this.categories.push(response.data)
+          this.newCategory.name = '',
+          this.newTimerCategory = false,
+          this.menu.saveTimerCategory = false
+        })
+        .catch((err) => {
+          this.errorMessage = err,
+          this.snackbar.error = true
+        })
+    },
     /**
      * タイマー編集用のmodal
      */
@@ -1065,6 +1057,26 @@ export default {
       }
       this.editTimer.id = item.id
       this.editTimer.name = item.name
+
+      this.editTimer.memo = item.memo
+      this.editTimer.started_at = new Date(item.started_at)
+
+      const started = moment(item.started_at)
+      const stopped = moment(item.stopped_at)
+      const time = this._readableTimeFromSeconds(
+        parseInt(moment.duration(stopped.diff(started)).asSeconds())
+      )
+      this.editTimer.time.hours = parseInt(time.hours)
+      this.editTimer.time.minutes = parseInt(time.minutes)
+      this.editTimer.time.seconds = parseInt(time.seconds)
+      this.editTimer.stopped_at = moment(this.editTimer.started_at)
+        .add({
+          h: this.editTimer.time.hours,
+          m: this.editTimer.time.minutes,
+          s: this.editTimer.time.seconds
+        })
+        .toDate()
+      this.dialog.editTimer = true
     },
     updateTimer() {
       window.axios
@@ -1114,11 +1126,18 @@ export default {
           this.snackbar.error = true
         })
     },
-    // timersArray: {
-      //   handler: function() {
-        //     this.loading = false
-    //   }
-    // }
+        // 値が空( null or undefined or ''(空文字) or [](空の配列) or {}(空のオブジェクト) )を判定
+        isEmpty: function (val) {
+          if (!val) {
+            if (val !== 0 && val !== false) {
+              return true
+            }
+          } else if (typeof val == 'object') {
+            return Object.keys(val).length === 0
+          }
+          return false
+          //値を返す
+        },
     _arrayHours() {
       let i = 0
       //TODO: refactoringする | hourPullDownとか
@@ -1207,8 +1226,12 @@ export default {
         }
       },
       deep: true
-    }
-
+    },
+  //  timersArray: {
+  //      handler: function() {
+  //          this.loading = false
+  //    }
+  //  }
   }
 }
 </script>
