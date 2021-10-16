@@ -1,28 +1,38 @@
 <template>
   <div class="body" v-resize="onResize">
-    <!-- TODO: snackbar系は上にまとめる -->
-    <!-- componentとして切り出してもいいかも -->
+    <!-- snackbarをcomponentとして切り出してもいいかも「TODO: やるならリリース後」 -->
+    <div v-if="!isEmpty(timers)">
+      <v-snackbar
+        v-model="snackbar.activeTimer"
+        :multi-line="true"
+        top
+        center
+        :timeout="-1"
+        :color="counter.timer.category_color"
+      >
+      <strong class="timer-name pr-4">{{ counter.timer.name }}</strong>
+      {{ activeTimerString }}
+        <v-btn text @click="stopTimer()">
+          <v-icon x-large>mdi-stop</v-icon>
+        </v-btn>
+      </v-snackbar>
+    </div>
 
-    <!-- 計算中のタイマーをsnackbarで表示 -->
-    <!-- 計算中のタイマーをsnackbarで表示 fin -->
-
+    <v-snackbar top v-model="snackbar.done" color="#00acee" :multi-line="true">
+      Good Job! You've learned a good deal today. Let's Try to beat your personal best again tomorow!
+    </v-snackbar>
     <v-snackbar top v-model="snackbar.updated" color="success">
       The record has been rewritten.
       <v-btn text @click="snackbar.updated = false">CLOSE</v-btn>
     </v-snackbar>
-
     <v-snackbar top v-model="snackbar.deleted" color="error">
       The record has been deleted.
       <v-btn text @click="snackbar.deleted = false">CLOSE</v-btn>
     </v-snackbar>
-    <!-- サーバーエラー時（表示を確認） -->
     <v-snackbar top v-model="snackbar.error" color="error" :multi-line="true">
       An error has occurred. message：{{ errorMessage }}
       <v-btn text @click="snackbar.error = false">CLOSE</v-btn>
     </v-snackbar>
-
-
-
 
     <!-- タイマー追加ボタン -->
     <v-speed-dial
@@ -716,7 +726,7 @@ export default {
   data() {
     return {
       snackbar: {
-        //activeTimerを追加,
+        activeTimer: false,
         done: false,
         updated: false,
         deleted: false,
@@ -1080,7 +1090,7 @@ export default {
     },
     updateTimer() {
       window.axios
-        .put(`api/timers/${this.editTimer.id}`, {
+        .put(`/api/timers/${this.editTimer.id}`, {
           name: this.editTimer.name,
           memo: this.editTimer.memo,
           category_id: this.editTimer.category.id,
