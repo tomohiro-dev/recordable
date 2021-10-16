@@ -540,8 +540,7 @@
                 saveTimer.stopped_at === '' ||
                 (!saveTimer.time.hours && !saveTimer.time.minutes && !saveTimer.time.seconds)
               "
-            >
-              保存</v-btn>
+            >保存</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -709,6 +708,7 @@
 </template>
 
 <script>
+import moment from "moment"
 import { TheMask } from "vue-the-mask"
 
 export default {
@@ -928,7 +928,7 @@ export default {
           const savedTimer = response.data
           const oldestTimer = this.timers[this.timers.length - 1]
 
-          if (this.lastPage || moment(savedTimer.started_at).isAfter(oldestTimer.sterted_at))
+          if (this.lastPage || moment(savedTimer.started_at).isAfter(oldestTimer.started_at))
           {
             this.timers.push(savedTimer)
             this.timers.sort(function(a, b) {
