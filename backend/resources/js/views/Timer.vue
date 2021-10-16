@@ -15,7 +15,7 @@
       The record has been deleted.
       <v-btn text @click="snackbar.deleted = false">CLOSE</v-btn>
     </v-snackbar>
-    <!-- サーバーエラー時 -->
+    <!-- サーバーエラー時（表示を確認） -->
     <v-snackbar top v-model="snackbar.error" color="error" :multi-line="true">
       An error has occurred. message：{{ errorMessage }}
       <v-btn text @click="snackbar.error = false">CLOSE</v-btn>
@@ -66,13 +66,13 @@
     <!-- タイマー追加ボタン fin -->
 
    <!-- loading animation -->
-    <!-- <template v-if="loading">
+    <template v-if="loading">
       <v-row :style="`height:${windowSize.height}px`" align="center" justify="center">
         <v-col>
-          <vue-loading type="bubbles" color="#B0BEC5" :size="{ width: '50px', height: '50px' }"></vue-loading>
+          <vue-loading type="bubbles" color="#CAD4D9" :size="{ width: '50px', height: '50px' }"></vue-loading>
         </v-col>
       </v-row>
-    </template> -->
+    </template>
       <!-- loading animation fin -->
 
     <!-- 一覧表示 (loadingがv-if) v-else -->
@@ -129,7 +129,7 @@
       </template>
 
           <!-- 記録がない時の画面 -->
-      <v-row v-else align="center" justify="center">
+      <v-row v-else :style="`height:${windowSize.height}px`" align="center" justify="center">
         <v-col cols="10" md="4">
           <!-- <v-img>TODO: 画像を追加</v-img> -->
           <p class="mt-2 title text-center">千里の道も一歩から。</p>
@@ -709,13 +709,14 @@
 
 <script>
 import moment from "moment"
-import { TheMask } from "vue-the-mask"
+// import { TheMask } from "vue-the-mask"
+//TOOD: 削除
 
 export default {
   data() {
     return {
       snackbar: {
-        //Timer,
+        //activeTimerを追加,
         done: false,
         updated: false,
         deleted: false,
@@ -751,21 +752,22 @@ export default {
         newTimer: false,
         saveTimer: false,
         editTimer: false
-        // 記録の編集
       },
       menu: {
-        saveTimerCategory: false,
         newTimerCategory: false,
+        newTimerColor: false,
+        saveTimerCategory: false,
         saveTimerColor: false,
+        delete: false,
       },
         // inputTimerRules（名前変えるかも）
         rules: {
-          category: [(value) => !!value || '選択してください。'],
-          memo: [(value) => (value || '').length <= 140 || '最大140文字までです。'],
-          require: [(value) => !!value || '入力してください。'],
+          category: [value => !!value || '選択してください。'],
+          memo: [value => (value || '').length <= 140 || '最大140文字までです。'],
+          require: [value => !!value || '入力してください。'],
           name: [
-            (value) => !!value || '入力してください。',
-            (value) => (value || '').length <= 30 || '最大30文字までです。'
+            value => !!value || '入力してください。',
+            value => (value || '').length <= 30 || '最大30文字までです。'
           ]
         },
       time: {
@@ -813,10 +815,10 @@ export default {
       page: 1,
       fab: false, //floatingActionBtn（名前変えるかも）
       counter: { seconds: 0, timer: { name: '', category: '' } },
-      activeTimerString: false,
+      // activeTimerString: "Calculating...",
       newTimerValid: false,
       errorMessage: "",
-      mask: '!#XXXXXXXX', //カラーコードの入力制御(colorCodeMaskにするかも),
+      mask: '!#XXXXXXXX', //カラーコードの入力制御(colorCodeMaskにするかも) ...そもそも不要かも
       textFieldProps: {
         prependIcon: 'mdi-clock',
         color: '#696969' //TODO: 色変更
@@ -842,6 +844,22 @@ export default {
     }
   },
   created() {
+    window.axios
+      .get("/api/timers")
+      .then(response => {
+        this.timers = response.data.data
+        if (this.page === response.data.last_page) {
+          this.lastPage = true
+        }
+        window.axios
+        .get("/api/timers/active")
+        .then(response => {
+          if (response.data.id !== undefined) {
+            this.startTimer(response.data)
+            this.$store.dispatch("timer/fetchActive", true)
+          }
+        })
+      })
     window.axios
       .get("/api/categories")
       .then(response => {
