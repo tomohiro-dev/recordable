@@ -870,6 +870,29 @@ export default {
     this._arrayMinutes()
   },
   methods: {
+    onResize() {
+      this.windowSize = {
+      width: window.innerWidth,
+      height: window.innerHeight
+      }
+    },
+    loadMore() {
+      this.infiniteLoading = true
+      window.axios
+        .get("/api/timers", {
+          params: {
+            page: this.page + 1
+          }
+        })
+        .then(response => {
+          this.page += 1;
+          this.timers.push(...response.data.data);
+          this.infiniteLoading = false;
+          if (this.page === response.data.last_page) {
+            this.lastPage = true;
+          }
+        })
+    },
     _padNumber: number => (number > 9 ? number : "0" + number),
 
     _readableTimerFromSeconds: function(seconds) {
@@ -880,12 +903,19 @@ export default {
         minutes: this._padNumber(parseInt(seconds / 60, 10) % 60)
       }
     },
-
-    onResize() {
-      this.windowSize = {
-      width: window.innerWidth,
-      height: window.innerHeight
+    calculateTimeSpent: function(timer) {
+      if (timer.stopped_at) {
+        const started = moment(timer.started_at);
+        const stopped = moment(timer.stopped_at);
+        const time = this._readableTimeFromSeconds(
+          parseInt(moment.duration(stopped.diff(started)).asSeconds())
+        );
+        return `${time.hours}:${time.minutes}:${time.seconds}`;
       }
+      return "";
+    },
+    showTimer: function(timer) {
+      return this.counter.timr && this.counter.timer.id === timer.id
     },
     // 値が空( null or undefined or ''(空文字) or [](空の配列) or {}(空のオブジェクト) )を判定
     isEmpty: function (val) {
