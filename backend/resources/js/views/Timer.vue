@@ -1002,7 +1002,7 @@ export default {
           //もし日付が更新されたら
           //timersを日付の新しい順番に並び替える
           //TODO: refactoring to a(beforeUpdateTimerとか) and b(updatedTimerとか)
-          if (!startedBefore.isSame(startdAfter)) {
+          if (!startedBefore.isSame(startedAfter)) {
             this.timers.sort(function(a, b) {
               return a.started_at < b.started_at ? 1 : -1
             })
