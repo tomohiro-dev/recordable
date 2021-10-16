@@ -844,6 +844,7 @@ export default {
     }
   },
   created() {
+    //axiosでresponsedataを追加
     window.axios
       .get("/api/timers")
       .then(response => {
