@@ -844,7 +844,6 @@ export default {
     }
   },
   created() {
-    //axiosでresponsedataを追加
     window.axios
       .get("/api/timers")
       .then(response => {
@@ -871,6 +870,17 @@ export default {
     this._arrayMinutes()
   },
   methods: {
+    _padNumber: number => (number > 9 ? number : "0" + number),
+
+    _readableTimerFromSeconds: function(seconds) {
+      const hours = 3600 > seconds ? 0 : parseInt(seconds / 3600, 10)
+      return {
+        hours: this._padNumber(hours),
+        seconds: this._padNumber(seconds % 60),
+        minutes: this._padNumber(parseInt(seconds / 60, 10) % 60)
+      }
+    },
+
     onResize() {
       this.windowSize = {
       width: window.innerWidth,
