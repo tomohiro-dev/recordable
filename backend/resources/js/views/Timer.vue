@@ -1132,6 +1132,22 @@ export default {
           this.snackbar.error = true
         })
     },
+    deleteTimer() {
+      window.axios
+        .delete(`/api/timers/${this.editTimer.id}`)
+        .then(response => {
+          const deletedTimer = response.data
+          this.timers = this.timers.filter(
+            timer => timer.id !== deletedTimer.id
+          )
+          this.dialog.editTimer = false
+          this.snackbar.deleted = true
+        })
+        .catch(err => {
+          this.errorMessage = err
+          this.snackbar.error = true
+        })
+    },
 
     _formatTime: function(date) {
       if (date) {

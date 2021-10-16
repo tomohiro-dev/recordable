@@ -184,7 +184,7 @@ class TimerController extends Controller
     public function destroy(int $id)
     {
         $timer = Timer::mine()->find($id);
-        $timer->destroy();
+        $timer->delete();
 
         return $timer;
     }
