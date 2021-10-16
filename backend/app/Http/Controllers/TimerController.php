@@ -97,7 +97,9 @@ class TimerController extends Controller
         ]);
 
         $started_at = new Carbon($data['started_at']);
+        $started_at->addHour(9);
         $stopped_at = new Carbon($data['stopped_at']);
+        $stopped_at->addHour(9);
 
         $timer = Timer::mine()->create([
             'name' => $data['name'],
@@ -156,7 +158,9 @@ class TimerController extends Controller
 
 
         $started_at = new Carbon($data['started_at']);
+        $started_at->addHour(9);
         $stopped_at = new Carbon($data['stopped_at']);
+        $stopped_at->addHour(9);
 
         $timer = Timer::mine()->where('id', $id)->first();
         $timer->name = $data['name'];
@@ -186,7 +190,7 @@ class TimerController extends Controller
     }
 
     public function running() {
-        return Timer::mine()->running()->first();
+        return Timer::mine()->running()->first() ?? [];
     }
 
     public function stopRunning() {

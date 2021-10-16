@@ -667,7 +667,7 @@
             :nudge-width="200"
             offset-x
           >
-            <template v-slot:action="{ on }">
+            <template v-slot:activator="{ on }">
               <v-btn text color="red lighten-1" v-on="on">削除</v-btn>
             </template>
             <v-card>
@@ -1204,7 +1204,7 @@ export default {
         this.editTimer.stopped_at = moment(this.editTimer.started_at)
           .add({
             h: this.editTimer.time.hours,
-            m: this.edittimer.time.minutes,
+            m: this.editTimer.time.minutes,
             s: this.editTimer.time.seconds
           })
           .toDate()
