@@ -40,7 +40,10 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        // TODO: バリデーション系の記述はstoreに書く
+        $data = $request->validate([
+            'name' => 'required|max:20',
+            'color' => 'required'
+        ]);
 
         //CategortyはUser Table内のuser_idとmerge
         $data = array_merge($data, ['user_id' => auth()->user()->id]);

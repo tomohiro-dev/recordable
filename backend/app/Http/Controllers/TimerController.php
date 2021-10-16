@@ -64,6 +64,13 @@ class TimerController extends Controller
      */
     public function store(Request $request)
     {
+        $data = $request->validate([
+            'name' => 'required|max:30',
+            'memo' => 'nullable|max140',
+            'caategory_id' => 'nullable',
+            'category_name' => 'nullable|max:20',
+            'category_color' => 'nullable'
+        ]);
         $timer =  Timer::mine()->create([
             'name' => $data['name'],
             'memo' => $data['memo'],
@@ -79,10 +86,20 @@ class TimerController extends Controller
     }
 
     public function save(Request $request) {
-        //TODO: varidation処理を追加する
+        $data = $request->validate([
+            'name' => 'required|max:30',
+            'memo' => 'nullable|max:140',
+            'category_id' => 'nullable',
+            'category_name' => 'nullable|max:20',
+            'category_color' => 'nullable',
+            'started_at' => 'required',
+            'stopped_at' => 'required'
+        ]);
 
         $started_at = new Carbon($data['started_at']);
+        $started_at->addHour(9);
         $stopped_at = new Carbon($data['stopped_at']);
+        $stopped_at->addHour(9);
 
         $timer = Timer::mine()->create([
             'name' => $data['name'],
@@ -129,16 +146,26 @@ class TimerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //TODO: varidation処理を追加する
+        $data = $request->validate([
+            'name' => 'required|max:30',
+            'memo' => 'nullable|max:140',
+            'category_id' => 'nullable',
+            'category_name' => 'nullable|max:20',
+            'category_color' => 'nullable',
+            'started_at' => 'required',
+            'stopped_at' => 'required'
+        ]);
 
 
         $started_at = new Carbon($data['started_at']);
+        $started_at->addHour(9);
         $stopped_at = new Carbon($data['stopped_at']);
+        $stopped_at->addHour(9);
 
         $timer = Timer::mine()->where('id', $id)->first();
         $timer->name = $data['name'];
         $timer->memo = $data['memo'];
-        $timer->category_id = $data['vategory_id'];
+        $timer->category_id = $data['category_id'];
         $timer->category_name = $data['category_name'];
         $timer->category_color = $data['category_color'];
         $timer->started_at = $started_at;
@@ -157,13 +184,13 @@ class TimerController extends Controller
     public function destroy(int $id)
     {
         $timer = Timer::mine()->find($id);
-        $timer->destroy();
+        $timer->delete();
 
         return $timer;
     }
 
     public function running() {
-        return Timer::mine()->running()->first();
+        return Timer::mine()->running()->first() ?? [];
     }
 
     public function stopRunning() {
