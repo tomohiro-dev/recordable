@@ -161,7 +161,7 @@ class TimerController extends Controller
         $timer = Timer::mine()->where('id', $id)->first();
         $timer->name = $data['name'];
         $timer->memo = $data['memo'];
-        $timer->category_id = $data['vategory_id'];
+        $timer->category_id = $data['category_id'];
         $timer->category_name = $data['category_name'];
         $timer->category_color = $data['category_color'];
         $timer->started_at = $started_at;

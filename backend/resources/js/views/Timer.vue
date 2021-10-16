@@ -496,8 +496,7 @@
                       required
                       prepend-icon="mdi-timer-sand-full"
                       :items="time.hours"
-                    >
-                    </v-select>
+                    ></v-select>
                   </v-col>
 
                   <v-col cols="4">
@@ -538,7 +537,7 @@
                 saveTimer.name.length > 30 ||
                 saveTimer.name === '' ||
                 saveTimer.category === '' ||
-                saveTimer.memo && saveTimer.memo.length > 140 ||
+                (saveTimer.memo && saveTimer.memo.length > 140) ||
                 saveTimer.started_at === '' ||
                 saveTimer.stopped_at === '' ||
                 (!saveTimer.time.hours && !saveTimer.time.minutes && !saveTimer.time.seconds)
@@ -734,7 +733,6 @@ export default {
         color: '#696969'
       },
       saveTimer: {
-        id: '',
         name: '',
         category: '',
         memo: '',
@@ -759,7 +757,8 @@ export default {
       },
       menu: {
         saveTimerCategory: false,
-        newTimerCategory: false
+        newTimerCategory: false,
+        saveTimerColor: false,
       },
         // inputTimerRules（名前変えるかも）
         rules: {
@@ -934,7 +933,7 @@ export default {
           if (this.lastPage || moment(savedTimer.started_at).isAfter(oldestTimer.sterted_at))
           {
             this.timers.push(savedTimer)
-            this.timers.sort(function(a,b) {
+            this.timers.sort(function(a, b) {
               return a.started_at < b.started_at ? 1 : -1
             })
           }
@@ -1052,7 +1051,66 @@ export default {
   },
 
   watch: {
-    // 記録の監視
+    //editTimer.stopped_at計算用
+    "editTimer.time": {
+      handler: function(val, oldVal) {
+        this.editTimer.stopped_at = moment(this.editTimer.started_at)
+          .add({
+            h: this.editTimer.time.hours,
+            m: this.edittimer.time.minutes,
+            s: this.editTimer.time.seconds
+          })
+          .toDate()
+      },
+      deep: true
+    },
+    "editTimer.started_at": {
+      handler: function(val, oldVal) {
+        this.editTimer.stopped_at = moment(this.editTimer.started_at)
+          .add({
+            h: this.editTimer.time.hours,
+            m: this.editTimer.time.minutes,
+            s: this.editTimer.time.seconds
+          })
+          .toDate();
+      }
+    },
+    //saveTimer.stopped_at計算用
+    "saveTimer.time": {
+      handler: function(val, oldVal) {
+        this.saveTimer.stopped_at = moment(this.saveTimer.started_at)
+          .add({
+            h: this.saveTimer.time.hours,
+            m: this.saveTimer.time.minutes,
+            s: this.saveTimer.time.seconds
+          })
+          .toDate();
+      },
+      deep: true
+    },
+    "saveTimer.started_at": {
+      handler: function(val, oldVal) {
+        this.saveTimer.stopped_at = moment(this.saveTimer.started_at)
+          .add({
+            h: this.saveTimer.time.hours,
+            m: this.saveTimer.time.minutes,
+            s: this.saveTimer.time.seconds
+          })
+          .toDate();
+      }
+    },
+    timers: {
+      // 記録の監視、日毎に分けてtimersArrayをつくる
+    },
+    "dialog.saveTimer": {
+      handler: function(val) {
+        if (!this.dialog.saveTimer) {
+          this.$refs.saveTimerForm.resetValidation()
+        }
+      },
+      deep: true
+    }
+
   }
 }
 </script>
