@@ -6,6 +6,7 @@ use App\Timer;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 class TimerController extends Controller
 {
     public function __construct() {
@@ -67,7 +68,7 @@ class TimerController extends Controller
         $data = $request->validate([
             'name' => 'required|max:30',
             'memo' => 'nullable|max140',
-            'caategory_id' => 'nullable',
+            'category_id' => 'nullable',
             'category_name' => 'nullable|max:20',
             'category_color' => 'nullable'
         ]);
@@ -198,6 +199,6 @@ class TimerController extends Controller
             $timer->update(['stopped_at' => new Carbon]);
         }
 
-        return $Timer;
+        return $timer;
     }
 }

@@ -6,7 +6,7 @@
         v-model="snackbar.activeTimer"
         :multi-line="true"
         top
-        center
+        right
         :timeout="-1"
         :color="counter.timer.category_color"
       >
@@ -829,16 +829,17 @@ export default {
       newTimerValid: false,
       errorMessage: "",
       mask: '!#XXXXXXXX', //カラーコードの入力制御(colorCodeMaskにするかも) ...そもそも不要かも
-      textFieldProps: {
-        prependIcon: 'mdi-clock',
-        color: '#696969' //TODO: 色変更
-      },
+      loading: true,
+      infiniteLoading: false,
+      lastPage: false,
       windowSize: {
         width: window.innerWidth,
         height: window.innerHeight
       },
-      loading: true,
-      lastPage: false,
+      textFieldProps: {
+        prependIcon: 'mdi-clock',
+        color: '#696969' //TODO: 色変更
+      },
       timePickerProps: {
         format: '24hr',
         color: "#696969"
@@ -849,8 +850,6 @@ export default {
       datePickerProps: {
         color: '#696969'
       },
-      // loading: true,
-      infiniteLoading: false
     }
   },
   created() {
@@ -925,7 +924,7 @@ export default {
       return ""
     },
     showTimer: function(timer) {
-      return this.counter.timr && this.counter.timer.id === timer.id
+      return this.counter.timer && this.counter.timer.id === timer.id
     },
     startTimer: function(timer) {
       this.$store.dispatch("timer/fetchActive", true)
