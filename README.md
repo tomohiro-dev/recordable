@@ -111,7 +111,7 @@ public ディレクトリにファイルや処理のすべてが集約される�
 ```
 chmod -R 777 storage bootstrap/cache
 ```
--R : recursive
+-R : recursive \
 `storage,bootstrap/cache`はフレームワークからファイル書き込みが発生するので、書き込み権限を与える。
 
 ## Dockerで立ち上げる
