@@ -1108,6 +1108,13 @@ export default {
           timer.started_at = updatedTimer["started_at"]
           timer.stopped_at = updatedTimer["stopped_at"]
 
+          const oldestTimer = this.timers[this.timers.length - 1]
+          if (!this.lastPage &&
+              moment(updatedTimer["started_at"]).isBefore(oldestTimer.started_at)) {
+                this.timers = this.timers.filter(
+                  timer => timer.id !== updatedTimer.id
+                )
+          }
           //もし日付が更新されたら
           //timersを日付の新しい順番に並び替える
           //TODO: refactoring to a(beforeUpdateTimerとか) and b(updatedTimerとか)
@@ -1116,7 +1123,6 @@ export default {
               return a.started_at < b.started_at ? 1 : -1
             })
           }
-          //TODO: 見せ方に関するロジックを追加する？
 
           this.dialog.editTimer = false
           this.snackbar.updated = true
@@ -1126,18 +1132,43 @@ export default {
           this.snackbar.error = true
         })
     },
-        // 値が空( null or undefined or ''(空文字) or [](空の配列) or {}(空のオブジェクト) )を判定
-        isEmpty: function (val) {
-          if (!val) {
-            if (val !== 0 && val !== false) {
-              return true
-            }
-          } else if (typeof val == 'object') {
-            return Object.keys(val).length === 0
-          }
-          return false
-          //値を返す
-        },
+
+    _formatTime: function(date) {
+      if (date) {
+        const d = new Date(date)
+        const h = d.getHours()
+        const m = d.getMinutes()
+        return `${this._padNumber(h)}:${this._padNumber(m)}`
+      }
+      return ""
+    },
+    formatTimer: function(timer) {
+      const started = timer.started_at
+      const stopped = timer.stopped_at
+      return `${this._formatTime(started)} - ${this._formatTime(stopped)}`
+    },
+    formatDate: function(date) {
+      //初期実装は英語表記のため"en". 多言語対応後は"ja"（に変更するかも→日本語ベースの多言語対応の予定）
+      moment.updateLocale("en", {
+        weekdatsShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+      })
+      const M = moment(date).format("M")
+      const D = moment(date).format("D")
+      const W = moment(date).format("ddd")
+      return `${M}-${D}-${W}`
+    },
+    // 値が空( null or undefined or ''(空文字) or [](空の配列) or {}(空のオブジェクト) )を判定
+    isEmpty: function (val) {
+      if (!val) {
+        if (val !== 0 && val !== false) {
+          return true
+        }
+      } else if (typeof val == 'object') {
+        return Object.keys(val).length === 0
+      }
+      return false
+      //値を返す
+    },
     _arrayHours() {
       let i = 0
       //TODO: refactoringする | hourPullDownとか
@@ -1166,7 +1197,6 @@ export default {
       }
     }
   },
-
   watch: {
     //editTimer.stopped_at計算用
     "editTimer.time": {
