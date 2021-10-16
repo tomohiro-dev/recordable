@@ -905,17 +905,58 @@ export default {
     },
     calculateTimeSpent: function(timer) {
       if (timer.stopped_at) {
-        const started = moment(timer.started_at);
-        const stopped = moment(timer.stopped_at);
+        const started = moment(timer.started_at)
+        const stopped = moment(timer.stopped_at)
         const time = this._readableTimeFromSeconds(
           parseInt(moment.duration(stopped.diff(started)).asSeconds())
-        );
-        return `${time.hours}:${time.minutes}:${time.seconds}`;
+        )
+        return `${time.hours}:${time.minutes}:${time.seconds}`
       }
-      return "";
+      return ""
     },
     showTimer: function(timer) {
       return this.counter.timr && this.counter.timer.id === timer.id
+    },
+    startTimer: function(timer) {
+      this.$store.dispatch("timer/fetchActive", true)
+      const started = moment(timer.started_at)
+
+      this.counter.timer = timer
+      this.counter.seconds = parseInt(
+        moment.duration(moment().diff(started)).asSeconds()
+      );
+      this.counter.ticker = setInterval(() => {
+        const time = this._readableTimeFromSeconds(++this.counter.seconds)
+        this.activeTimerString = `${time.hours}:${time.minutes}:${time.seconds}`
+      }, 1000)
+      this.snackbar.activeTimer = true
+    },
+    stopTimer: function() {
+      window.axios
+        .post(`/api/timers/stop`)
+        .then(response => {
+          // activeTimerをストップ TODO:stopActiveTimerへ変更したい
+          const activeTimer = this.timers.find(
+            timer => timer.id === this.counter.timer.id
+          )
+          activeTimer.stopped_at = response.data.stopped_at
+          // tickerをストップする
+          clearInterval(this.counter.ticker)
+          this.counter = { seconds: 0, timer: { name: "", category: "" } }
+          this.activeTimerString = "Calculating..."
+          this.snackbar.activeTimer = false;
+          this.snackbar.done = true
+          confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { y: 0.6 }
+          })
+          this.$store.dispatch("timer/fetchActive", false)
+        })
+        .catch(err => {
+          this.errorMessage = err
+          this.snackbar.error = true
+        })
     },
     // 値が空( null or undefined or ''(空文字) or [](空の配列) or {}(空のオブジェクト) )を判定
     isEmpty: function (val) {
