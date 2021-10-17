@@ -8,21 +8,32 @@
     <v-col cols="12" md="5">
       <v-card>
         <v-card-title>
-          <h1>Recordableをつかってみよう</h1>
-          <!-- TODO: 文言検討 -->
+          <h1>Welcome to Recordable!</h1>
+          <h1>Are you ready to learn Japanese?</h1>
         </v-card-title>
 
         <v-card-title class="pb-0">
-          <h2 class="title">アカウントへログインする</h2>
+          <h2 class="title">How many hours will you concentrate today?</h2>
         </v-card-title>
+
+        <v-card-text class="pb-0 mb-0">
+          <div class="text--primary subtitle-2">
+            <p>Login to manage your account</p>
+          </div>
+        </v-card-text>
 
         <v-card-text>
           <v-form>
-            <v-text-field tabindex="1" v-model="loginForm.email" label="メールアドレス" prepend-icon="mdi-email" />
+            <v-text-field
+              tabindex="1"
+              v-model="loginForm.email"
+              label="Email Address"
+              prepend-icon="mdi-email"
+            />
             <v-text-field
               tabindex="2"
               v-model="loginForm.password"
-              label="パスワード"
+              label="Password"
               prepend-icon="mdi-lock"
               :type="showPassword ? 'text' : 'password'"
               :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
@@ -35,7 +46,7 @@
         <v-card-actions>
           <v-tooltip bottom>
             <template v-slot:activator="{ on }">
-              <v-btn text color="success" v-on="on" @click="tutorialLogin">Tutorial</v-btn>
+              <v-btn text color="success" v-on="on" @click="tutorialLogin">TUTORIAL</v-btn>
             </template>
             <span>
               <v-icon dark left>mdi-alert-circle</v-icon>
@@ -51,7 +62,7 @@
             text
             @click="login"
           >
-            ログイン
+            Login
           </v-btn>
         </v-card-actions>
       </v-card>
