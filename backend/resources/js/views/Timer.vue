@@ -133,7 +133,7 @@
 
           <v-row v-if="!lastPage" justify="center">
             <v-btn :loading="infiniteLoading" @click="loadMore">
-              <v-icon left>mdi-chevron-down</v-icon>もっと見る
+              <v-icon left>mdi-chevron-down</v-icon>Read more
             </v-btn>
           </v-row>
       </template>
@@ -142,8 +142,8 @@
       <v-row v-else :style="`height:${windowSize.height}px`" align="center" justify="center">
         <v-col cols="10" md="4">
           <!-- <v-img>TODO: 画像を追加</v-img> -->
-          <p class="mt-2 title text-center">千里の道も一歩から。</p>
-          <p class="text-center">学習の準備はできましたか？学習を始めましょう！</p>
+          <p class="mt-2 title text-center">A journey of a thousand miles begins with a single step.</p>
+          <p class="text-center">Are you ready to study? Let's get started!</p>
         </v-col>
       </v-row>
     </template>
@@ -154,7 +154,7 @@
       <v-dialog v-model="dialog.newTimer" width="500">
         <v-card>
           <v-card-title class="headline">
-            <v-icon class="mr-2" color="#FB5D63">mdi-timer-outline</v-icon>タイマーモード
+            <v-icon class="mr-2" color="#FB5D63">mdi-timer-outline</v-icon>Recording
           </v-card-title>
           <v-card-text>
             <v-form v-model="newTimerValid" ref="newTimerForm">
@@ -182,7 +182,7 @@
                       :items="categories"
                       item-text="name"
                       item-value="value"
-                      label="カテゴリーを追加してください*"
+                      label="You have to add a category*"
                       return-object
                       required
                       prepend-icon="mdi-folder"
@@ -195,7 +195,7 @@
                       :items="categories"
                       item-text="name"
                       item-value="value"
-                      label="カテゴリーを選択する*"
+                      label="Choosing a category*"
                       return-object
                       required
                       prepend-icon="mdi-folder"
@@ -212,14 +212,14 @@
                     >
                       <template v-slot:activator="{ on }">
                         <v-btn text color="grey lighten-1" v-on="on">
-                          <v-icon color="light-green accent-4">mdi-plus</v-icon>カテゴリーを追加する
+                          <v-icon color="light-green accent-4">mdi-plus</v-icon>Create a category
                         </v-btn>
                       </template>
 
                       <!-- カテゴリー追加メニュー -->
                       <v-card>
                         <v-card-title>
-                          <span class="headline">カテゴリーを追加する</span>
+                          <span class="headline">Create a category</span>
                         </v-card-title>
                         <v-card-text>
                           <v-container>
@@ -228,7 +228,7 @@
                                 <!-- カテゴリー名入力 -->
                                 <v-text-field
                                   v-model="newCategory.name"
-                                  label="カテゴリー名を入力"
+                                  label="Enter a category name."
                                   prepend-icon="mdi-folder-plus"
                                 ></v-text-field>
 
@@ -238,7 +238,7 @@
                                   v-mask="mask"
                                   hide-details
                                   class="ma-0 pa-0"
-                                  label="色を選択"
+                                  label="Select a color"
                                   v-model="newCategory.color"
                                 >
                                   <template v-slot:append>
@@ -274,14 +274,14 @@
                           <v-btn
                             text
                             @click="menu.newTimerCategory = false"
-                          >閉じる</v-btn>
+                          >CLOSE</v-btn>
                           <v-btn
                             color="primary"
                             text
                             :disabled="newCategory.name === ''"
                             @click="createCategory()"
                             >
-                            保存</v-btn>
+                            SAVE</v-btn>
                         </v-card-actions>
                       </v-card>
                     </v-menu>
@@ -302,29 +302,29 @@
                 </v-row>
               </v-container>
             </v-form>
-            <small>*は必須項目です。</small>
+            <small>*Required field.</small>
           </v-card-text>
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn text @click="dialog.newTimer = false">閉じる</v-btn>
+            <v-btn text @click="dialog.newTimer = false">CLOSE</v-btn>
             <v-btn
               color="blue darken-1"
               text
               @click="createTimer()"
               :disabled="!newTimerValid"
-            >スタート</v-btn>
+            >START</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
     </div>
 
-    <!-- マニュアルモード -->
+    <!-- Editing -->
     <div class="text-center">
       <v-dialog v-model="dialog.saveTimer" width="500">
         <v-card>
           <v-card-title class="headline">
-            <v-icon class="mr-2" color="#696969">mdi-book-edit-outline</v-icon>マニュアルモード
+            <v-icon class="mr-2" color="#696969">mdi-book-edit-outline</v-icon>Editing
           </v-card-title>
 
           <v-card-text :class="{ 'px-4': windowSize.width < 600 }">
@@ -335,7 +335,7 @@
                   <v-col cols="12">
                     <v-text-field
                       v-model="saveTimer.name"
-                      label="記録する内容"
+                      label="Contents to be recorded"
                       color="#696969"
                       required
                       prepend-icon="mdi-border-color"
@@ -354,7 +354,7 @@
                       :items="categories"
                       item-text="name"
                       item-value="value"
-                      label="カテゴリーを追加してください*"
+                      label="You have to add a category*"
                       return-object
                       required
                       prepend-icon="mdi-folder"
