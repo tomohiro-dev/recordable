@@ -33,13 +33,13 @@
         </v-card-text>
 
         <v-card-actions>
-          <v-tooltip buttom>
-            <template>
-              <v-btn text color="success">テストログイン</v-btn>
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on }">
+              <v-btn text color="success" v-on="on" @click="tutorialLogin">Tutorial</v-btn>
             </template>
             <span>
               <v-icon dark left>mdi-alert-circle</v-icon>
-              一定期間が立つとアカウント情報は初期化されます。
+              You can try out how to operate it.
             </span>
           </v-tooltip>
 
@@ -92,6 +92,13 @@ export default {
     this.clearError()
   },
   methods: {
+    tutorialLogin() {
+      this.loginForm = {
+        email: "tutorial@tutorial.com",
+        password: "tutorial"
+      }
+      this.login()
+    },
     async login() {
       await this.$store.dispatch('auth/login', this.loginForm)
 
