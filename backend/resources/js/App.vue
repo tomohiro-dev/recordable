@@ -2,7 +2,7 @@
   <v-app>
     <v-snackbar top v-model="systemErrorSnackbar" color="error">
       A system error has occurred.
-      <v-btn text @click="systemErrorSnackbar = false">close</v-btn>
+      <v-btn text @click="systemErrorSnackbar = false">CLOSE</v-btn>
     </v-snackbar>
     <NavBar />
     <NavDrawer />
