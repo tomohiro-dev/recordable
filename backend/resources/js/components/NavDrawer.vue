@@ -4,21 +4,12 @@
     :disable-route-watcher="true"
     app
   >
-    <!-- ↑画面開発用画面関係なく表示される -->
+
     <v-list-item class="px-2">
-      <!-- <v-menu top offset-x :close-on-content-click="false">
-        <template v-slot:activator="{ on }">
-          <v-list-item-avatar class="avatar" v-on="on">
-            <v-img>TODO:【nextUpdate】アイコン追加</v-img>
-          </v-list-item-avatar>
-        </template>
-      </v-menu> -->
-
+      <!-- TODO: 次回アップデート時に追加する -->
+      <!-- TODO: アイコン追加 -->
       <v-list-item-title>{{ username }}</v-list-item-title>
-      <!-- <v-list-item-title>ユーザーネーム</v-list-item-title> -->
-      <!-- TODO: （ユーザーネームの表示に成功：済）画面開発完了後に削除 -->
     </v-list-item>
-
     <v-divider></v-divider>
 
     <v-list nav>
@@ -29,7 +20,7 @@
           </v-badge>
           <v-icon v-else>{{ item.icon }}</v-icon>
         </v-list-item-icon>
-        <v-list-item-icon>
+        <v-list-item-icon v-else>
           <v-icon>{{ item.icon }}</v-icon>
         </v-list-item-icon>
 
@@ -42,33 +33,8 @@
     <template v-slot:append>
       <div class="px-2">
         <v-menu top offset-x :close-on-content-click="false">
-          <template v-slot:activator="{ on }">
-            <v-btn icon v-on="on">
-              <v-icon>mdi-image-multiple</v-icon>
-            </v-btn>
-          </template>
-          <v-card max-width="500">
-            <v-slide-group
-              v-model="navImage"
-              class="pa-2"
-              mandatory
-              center-active
-              show-arrows
-             >
-              <v-slide-item
-               v-for="image in navImages"
-               :key="image"
-               v-slot:default="{ active }"
-              >
-                <v-sheet
-                  :class="active && 'image_active'"
-                  class="ma-2 image"
-                >
-                  <v-img :src="image" height="100" width="50" />
-                </v-sheet>
-              </v-slide-item>
-            </v-slide-group>
-          </v-card>
+          <!-- TODO: 次回アップデート時に追加する -->
+          <!-- 着せ替え追加 -->
         </v-menu>
       </div>
 
@@ -87,8 +53,7 @@ export default {
         {
           title: 'タイマー',
           icon: 'mdi-clock',
-          url: '/timer',
-          // url: '/',
+          url: '/',
           disabled: false,
           badge: true
         },
@@ -99,10 +64,6 @@ export default {
           disabled: false,
           badge: false
         }
-      ],
-      navImage: 0,
-      navImages: [
-        // TODO: ASANAでpick upしている地域の画像を追加
       ]
     }
   },
