@@ -791,32 +791,32 @@ export default {
       headers: [
         // TODO: barみたいな名前にrefactoring
         {
-          text: "記録の内容",
+          text: "Contents",
           align: "start",
           sortable: false,
           value: "name",
           width: "30%"
         },
         {
-          text: "メモ",
+          text: "Memo",
           value: "memo",
           sortable: false,
           width: "30%"
         },
         {
-          text: "カテゴリー",
+          text: "Category",
           value: "category",
           sortable: "false",
           width: "15%"
         },
         {
-          text: "時刻",
+          text: "Time",
           value: "started_at",
           sortable: "false",
           width: "15%"
         },
         {
-          text: "計測期間",
+          text: "Period",
           value: "time",
           sortable: "false",
           width: "10%"

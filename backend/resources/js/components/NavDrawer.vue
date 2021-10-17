@@ -39,7 +39,7 @@
       </div>
 
       <div class="pa-2">
-        <v-btn block @click="logout">ログアウト</v-btn>
+        <v-btn block @click="logout">LOGOUT</v-btn>
       </div>
     </template>
   </v-navigation-drawer>
@@ -51,14 +51,14 @@ export default {
     return {
       items: [
         {
-          title: 'タイマー',
+          title: 'Timer',
           icon: 'mdi-clock',
           url: '/',
           disabled: false,
           badge: true
         },
         {
-          title: 'ダッシュボード',
+          title: 'Dashboard',
           icon: 'mdi-chart-bar',
           url: '/dashboard',
           disabled: false,
@@ -69,7 +69,7 @@ export default {
   },
   methods: {
     async logout() {
-      if (confirm('ログアウトしますか？')) {
+      if (confirm('Would you like to log out?')) {
         await this.$store.dispatch('auth/logout')
 
         if (this.apiStatus) {
