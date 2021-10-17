@@ -69,7 +69,7 @@
         <v-tabs-items v-model="pie">
           <v-tab-item>
             <v-card>
-              <div class="py-4">
+              <div class="py-4" v-if="loading.pie">
                 <div class="echarts d-flex justify-center align-center">
                   <vue-loading
                    type="bubbles"
@@ -80,23 +80,23 @@
                 </div>
               </div>
 
-              <div>
-                <div class="py-4">
+                <div class="py-4" v-else>
                   <chart
                    :options="chartPie"
                    autoresize
                    v-if="!isEmpty(chartPie.series[0].data)"
                   >
                   </chart>
+
+                  <div class="echarts" v-else>
                   <v-row align="center" justify="center">
                     <v-col>
                       <!-- <v-img>TODO: 画像追加</v-img> -->
                       <p class="mt-2 subtitle-1 text-center">データがありません。</p>
                     </v-col>
                   </v-row>
+                  </div>
                 </div>
-              </div>
-
             </v-card>
           </v-tab-item>
         </v-tabs-items>
@@ -151,7 +151,7 @@
 </template>
 
 <script>
-import ICountUp from "vue-countup-v2"
+import ICountUp from "vue-countup-v2" //TODO: 不要なら削除
 import moment from "moment"
 
 export default {
@@ -160,6 +160,13 @@ export default {
   },
   data() {
     return {
+      snackbar: {
+        error: false
+      },
+      loading: {
+        pie: true,
+        stack: true
+      },
       timers: {
         month: []
       },
@@ -168,13 +175,6 @@ export default {
         thisWeek: 0,
         thisMonth: 0,
         total: 0
-      },
-      loading: {
-        pie: true,
-        stack: true
-      },
-      snackbar: {
-        error: false
       },
       stack: "",
       pie: "",
@@ -197,7 +197,8 @@ export default {
               // name: Writing,
               // itemStyle: { color: "#696969" }
               // }
-            ]
+            ],
+            animationEasing: "cubicInOut"
           }
         ]
       },
@@ -208,7 +209,7 @@ export default {
             type: "shadow"
           }
         },
-
+        //TODO: propertyを追加
       }
     }
   },
@@ -221,6 +222,7 @@ export default {
       } else if (typeof val == "object") {
         return Object.keys(val).length === 0
       }
+      return false
     }
   },
   computed: {
@@ -389,22 +391,49 @@ export default {
 
           for (let i = 1; i < timers_this_week.length; i++) {
             let isSame = false;
-            for (let j = 0; j < categories.length; j++) {
+            for (let j = 0; j < series.length; j++) {
               if (categories[j]["id"] === timers_this_week[i]["category_id"]) {
                 isSame = true;
                 categories[j]["data"].push(timers_this_week[i])
                 break;
               }
             }
+            if(isSame === false) {
+              series.push({
+                id: timers_this_week[i]["category_id"],
+                name: timers_this_week[i]["category_name"],
+                type: "bar",
+                color: timers_this_week[i]["category_color"],
+                stack: "vistors",
+                barWidth: "50%"
+              })
+            }
           }
 
-          if (isSame === false) {
-            categories.push({
-             id: timers_this_week[i]["category_id"],
-             data: [timers_this_week[i]]
-            })
+          let categories = [
+            {
+              id: timers_this_week[0]["category_id"],
+              data: [timers_this_week[0]]
+            }
+          ]
+
+          for (let i = 1; j < categories.length; j++) {
+            let isSame = false
+            for (let j = 0; j < categories.length; j++) {
+              if (categories[j]["id"] === timers_this_week[i]["category_id"]) {
+                isSame = true
+                categories[j]["data"].push(timers_this_week[i])
+                break
+              }
+            }
+            if (isSame === false) {
+              categories.push({
+               id: timers_this_week[i]["category_id"],
+               data: [timers_this_week[i]]
+              })
+            }
           }
-        }
+
 
         // 日毎のデータ作成
         //TODO: i,jをrefactoring
@@ -443,20 +472,25 @@ export default {
           categories[i].data = data
         }
         //seriesObject merge to data of category
-        for (let i = 0; i < categories.length; j++) {
+        for (let i = 0; i < series.length; j++) {
           for (let j = 0; j < categories.length; j++) {
-              if (series[i].id === categories[j].id) {
-                series[i] = Object.assign(series[i], categories[j]);
+            if (series[i].id === categories[j].id) {
+              series[i] = Object.assign(series[i], categories[j]);
                 break;
               }
             }
           }
-
           for (let i = 0; i < series.length; i++) {
             for (let j = 0; j < series[i].data.length; i++) {
               series[i].data[j] = Math.round((series[i].data[j] / 60) * 10) / 10
             }
           }
+          this.chartStackWeek.series = series
+          this.loading.stack = false
+        }
+        // else {
+          // this.loading.stack = false
+        // }
       }
     }
   }
