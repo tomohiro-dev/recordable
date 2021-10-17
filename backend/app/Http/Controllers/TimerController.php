@@ -6,9 +6,11 @@ use App\Timer;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 class TimerController extends Controller
 {
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('auth');
     }
 
@@ -22,23 +24,25 @@ class TimerController extends Controller
         return Timer::mine()->orderBy('started_at', 'desc')->paginate(20)->toArray();
     }
 
-    public function indexMonth() {
+    public function indexMonth()
+    {
         $this_year = Carbon::today('Asia/Tokyo')->year;
         $this_month = Carbon::today('Asia/Tokyo')->month;
         return Timer::mine()
-        ->whereYear('started_at', $this_year)
-        ->whereMonth('started_at', $this_month)
-        ->get();
+            ->whereYear('started_at', $this_year)
+            ->whereMonth('started_at', $this_month)
+            ->get();
     }
     //TODO: ユーザーのTimezone毎に時間が対応するように設定したい（作成時はAsia/Tokyo）
     //TODO: サービス使用開始時のタイムラグをユーザーに確認する
 
-    public function indexTotal() {
+    public function indexTotal()
+    {
         $timers = Timer::mine()->get()->toArray();
         $total_seconds = 0;
-        for($i=0; $i < count($timers) ;$i++) {
+        for($i = 0; $i < count($timers) ;$i++){
             $started_at = new Carbon($timers[$i]['started_at']);
-            $stopprd_at = new Carbon($timers[$i]['stopped_at']);
+            $stopped_at = new Carbon($timers[$i]['stopped_at']);
             $diff = $started_at->diffInSeconds($stopped_at);
             $total_seconds += $diff;
         }
@@ -66,12 +70,12 @@ class TimerController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|max:30',
-            'memo' => 'nullable|max140',
-            'caategory_id' => 'nullable',
+            'memo' => 'nullable|max:140',
+            'category_id' => 'nullable',
             'category_name' => 'nullable|max:20',
             'category_color' => 'nullable'
         ]);
-        $timer =  Timer::mine()->create([
+        $timer = Timer::mine()->create([
             'name' => $data['name'],
             'memo' => $data['memo'],
             'category_id' => $data['category_id'],
@@ -85,7 +89,8 @@ class TimerController extends Controller
         return $timer;
     }
 
-    public function save(Request $request) {
+    public function save(Request $request)
+    {
         $data = $request->validate([
             'name' => 'required|max:30',
             'memo' => 'nullable|max:140',
@@ -144,7 +149,7 @@ class TimerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
         $data = $request->validate([
             'name' => 'required|max:30',
@@ -185,19 +190,20 @@ class TimerController extends Controller
     {
         $timer = Timer::mine()->find($id);
         $timer->delete();
-
         return $timer;
     }
 
-    public function running() {
+    public function running()
+    {
         return Timer::mine()->running()->first() ?? [];
     }
 
-    public function stopRunning() {
+    public function stopRunning()
+    {
         if ($timer = Timer::mine()->running()->first()) {
             $timer->update(['stopped_at' => new Carbon]);
         }
 
-        return $Timer;
+        return $timer;
     }
 }
