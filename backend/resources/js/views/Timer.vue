@@ -955,6 +955,7 @@ export default {
           this.activeTimerString = "Calculating..."
           this.snackbar.activeTimer = false;
           this.snackbar.done = true
+
           // confetti({
           var end = Date.now() + (3 * 1000);
           // go Buckeyes!
