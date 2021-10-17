@@ -11,19 +11,22 @@
         <RouterView />
       </v-container>
     </v-main>
+    <MobileNav />
   </v-app>
 </template>
 
 <script>
 import NavBar from './components/NavBar.vue'
 import NavDrawer from './components/NavDrawer.vue'
+import MobileNav  from './components/MobileNav.vue'
 
 import { INTERNAL_SERVER_ERROR } from './util'
 
 export default {
   components: {
     NavBar,
-    NavDrawer
+    NavDrawer,
+    MobileNav
   },
   data() {
     return {
