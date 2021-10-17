@@ -9,8 +9,15 @@
       <v-card>
         <v-card-title>
           <h1>Welcome to Recordable!</h1>
-          <h1>Are you ready to learn Japanese?</h1>
         </v-card-title>
+
+        <v-card-text>
+          <div class="text--primary subtitle-2">
+            "—A combination of passion and perseverance for a singularly important goal—
+            <br />is the hallmark of high achievers in every domain."
+            <br />Angela Duckworth
+          </div>
+        </v-card-text>
 
         <v-card-title class="pb-0">
           <h2 class="title">How many hours will you concentrate today?</h2>
