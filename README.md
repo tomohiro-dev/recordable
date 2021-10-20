@@ -18,7 +18,7 @@ main branchで`git clone`を行ってください。`cd`commandで当Directory�
 Build errorが出た場合は、エラーの内容に従って都度修正を行ってください。
 
 **【重要】`.php`ファイルを`git commit`する時にコード整形を行う場合は、「コード整形のみ」の`feature branch`として`feature/000_fixPhpCode`を切ってください。** \
-`000`は前回のチケット番号と同じ番号でbranchを切ってください。 \
+`000`は前回のチケット番号から連番でbranchを切ってください。 \
 Asana内で管理している、他のチケット番号と被らないよう注意してください。
 
 ## Project構成
