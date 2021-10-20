@@ -1,6 +1,6 @@
 <template>
   <div class="body" v-resize="onResize">
-    <!-- snackbarをcomponentとして切り出してもいいかも「TODO: やるならリリース後」 -->
+    <!-- TODO: snackbarをcomponentとして切り出す（リリース後のアップデート時に実施）-->
     <div v-if="!isEmpty(timers)">
       <v-snackbar
         v-model="snackbar.activeTimer"
@@ -33,6 +33,8 @@
       An error has occurred. message：{{ errorMessage }}
       <v-btn text @click="snackbar.error = false">CLOSE</v-btn>
     </v-snackbar>
+    <!-- TODO: snackbarをcomponentとして切り出す fin-->
+
 
     <!-- タイマー追加ボタン -->
     <v-speed-dial

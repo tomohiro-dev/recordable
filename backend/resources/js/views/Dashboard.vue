@@ -62,7 +62,7 @@
     <v-row>
       <v-col cols="12" md="5">
         <span class="title">
-          <v-icon class="mr-2 mb-1">mdi-chart-pie</v-icon>Details
+          <v-icon class="mr-2 mb-1">mdi-chart-pie</v-icon>Monthly Report
         </span>
 
         <v-tabs v-model="pie">

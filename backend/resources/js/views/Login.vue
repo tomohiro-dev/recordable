@@ -6,7 +6,9 @@
     </v-col>
     <v-spacer></v-spacer>
     <v-col cols="12" md="5">
+      <!-- <v-card elevation="0" style="background-color: var(--v-background-base)"> -->
       <v-card>
+        <!-- TODO: ↑画像追加時に削除 -->
         <v-card-title>
           <h1>Welcome to Recordable!</h1>
         </v-card-title>
@@ -15,7 +17,7 @@
           <div class="text--primary subtitle-2">
             "—A combination of passion and perseverance for a singularly important goal—
             <br />is the hallmark of high achievers in every domain."
-            <br />Angela Duckworth
+            <br /><p class="text-right">Angela Duckworth</p>
           </div>
         </v-card-text>
 
