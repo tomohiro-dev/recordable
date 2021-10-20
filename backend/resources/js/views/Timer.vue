@@ -287,12 +287,12 @@
                     </v-menu>
                   </div>
 
-                  <!-- メモ入力 -->
+                  <!-- Memo入力 -->
                   <v-col cols="12">
                     <v-textarea
                       color="#696969"
                       v-model="newTimer.memo"
-                      label="メモ"
+                      label="Memo"
                       type="text"
                       prepend-icon="mdi-text-box"
                       :rules="rules.memo"
@@ -462,12 +462,12 @@
                     </v-menu>
                   </div>
 
-                  <!-- メモの入力 -->
+                  <!-- Memoの入力 -->
                   <v-col cols="12">
                     <v-textarea
                       color="#696969"
                       v-model="saveTimer.memo"
-                      label="メモ"
+                      label="Memo"
                       type="text"
                       prepend-icon="mdi-text-box"
                       :rules="rules.memo"
@@ -599,11 +599,11 @@
                   </v-select>
                 </v-col>
 
-                <!-- メモ入力 -->
+                <!-- Memo入力 -->
                 <v-col cols="12">
                   <v-textarea
                     v-model="editTimer.memo"
-                    label="メモ"
+                    label="Memo"
                     type="text"
                     prepend-icon="mdi-texgt-box"
                     :rules="rules.memo"
