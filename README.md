@@ -250,8 +250,8 @@ docker compose exec web ash
 ```
 npm install && npm run dev
 ```
-追加しているライブラリについてはWikiを参照してください。
-【TODO:Wikiのリンクを追加】
+追加しているライブラリについてはWikiを参照してください。 \
+【TODO:Wikiのリンクを編集後に追加】
 
 ・npm
 ```
