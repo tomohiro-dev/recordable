@@ -4,7 +4,7 @@
     :disable-route-watcher="true"
     app
     color="#f0f8ff"
-    floating="false"
+    floating
   >
 
     <v-list-item class="px-2">
@@ -51,6 +51,7 @@
 export default {
   data() {
     return {
+      floating: "false",
       items: [
         {
           title: 'Timer',

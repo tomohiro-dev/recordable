@@ -102,6 +102,7 @@
               :hide-default-header="windowSize.width < 600"
               hide-default-footer
               @click:row="openEditTimer"
+              backgoundcolor="#f5f5f5"
               >
               <template v-slot:item.name="{ item }">
                 <span>{{ item.name }}</span>
