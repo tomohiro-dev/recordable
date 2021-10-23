@@ -3,7 +3,7 @@
     v-if="isLogin"
     :disable-route-watcher="true"
     app
-    color="#f0f8ff"
+    color="#E6FBFF"
     floating
   >
 

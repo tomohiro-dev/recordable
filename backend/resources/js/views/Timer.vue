@@ -330,7 +330,7 @@
       <v-dialog v-model="dialog.saveTimer" width="500">
         <v-card>
           <v-card-title class="headline">
-            <v-icon class="mr-2" color="light-green">mdi-book-edit-outline</v-icon>Editing
+            <v-icon class="mr-2" color="light-green">mdi-book-edit-outline</v-icon>Add the previous
           </v-card-title>
 
           <v-card-text :class="{ 'px-4': windowSize.width < 600 }">

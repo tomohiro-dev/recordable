@@ -64,7 +64,7 @@
           <v-icon class="mr-2 mb-1" color="#02E3FF">mdi-equalizer</v-icon>Weekly Report
         </span>
 
-        <v-tabs v-model="stack">
+        <v-tabs v-model="stack" color="#00CED1">
           <v-tab>{{ thisWeek }}~ (MIN)</v-tab>
         </v-tabs>
 
@@ -115,7 +115,7 @@
           <v-icon class="mr-2 mb-1" color="#02E3FF">mdi-chart-pie</v-icon>Monthly Report
         </span>
 
-        <v-tabs v-model="pie" color="primary">
+        <v-tabs v-model="pie" color="#00CED1">
           <v-tab>{{ thisMonth }}(HOUR)</v-tab>
         </v-tabs>
 
