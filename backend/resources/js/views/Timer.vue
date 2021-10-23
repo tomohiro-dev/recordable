@@ -50,7 +50,7 @@
         <v-hover v-slot:default="{ hover }">
           <v-btn
             v-model="fab"
-            color="#696969"
+            color="#02E3FF"
             dark
             fab
             x-large
@@ -66,12 +66,19 @@
         fab
         dark
         small
-        color="#696969"
+        color="#D9333F"
         @click.stop="dialog.newTimer = true"
       >
         <v-icon>mdi-camera-timer</v-icon>
       </v-btn>
-      <v-btn fab dark small color="#696969" @click.stop="dialog.saveTimer = true">
+
+      <v-btn
+        fab
+        dark
+        small
+        color="light-green"
+        @click.stop="dialog.saveTimer = true"
+      >
         <v-icon>mdi-book-edit-outline</v-icon>
       </v-btn>
     </v-speed-dial>
@@ -102,7 +109,6 @@
               :hide-default-header="windowSize.width < 600"
               hide-default-footer
               @click:row="openEditTimer"
-              backgoundcolor="#f5f5f5"
               >
               <template v-slot:item.name="{ item }">
                 <span>{{ item.name }}</span>
@@ -157,7 +163,7 @@
       <v-dialog v-model="dialog.newTimer" width="500">
         <v-card>
           <v-card-title class="headline">
-            <v-icon class="mr-2" color="#FB5D63">mdi-camera-timer</v-icon>Recording
+            <v-icon class="mr-2" color="#D9333F">mdi-camera-timer</v-icon>Recording
           </v-card-title>
           <v-card-text>
             <v-form v-model="newTimerValid" ref="newTimerForm">
@@ -167,7 +173,7 @@
                   <v-col cols="12">
                     <v-text-field
                       v-model="newTimer.name"
-                      color="#46DBC9"
+                      color="#02E3FF"
                       label="Contents to be recorded*"
                       required
                       prepend-icon="mdi-border-color"
@@ -180,7 +186,6 @@
                   <v-col cols="12">
                     <v-select
                       v-if="isEmpty(categories)"
-                      color="#46DBC9"
                       v-model="newTimer.category"
                       :items="categories"
                       item-text="name"
@@ -193,7 +198,6 @@
                     ></v-select>
                     <v-select
                       v-else
-                      color="#46DBC9"
                       v-model="newTimer.category"
                       :items="categories"
                       item-text="name"
@@ -215,7 +219,7 @@
                     >
                       <template v-slot:activator="{ on }">
                         <v-btn text color="grey lighten-1" v-on="on">
-                          <v-icon color="light-green accent-4">mdi-plus</v-icon>Create a category
+                          <v-icon color="light-green accent-4">mdi-plus</v-icon>CREATE A CATEGORY
                         </v-btn>
                       </template>
 
@@ -293,7 +297,6 @@
                   <!-- Memo入力 -->
                   <v-col cols="12">
                     <v-textarea
-                      color="#696969"
                       v-model="newTimer.memo"
                       label="Memo"
                       type="text"
@@ -327,7 +330,7 @@
       <v-dialog v-model="dialog.saveTimer" width="500">
         <v-card>
           <v-card-title class="headline">
-            <v-icon class="mr-2" color="#696969">mdi-book-edit-outline</v-icon>Editing
+            <v-icon class="mr-2" color="light-green">mdi-book-edit-outline</v-icon>Editing
           </v-card-title>
 
           <v-card-text :class="{ 'px-4': windowSize.width < 600 }">
@@ -339,7 +342,6 @@
                     <v-text-field
                       v-model="saveTimer.name"
                       label="Contents to be recorded"
-                      color="#696969"
                       required
                       prepend-icon="mdi-border-color"
                       :rules="rules.name"
@@ -352,7 +354,6 @@
                   <v-col cols="12">
                     <v-select
                       v-if="isEmpty(categories)"
-                      color="#696969"
                       v-model="saveTimer.category"
                       :items="categories"
                       item-text="name"
@@ -366,7 +367,6 @@
                     </v-select>
                     <v-select
                       v-else
-                      color="#696969"
                       v-model="saveTimer.category"
                       :items="categories"
                       item-text="name"
@@ -390,7 +390,7 @@
                     >
                       <template v-slot:activator="{ on }">
                         <v-btn text color="grey lighten-1" v-on="on">
-                          <v-icon color="light-green accent-4">mdi-plus</v-icon>Create a category
+                          <v-icon color="light-green accent-4">mdi-plus</v-icon>CREATE A CATEGORY
                         </v-btn>
                       </template>
 
@@ -468,7 +468,6 @@
                   <!-- Memoの入力 -->
                   <v-col cols="12">
                     <v-textarea
-                      color="#696969"
                       v-model="saveTimer.memo"
                       label="Memo"
                       type="text"
@@ -483,14 +482,14 @@
                     <v-datetime-picker
                       v-model="saveTimer.started_at"
                       :text-field-props="textFieldProps"
-                      label="Starting time* / Measuring period*"
+                      label="Starting date* and Measuring period*"
                       :timePickerProps="editTimePickerProps"
                     >
                       <template slot="dateIcon">
-                        <v-icon color="#696969">mdi-calendar</v-icon>
+                        <v-icon>mdi-calendar</v-icon>
                       </template>
                       <template slot="timeIcon">
-                        <v-icon color="#696969">mdi-clock-outline</v-icon>
+                        <v-icon>mdi-clock-outline</v-icon>
                       </template>
                       <template slot="actions" slot-scope="{ parent }">
                         <v-btn text color="primary" @click="parent.okHandler">SAVE</v-btn>
@@ -502,7 +501,6 @@
                   <v-col cols="4">
                     <v-select
                       v-model="saveTimer.time.hours"
-                      color="#696969"
                       label="hour"
                       required
                       prepend-icon="mdi-timer-sand-full"
@@ -513,7 +511,6 @@
                   <v-col cols="4">
                     <v-select
                       v-model="saveTimer.time.minutes"
-                      color="#696969"
                       label="minute"
                       required
                       :items="time.minutes"
@@ -524,7 +521,6 @@
                   <v-col cols="4">
                     <v-select
                       v-model="saveTimer.time.seconds"
-                      color="#696969"
                       label="second"
                       required
                       :items="time.seconds"
@@ -564,10 +560,10 @@
       <v-dialog v-model="dialog.editTimer" width="500">
         <v-card>
           <v-card-title
-            class="grey--text text--darken-2 headline"
+            class="text--darken-2 headline"
             :class="{ title: windowSize.width < 600 }"
           >
-            <v-icon class="mr-2">mdi-update</v-icon>
+            <v-icon class="mr-2" color="#02E3FF">mdi-update</v-icon>
             Editing this record
             <v-spacer></v-spacer>
           </v-card-title>
@@ -622,10 +618,10 @@
                     :text-field-props="textFieldProps"
                     :timePickerProps="timePickerProps"
                     :datePickerProps="datePickerProps"
-                    label="Starting time* / Measuring period*"
+                    label="Starting date* and Measuring period*"
                   >
                     <template slot="dateIcon">
-                      <v-icon>mdi-calender</v-icon>
+                      <v-icon>mdi-calendar</v-icon>
                     </template>
                     <template slot="timeIcon">
                       <v-icon>mdi-camera-timer</v-icon>
@@ -1347,4 +1343,9 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+.v-speed-dial {
+  z-index: 5;
+}
+
+</style>
