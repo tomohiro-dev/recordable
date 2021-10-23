@@ -7,118 +7,67 @@
 
     <!-- レコード -->
     <span class="title">
-      <v-icon class="mr-2 mb-1">mdi-archive-clock</v-icon>My Record
+      <v-icon class="mr-2 mb-1" color="#02E3FF">mdi-archive-clock</v-icon>My Record
     </span>
     <v-row>
       <v-col cols="12" sm="4" md="3">
         <v-card>
-          <v-card-title class="pb-2">Today</v-card-title>
-          <v-divider class="my-0 mx-4"></v-divider>
-          <v-card-text class="display-2">
+          <v-card-text class="display-1">
             <ICountUp :endVal="record.today" />
             <span class="headline">min</span>
           </v-card-text>
+          <!-- <v-divider class="my-0 mx-4"></v-divider> -->
+          <v-card-title class="pb-2">Today</v-card-title>
         </v-card>
       </v-col>
 
       <v-col cols="12" sm="4" md="3">
         <v-card>
-          <v-card-title class="pb-2">This Week({{ thisWeek }}~)</v-card-title>
-          <v-divider class="my-0 mx-4"></v-divider>
-          <v-card-text class="display-2">
+          <v-card-text class="display-1">
             <ICountUp
              :endVal="record.thisWeek"
              :options="{ decimals: '.', decimalPlaces: 1}"
             />
             <span class="headline">hours</span>
           </v-card-text>
+          <v-card-title class="pb-2">This Week({{ thisWeek }}~)</v-card-title>
         </v-card>
       </v-col>
 
       <v-col cols="12" sm="4" md="3">
         <v-card>
-          <v-card-title class="pb-2">This Month({{ thisMonth }})</v-card-title>
-          <v-divider class="my-0 mx-4"></v-divider>
-          <v-card-text class="display-2">
+          <v-card-text class="display-1">
             <ICountUp :endVal="record.thisMonth" />
             <span class="headline">hours</span>
           </v-card-text>
+          <v-card-title class="pb-2">This Month({{ thisMonth }})</v-card-title>
         </v-card>
       </v-col>
 
       <v-col cols="12" md="3">
         <v-card>
-          <v-card-title class="pb-2">Total</v-card-title>
-          <v-divider class="my-0 mx-4"></v-divider>
-          <v-card-text class="display-2">
+          <v-card-text class="display-1">
             <ICountUp :endVal="record.total" />
             <span class="headline">hours</span>
           </v-card-text>
+          <v-card-title class="pb-2">Total</v-card-title>
         </v-card>
       </v-col>
     </v-row>
 
-    <!-- チャート -->
     <v-row>
-      <v-col cols="12" md="5">
-        <span class="title">
-          <v-icon class="mr-2 mb-1">mdi-chart-pie</v-icon>Monthly Report
-        </span>
 
-        <v-tabs v-model="pie">
-          <v-tab>This Month（hours）</v-tab>
-        </v-tabs>
 
-        <!-- パイチャート -->
-        <v-tabs-items v-model="pie">
-          <v-tab-item>
-            <v-card>
-              <div class="py-4" v-if="loading.pie">
-                <div class="echarts d-flex justify-center align-center">
-                  <vue-loading
-                   type="bubbles"
-                   color="#696969"
-                   :size="{ width: '50px', height: '50px' }"
-                  >
-                  </vue-loading>
-                </div>
-              </div>
-
-              <div class="py-4" v-else>
-                  <chart
-                   :options="chartPie"
-                   autoresize
-                   v-if="!isEmpty(chartPie.series[0].data)"
-                  >
-                  </chart>
-
-                  <div class="echarts" v-else>
-                  <v-row align="center" justify="center">
-                    <v-col>
-                      <!-- <v-img>TODO: 画像追加</v-img> -->
-                      <p class="mt-2 subtitle-1 text-center">
-                        Your records will now be added.
-                        <br />Are you ready to get started?
-                      </p>
-                    </v-col>
-                  </v-row>
-                  </div>
-                </div>
-            </v-card>
-          </v-tab-item>
-        </v-tabs-items>
-      </v-col>
-
+        <!-- スタックチャート -->
       <v-col cols="12" md="7">
         <span class="title">
-          <v-icon class="mr-2 mb-1">mdi-equalizer</v-icon>Weekly Report
+          <v-icon class="mr-2 mb-1" color="#02E3FF">mdi-equalizer</v-icon>Weekly Report
         </span>
 
         <v-tabs v-model="stack">
-          <v-tab>this week（min）</v-tab>
+          <v-tab>{{ thisWeek }}~ (MIN)</v-tab>
         </v-tabs>
 
-        <!-- スタックチャート -->
         <v-tabs-items v-model="stack">
           <v-tab-item>
             <v-card>
@@ -126,7 +75,7 @@
                 <div class="echarts d-flex justify-center align-center">
                   <vue-loading
                    type="bubbles"
-                   color="#696969"
+                   color="#C7CED1"
                    :size="{ width: '50px', height: '50px' }"
                   >
                   </vue-loading>
@@ -158,12 +107,65 @@
           </v-tab-item>
         </v-tabs-items>
       </v-col>
+      <!-- スタックチャートfin -->
+
+    <!-- pieチャート -->
+      <v-col cols="12" md="5">
+        <span class="title">
+          <v-icon class="mr-2 mb-1" color="#02E3FF">mdi-chart-pie</v-icon>Monthly Report
+        </span>
+
+        <v-tabs v-model="pie" color="primary">
+          <v-tab>{{ thisMonth }}(HOUR)</v-tab>
+        </v-tabs>
+
+        <!-- パイチャート -->
+        <v-tabs-items v-model="pie">
+          <v-tab-item>
+            <v-card>
+              <div class="py-4" v-if="loading.pie">
+                <div class="echarts d-flex justify-center align-center">
+                  <vue-loading
+                   type="bubbles"
+                   color="#C7CED1"
+                   :size="{ width: '50px', height: '50px' }"
+                  >
+                  </vue-loading>
+                </div>
+              </div>
+
+              <div class="py-4" v-else>
+                  <chart
+                   :options="chartPie"
+                   autoresize
+                   v-if="!isEmpty(chartPie.series[0].data)"
+                  >
+                  </chart>
+
+                  <div class="echarts" v-else>
+                  <v-row align="center" justify="center">
+                    <v-col>
+                      <!-- <v-img>TODO: 画像追加</v-img> -->
+                      <p class="mt-2 subtitle-1 text-center">
+                        Your records will now be added.
+                        <br />Are you ready to get started?
+                      </p>
+                    </v-col>
+                  </v-row>
+                  </div>
+                </div>
+            </v-card>
+          </v-tab-item>
+        </v-tabs-items>
+      </v-col>
+        <!-- pieチャート fin-->
+
     </v-row>
   </div>
 </template>
 
 <script>
-import ICountUp from "vue-countup-v2" //TODO: 不要なら削除
+import ICountUp from "vue-countup-v2"
 import moment from "moment"
 
 export default {
@@ -185,7 +187,7 @@ export default {
       record: {
         today: 0,
         thisWeek: 0,
-        thisMonth: 0,
+        thisMonth: '', //ローマ字表記
         total: 0
       },
       stack: "",
@@ -195,10 +197,9 @@ export default {
       chartPie: {
         tooltip: {
           trigger: "item",
-          formatter: "{b} : {c}時間 ({d}%)"
-          // formatter: "{b} : {c}H ({d}%)"
+          formatter: "{b} : {c}H ({d}%)"
         },
-        //地図やグラフにつく説明部分
+        //legend「地図やグラフにつく説明部分」
         legend: {
           bottom: "10",
           left: "center"
@@ -206,11 +207,12 @@ export default {
         calculable: true,
         series: [
           {
-            name: "カテゴリーごとの記録",
+            name: "Records by category",
             type: "pie",
             roseType: "radius",
-            radius: [15, 95],
-            center: ["50%", "38%"],
+            radius: [25, 100],
+            //radius: '55%',
+            center: ["50%", "40%"],
             data: [],
             animationEasing: "cubicInOut"
           }
@@ -291,13 +293,11 @@ export default {
     thisWeek() {
       return moment()
         .day(0)
-        .format("M月D日")
-        // .format("M/D")
+        .format("M/D")
     },
     thisMonth() {
       return moment()
-        .format("YYYY年M月")
-        // .format("YYYY,M")
+        .format("MMM,YYYY")
     }
   },
   watch: {

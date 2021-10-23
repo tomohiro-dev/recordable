@@ -88,7 +88,7 @@
     <template v-if="loading">
       <v-row :style="`height:${windowSize.height}px`" align="center" justify="center">
         <v-col>
-          <vue-loading type="bubbles" color="#CAD4D9" :size="{ width: '50px', height: '50px' }"></vue-loading>
+          <vue-loading type="bubbles" color="#C7CED1" :size="{ width: '50px', height: '50px' }"></vue-loading>
         </v-col>
       </v-row>
     </template>
