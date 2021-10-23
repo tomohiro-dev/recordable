@@ -52,7 +52,7 @@ export default {
       items: [
         {
           title: 'Timer',
-          icon: 'mdi-clock',
+          icon: 'mdi-camera-timer',
           url: '/',
           disabled: false,
           badge: true
@@ -69,7 +69,7 @@ export default {
   },
   methods: {
     async logout() {
-      if (confirm('Would you like to log out?')) {
+      if (confirm('Would you like to logout?')) {
         await this.$store.dispatch('auth/logout')
 
         if (this.apiStatus) {

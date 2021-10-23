@@ -58,8 +58,8 @@
               <v-btn text color="success" v-on="on" @click="tutorialLogin">TUTORIAL</v-btn>
             </template>
             <span>
-              <v-icon dark left>mdi-alert-circle</v-icon>
-              You can try out how to operate it.
+              <v-icon dark left>mdi-rocket-launch-outline</v-icon>
+              You can try out how to operate it. Enjoy Recordable!
             </span>
           </v-tooltip>
 
