@@ -69,7 +69,7 @@
         color="#696969"
         @click.stop="dialog.newTimer = true"
       >
-        <v-icon>mdi-timer-outline</v-icon>
+        <v-icon>mdi-camera-timer</v-icon>
       </v-btn>
       <v-btn fab dark small color="#696969" @click.stop="dialog.saveTimer = true">
         <v-icon>mdi-book-edit-outline</v-icon>
@@ -156,7 +156,7 @@
       <v-dialog v-model="dialog.newTimer" width="500">
         <v-card>
           <v-card-title class="headline">
-            <v-icon class="mr-2" color="#FB5D63">mdi-timer-outline</v-icon>Recording
+            <v-icon class="mr-2" color="#FB5D63">mdi-camera-timer</v-icon>Recording
           </v-card-title>
           <v-card-text>
             <v-form v-model="newTimerValid" ref="newTimerForm">
@@ -627,7 +627,7 @@
                       <v-icon>mdi-calender</v-icon>
                     </template>
                     <template slot="timeIcon">
-                      <v-icon>mdi-clock-outline</v-icon>
+                      <v-icon>mdi-camera-timer</v-icon>
                     </template>
                     <template slot="actions" slot-scope="{ parent }">
                       <v-btn text color="primary" @click="parent.okHandler">SAVE</v-btn>
@@ -839,7 +839,7 @@ export default {
         height: window.innerHeight
       },
       textFieldProps: {
-        prependIcon: 'mdi-clock',
+        prependIcon: 'mdi-camera-timer',
         color: '#696969' //TODO: 色変更
       },
       timePickerProps: {

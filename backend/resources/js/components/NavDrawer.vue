@@ -3,12 +3,14 @@
     v-if="isLogin"
     :disable-route-watcher="true"
     app
+    color="#f0f8ff"
+    floating="false"
   >
 
     <v-list-item class="px-2">
       <!-- TODO: 次回アップデート時に追加する -->
       <!-- TODO: アイコン追加 -->
-      <v-list-item-title>{{ username }}</v-list-item-title>
+      <v-list-item-title class="font-weight-bold">{{ username }}</v-list-item-title>
     </v-list-item>
     <v-divider></v-divider>
 
