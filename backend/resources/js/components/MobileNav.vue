@@ -18,12 +18,12 @@ export default {
       mobileNav: 0,
       items: [
         {
-          title: 'タイマー',
-          icon: 'mdi-clock',
+          title: 'Timer',
+          icon: 'mdi-camera-timer',
           url: '/',
         },
         {
-          title: 'ダッシュボード',
+          title: 'Dashboard',
           icon: 'mdi-chart-bar',
           url: '/dashboard',
         },
@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     async logout() {
-      if(confirm('ログアウトしますか？')){
+      if(confirm('Would you like to logout?')){
         await this.$store.dispatch('auth/logout');
         if (this.apiStatus) {
           this.$router.push('/login');

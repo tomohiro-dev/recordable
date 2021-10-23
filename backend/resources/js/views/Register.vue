@@ -8,38 +8,43 @@
     <v-col cols="12" md="5">
       <v-card>
         <v-card-title>
-          <h1 class="display-1 font-weight-bold">日本語をペラペラに</h1>
+          <h1 class="display-1 font-weight-bold">Visualize the learning process.</h1>
         </v-card-title>
 
         <v-card-text>
           <div class="text--primary subtitle-2">
-            日本語学習を仕組み化してペラペラになるには練習が必要です。
-            <br />学習内容を記録して練習プロセスを見える化してみましょう。
+            <h2>Are you ready to study Japanese?</h2>
           </div>
         </v-card-text>
 
         <v-card-title class="pb-0">
-          <h2 class="title">アカウントを作る</h2>
+          <h2 class="title">Create account</h2>
         </v-card-title>
+
+        <v-card-text class="pb-0 mb-0">
+          <div class="text--primary subtitle-2">
+            <p>Sign up and get started Recordable!</p>
+          </div>
+        </v-card-text>
 
         <v-card-text>
           <v-form>
             <v-text-field
               tabindex="1"
               v-model="registerForm.name"
-              label="ユーザー名"
+              label="Enter your user name"
               prepend-icon="mdi-account-circle"
             />
             <v-text-field
               tabindex="2"
               v-model="registerForm.email"
-              label="MailAddress"
+              label="Email Address"
               prepend-icon="mdi-email"
             />
             <v-text-field
               tabindex="3"
               v-model="registerForm.password"
-              label="パスワード(8 or more characters)"
+              label="Password(8 or more characters)"
               prepend-icon="mdi-lock"
               :type="showPassword ? 'text' : 'password'"
               :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
@@ -48,7 +53,7 @@
             <v-text-field
               tabindex="4"
               v-model="registerForm.password_confirmation"
-              label="パスワード再入力"
+              label="Confirm Password"
               prepend-icon="mdi-lock"
               :type="showPassword ? 'text' : 'password'"
               :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
@@ -57,7 +62,7 @@
             />
 
             <small>
-              アカウントを作成することにより、利用規約およびプライバシーポリシーに同意したものとみなされます。
+              By creating an account, you could agree to the Terms of Use and Privacy Policy.
             </small>
           </v-form>
         </v-card-text>
@@ -74,7 +79,7 @@
           text
           @click="register"
         >
-          登録する
+          REGISTER
         </v-btn>
       </v-card>
     </v-col>

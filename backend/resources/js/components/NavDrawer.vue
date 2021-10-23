@@ -3,12 +3,14 @@
     v-if="isLogin"
     :disable-route-watcher="true"
     app
+    color="#E6FBFF"
+    floating
   >
 
     <v-list-item class="px-2">
       <!-- TODO: 次回アップデート時に追加する -->
       <!-- TODO: アイコン追加 -->
-      <v-list-item-title>{{ username }}</v-list-item-title>
+      <v-list-item-title class="font-weight-bold">{{ username }}</v-list-item-title>
     </v-list-item>
     <v-divider></v-divider>
 
@@ -39,7 +41,7 @@
       </div>
 
       <div class="pa-2">
-        <v-btn block @click="logout">ログアウト</v-btn>
+        <v-btn block @click="logout">LOGOUT</v-btn>
       </div>
     </template>
   </v-navigation-drawer>
@@ -49,16 +51,17 @@
 export default {
   data() {
     return {
+      floating: "false",
       items: [
         {
-          title: 'タイマー',
-          icon: 'mdi-clock',
+          title: 'Timer',
+          icon: 'mdi-camera-timer',
           url: '/',
           disabled: false,
           badge: true
         },
         {
-          title: 'ダッシュボード',
+          title: 'Dashboard',
           icon: 'mdi-chart-bar',
           url: '/dashboard',
           disabled: false,
@@ -69,7 +72,7 @@ export default {
   },
   methods: {
     async logout() {
-      if (confirm('ログアウトしますか？')) {
+      if (confirm('Would you like to logout?')) {
         await this.$store.dispatch('auth/logout')
 
         if (this.apiStatus) {

@@ -6,23 +6,43 @@
     </v-col>
     <v-spacer></v-spacer>
     <v-col cols="12" md="5">
+      <!-- <v-card elevation="0" style="background-color: var(--v-background-base)"> -->
       <v-card>
+        <!-- TODO: ↑画像追加時に削除 -->
         <v-card-title>
-          <h1>Recordableをつかってみよう</h1>
-          <!-- TODO: 文言検討 -->
-        </v-card-title>
-
-        <v-card-title class="pb-0">
-          <h2 class="title">アカウントへログインする</h2>
+          <h1>Welcome to Recordable!</h1>
         </v-card-title>
 
         <v-card-text>
+          <div class="text--primary subtitle-2">
+            "—A combination of passion and perseverance for a singularly important goal—
+            <br />is the hallmark of high achievers in every domain."
+            <br /><p class="text-right">Angela Duckworth</p>
+          </div>
+        </v-card-text>
+
+        <v-card-title class="pb-0">
+          <h2 class="title">How many hours will you concentrate today?</h2>
+        </v-card-title>
+
+        <v-card-text class="pb-0 mb-0">
+          <div class="text--primary subtitle-2">
+            <p>Login to manage your account</p>
+          </div>
+        </v-card-text>
+
+        <v-card-text>
           <v-form>
-            <v-text-field tabindex="1" v-model="loginForm.email" label="メールアドレス" prepend-icon="mdi-email" />
+            <v-text-field
+              tabindex="1"
+              v-model="loginForm.email"
+              label="Email Address"
+              prepend-icon="mdi-email"
+            />
             <v-text-field
               tabindex="2"
               v-model="loginForm.password"
-              label="パスワード"
+              label="Password"
               prepend-icon="mdi-lock"
               :type="showPassword ? 'text' : 'password'"
               :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
@@ -35,11 +55,11 @@
         <v-card-actions>
           <v-tooltip bottom>
             <template v-slot:activator="{ on }">
-              <v-btn text color="success" v-on="on" @click="tutorialLogin">Tutorial</v-btn>
+              <v-btn text color="success" v-on="on" @click="tutorialLogin">TUTORIAL</v-btn>
             </template>
             <span>
-              <v-icon dark left>mdi-alert-circle</v-icon>
-              You can try out how to operate it.
+              <v-icon dark left>mdi-rocket-launch-outline</v-icon>
+              You can try out how to operate it. Enjoy Recordable!
             </span>
           </v-tooltip>
 
@@ -51,7 +71,7 @@
             text
             @click="login"
           >
-            ログイン
+            Login
           </v-btn>
         </v-card-actions>
       </v-card>
