@@ -104,9 +104,6 @@
 
 <script>
 export default {
-  created() {
-    this.clearError()
-  },
   data() {
     return {
       snackbar: false,
@@ -117,14 +114,17 @@ export default {
         password: '',
         password_confirmation: ''
       },
-      //TODO: launch後に追加
+      //TODO: launch後に追加（termsDialog, privacyDialog）
       termsDialog: false,
       privacyDialog: false
     }
   },
+  created() {
+    this.clearError()
+  },
   methods: {
     async register() {
-      console.log(this.registerForm) //TODO: feature/2505の問題が解決したら消す
+      console.log(this.registerForm)
       // authストアのresigterアクションを呼び出す
       await this.$store.dispatch('auth/register', this.registerForm)
 
