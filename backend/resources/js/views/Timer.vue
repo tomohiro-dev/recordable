@@ -18,7 +18,7 @@
       </v-snackbar>
     </div>
 
-    <v-snackbar top v-model="snackbar.done" color="#00acee" :multi-line="true">
+    <v-snackbar top v-model="snackbar.done" color="#02E3FF" :multi-line="true">
       Good Job! You've learned a good deal today. Let's Try to beat your personal best again tomorow!
     </v-snackbar>
     <v-snackbar top v-model="snackbar.updated" color="success">
@@ -150,7 +150,7 @@
           <!-- 記録がない時の画面 -->
       <v-row v-else :style="`height:${windowSize.height}px`" align="center" justify="center">
         <v-col cols="10" md="4">
-          <!-- <v-img>TODO: 画像を追加</v-img> -->
+          <v-img :src="'./svg/noDataTimer.svg'"></v-img>
           <p class="mt-2 title text-center">A journey of a thousand miles begins with a single step.</p>
           <p class="text-center">Are you ready to study? Let's get started!</p>
         </v-col>
@@ -173,7 +173,6 @@
                   <v-col cols="12">
                     <v-text-field
                       v-model="newTimer.name"
-                      color="#02E3FF"
                       label="Contents to be recorded*"
                       required
                       prepend-icon="mdi-border-color"

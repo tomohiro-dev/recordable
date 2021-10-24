@@ -1,8 +1,8 @@
 <template>
   <v-row>
     <v-spacer></v-spacer>
-    <v-col cols="9" md="6" class="mt-n11">
-      <!-- <v-img>TODO: 画像を追加する</v-img> -->
+    <v-col cols="9" md="6" class="mt-n11 pt-12">
+      <v-img :src="'./svg/register.svg'"></v-img>
     </v-col>
     <v-spacer></v-spacer>
     <v-col cols="12" md="5">
@@ -13,7 +13,7 @@
 
         <v-card-text>
           <div class="text--primary subtitle-2">
-            <h2>Are you ready to study Japanese?</h2>
+            <h2>You are connected to the world in Japanese.</h2>
           </div>
         </v-card-text>
 
