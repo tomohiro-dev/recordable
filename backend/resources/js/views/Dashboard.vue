@@ -145,7 +145,7 @@
                   <div class="echarts" v-else>
                   <v-row align="center" justify="center">
                     <v-col>
-                      <v-img :contain="true" max-height="240px" :src="'./svg/noData.svg'"></v-img>
+                      <v-img :contain="true" max-height="240px" :src="'./svg/noDataMonthly.svg'"></v-img>
                       <p class="mt-2 subtitle-1 text-center">
                         Your records will now be added.
                         <br />Are you ready to get started?
