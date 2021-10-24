@@ -4,11 +4,10 @@
     <v-col cols="12" md="6" class="mt-n8 pt-12">
       <v-img :src="'./svg/login.svg'"></v-img>
     </v-col>
-    <!-- <v-spacer></v-spacer> -->
     <v-col cols="12" md="5">
       <!-- <v-card elevation="0" style="background-color: var(--v-background-base)"> -->
+        <!-- TODO:次回リリース時に対応↑ -->
       <v-card>
-        <!-- TODO: ↑画像追加時に削除 -->
         <v-card-title>
           <h1>Welcome to Recordable!</h1>
         </v-card-title>

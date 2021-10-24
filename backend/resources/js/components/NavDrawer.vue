@@ -9,7 +9,7 @@
 
     <v-list-item class="px-2">
       <!-- TODO: 次回アップデート時に追加する -->
-      <!-- TODO: アイコン追加 -->
+      <!-- TODO: ユーザーアイコンの追加 -->
       <v-list-item-title class="font-weight-bold">{{ username }}</v-list-item-title>
     </v-list-item>
     <v-divider></v-divider>
@@ -36,7 +36,7 @@
       <div class="px-2">
         <v-menu top offset-x :close-on-content-click="false">
           <!-- TODO: 次回アップデート時に追加する -->
-          <!-- 着せ替え追加 -->
+          <!-- 着せ替え追加（追加するか検討中） -->
         </v-menu>
       </div>
 

@@ -2,10 +2,9 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
 use App\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class LogoutApiTest extends TestCase
 {
@@ -24,7 +23,7 @@ class LogoutApiTest extends TestCase
     public function should_LogoutRegisterdUser()
     {
         $response = $this->actingAs($this->user)
-                         ->json('POST', route('logout'));
+            ->json('POST', route('logout'));
 
         $response->assertStatus(200);
         $this->assertGuest();

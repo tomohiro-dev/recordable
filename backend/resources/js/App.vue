@@ -20,7 +20,7 @@ import NavBar from './components/NavBar.vue'
 import NavDrawer from './components/NavDrawer.vue'
 import MobileNav  from './components/MobileNav.vue'
 
-import { INTERNAL_SERVER_ERROR } from './util'
+import { INTERNAL_SERVER_ERROR } from './status'
 
 export default {
   components: {
@@ -34,7 +34,6 @@ export default {
     }
   },
   computed: {
-    // error storeのcode state 取得
     errorCode() {
       return this.$store.state.error.code
     }

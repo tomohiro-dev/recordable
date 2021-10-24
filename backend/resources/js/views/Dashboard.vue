@@ -5,7 +5,6 @@
       <v-btn text @click="snackbar.error = false">CLOSE</v-btn>
     </v-snackbar>
 
-    <!-- レコード -->
     <span class="title">
       <v-icon class="mr-2 mb-1" color="#02E3FF">mdi-archive-clock</v-icon>My Record
     </span>
@@ -16,7 +15,6 @@
             <ICountUp :endVal="record.today" />
             <span class="headline">min</span>
           </v-card-text>
-          <!-- <v-divider class="my-0 mx-4"></v-divider> -->
           <v-card-title class="pb-2">Today</v-card-title>
         </v-card>
       </v-col>
@@ -40,7 +38,7 @@
             <ICountUp :endVal="record.thisMonth" />
             <span class="headline">hours</span>
           </v-card-text>
-          <v-card-title class="pb-2">This Month({{ thisMonthEng }})</v-card-title>
+          <v-card-title class="pb-2">This Month({{ thisMonthEngText }})</v-card-title>
         </v-card>
       </v-col>
 
@@ -56,9 +54,6 @@
     </v-row>
 
     <v-row>
-
-
-        <!-- スタックチャート -->
       <v-col cols="12" md="7">
         <span class="title">
           <v-icon class="mr-2 mb-1" color="#02E3FF">mdi-equalizer</v-icon>Weekly Report
@@ -85,8 +80,8 @@
 
               <div class="py-4" v-else>
                 <chart
-                 v-if="!isEmpty(this.chartStackWeek.series)"
-                 :options="chartStackWeek"
+                 v-if="!isEmpty(this.stackChartWeek.series)"
+                 :options="stackChartWeek"
                  autoresize
                 >
                 </chart>
@@ -107,19 +102,16 @@
           </v-tab-item>
         </v-tabs-items>
       </v-col>
-      <!-- スタックチャートfin -->
 
-    <!-- pieチャート -->
       <v-col cols="12" md="5">
         <span class="title">
           <v-icon class="mr-2 mb-1" color="#02E3FF">mdi-chart-pie</v-icon>Monthly Report
         </span>
 
         <v-tabs v-model="pie" color="#00CED1">
-          <v-tab>{{ thisMonthEng }}(HOUR)</v-tab>
+          <v-tab>{{ thisMonthEngText }}(HOUR)</v-tab>
         </v-tabs>
 
-        <!-- パイチャート -->
         <v-tabs-items v-model="pie">
           <v-tab-item>
             <v-card>
@@ -158,7 +150,6 @@
           </v-tab-item>
         </v-tabs-items>
       </v-col>
-        <!-- pieチャート fin-->
 
     </v-row>
   </div>
@@ -187,11 +178,11 @@ export default {
       record: {
         today: 0,
         thisWeek: 0,
-        thisMonth: 0, //TODOローマ字表記 dashboard表示用に追加？
+        thisMonth: 0,
         total: 0
       },
       recordEngNotation: {
-        thisMonthEng: ''
+        thisMonthEngText: ''
       },
       stack: "",
       pie: "",
@@ -214,14 +205,13 @@ export default {
             type: "pie",
             roseType: "radius",
             radius: [25, 100],
-            //radius: '55%',
             center: ["50%", "40%"],
             data: [],
             animationEasing: "cubicInOut"
           }
         ]
       },
-      chartStackWeek: {
+      stackChartWeek: {
         tooltip: {
           trigger: "axis",
           axisPointer: {
@@ -252,31 +242,31 @@ export default {
             }
           }
         ],
-        //データのこと
+        //stackチャート内のデータ
         series: []
       }
-    };
+    }
   },
   created() {
     // 今月の記録を取得
     window.axios
       .get("/api/records")
       .then(response => {
-        this.timers.month = response.data;
+        this.timers.month = response.data
       })
       .catch(err => {
-        this.errorMessage = err;
-        this.snackbar.error = true;
-      });
+        this.errorMessage = err
+        this.snackbar.error = true
+      })
     // これまでの総合計を取得
     window.axios
       .get("/api/records/total")
       .then(response => {
-        this.record.total = response.data;
+        this.record.total = response.data
       })
       .catch(err => {
-        this.errorMessage = err;
-        this.snackbar.error = true;
+        this.errorMessage = err
+        this.snackbar.error = true
       });
   },
   methods: {
@@ -287,7 +277,7 @@ export default {
           return true;
         }
       } else if (typeof val == "object") {
-        return Object.keys(val).length === 0;
+        return Object.keys(val).length === 0
       }
       return false
     }
@@ -302,14 +292,14 @@ export default {
       return moment()
         .format("M,YYYY")
     },
-    thisMonthEng() {
+    thisMonthEngText() {
       return moment()
         .format("MMM, YYYY")
     }
   },
   watch: {
     "timers.month": {
-      handler: function(val) {
+      handler: function() {
         const now = moment()
 
         function today(val) {
@@ -320,16 +310,16 @@ export default {
             moment(val.started_at).isSame(now, "day")
           )
         }
-        // 今日のレコード
-        const timers_today = this.timers.month.filter(today);
-        let amountToday = 0
-        // 今日の全レコードの経過分を計算
-        for (let i = 0; i < timers_today.length; i++) {
-          const started_at = moment(timers_today[i].started_at)
-          const stopped_at = moment(timers_today[i].stopped_at)
-          amountToday += stopped_at.diff(started_at, "seconds")
+        const timersToday = this.timers.month.filter(today)
+        let totalToday = 0
+
+        for (let todayComplete = 0; todayComplete < timersToday.length; todayComplete++) {
+          const started_at = moment(timersToday[todayComplete].started_at)
+          const stopped_at = moment(timersToday[todayComplete].stopped_at)
+          totalToday += stopped_at.diff(started_at, "seconds")
         }
-        this.record.today = Math.round(amountToday / 60)
+        this.record.today = Math.round(totalToday / 60)
+
 
         function thisWeek(val) {
           return (
@@ -337,37 +327,37 @@ export default {
             val.stopped_at !== null &&
             // 今週の記録のみに絞り込み
             moment(val.started_at).week() === now.week()
-          );
+          )
         }
 
         // 今週のレコード
-        const timers_this_week = this.timers.month.filter(thisWeek)
-        let amountThisWeek = 0
+        const timersThisWeek = this.timers.month.filter(thisWeek)
+        let totalThisWeek = 0
 
         // 今週の全レコードの経過時間(少数第一位まで)を計算
-        for (let i = 0; i < timers_this_week.length; i++) {
-          const started_at = moment(timers_this_week[i].started_at)
-          const stopped_at = moment(timers_this_week[i].stopped_at)
-          amountThisWeek += stopped_at.diff(started_at, "seconds")
+        for (let weekComplete = 0; weekComplete < timersThisWeek.length; weekComplete++) {
+          const started_at = moment(timersThisWeek[weekComplete].started_at)
+          const stopped_at = moment(timersThisWeek[weekComplete].stopped_at)
+          totalThisWeek += stopped_at.diff(started_at, "seconds")
         }
-        this.record.thisWeek = Math.round((amountThisWeek / 3600) * 10) / 10
+        this.record.thisWeek = Math.round((totalThisWeek / 3600) * 10) / 10
 
-        let amountThisMonth = 0;
 
-        for (let i = 0; i < this.timers.month.length; i++) {
-          const started_at = moment(this.timers.month[i].started_at);
+        let totalThisMonth = 0
+
+        for (let monthComplete = 0; monthComplete < this.timers.month.length; monthComplete++) {
+          const started_at = moment(this.timers.month[monthComplete].started_at)
           // もし計測していたら飛ばす
-          if (this.timers.month[i].stopped_at === null) {
-            continue;
+          if (this.timers.month[monthComplete].stopped_at === null) {
+            continue
           }
-          const stopped_at = moment(this.timers.month[i].stopped_at);
-          amountThisMonth += stopped_at.diff(started_at, "seconds");
+          const stopped_at = moment(this.timers.month[monthComplete].stopped_at)
+          totalThisMonth += stopped_at.diff(started_at, "seconds")
         }
-        this.record.thisMonth = Math.round(amountThisMonth / 3600);
+        this.record.thisMonth = Math.round(totalThisMonth / 3600)
 
 
         //今月のデータがある場合に実行（データが空ではない）
-        //TODO: ↑コメント削除
         if (!this.isEmpty(this.timers.month)) {
           let data = [
             {
@@ -383,54 +373,55 @@ export default {
           let value = stopped_at.diff(started_at, "seconds")
           let name = this.timers.month[0].category_name
           let color = this.timers.month[0].category_color
+
           // パイチャート用に渡すデータ
           // 今月の記録でループを回す
-          for (let i = 1; i < this.timers.month.length; i++) {
-            // 計算中のタイマーは含めないので回避
-            if (this.timers.month[i].stopped_at === null) {
+          for (let recordOfTheMonth = 1; recordOfTheMonth < this.timers.month.length; recordOfTheMonth++) {
+            // 計算中のタイマーは含めないので回避する
+            if (this.timers.month[recordOfTheMonth].stopped_at === null) {
               continue
             }
-            let started_at = moment(this.timers.month[i].started_at)
-            let stopped_at = moment(this.timers.month[i].stopped_at)
+            let started_at = moment(this.timers.month[recordOfTheMonth].started_at)
+            let stopped_at = moment(this.timers.month[recordOfTheMonth].stopped_at)
             let value = stopped_at.diff(started_at, "seconds")
             let added = false
-            for (let j = 0; j < data.length; j++) {
-              if (data[j]["id"] === this.timers.month[i].category_id) {
-                data[j]["value"] += value
+            for (let dataForPieChart = 0; dataForPieChart < data.length; dataForPieChart++) {
+              if (data[dataForPieChart]["id"] === this.timers.month[recordOfTheMonth].category_id) {
+                data[dataForPieChart]["value"] += value
                 added = true
                 break
               }
             }
             if (added === false) {
-              let id = this.timers.month[i].category_id
-              let name = this.timers.month[i].category_name
-              let color = this.timers.month[i].category_color
+              let id = this.timers.month[recordOfTheMonth].category_id
+              let name = this.timers.month[recordOfTheMonth].category_name
+              let color = this.timers.month[recordOfTheMonth].category_color
               data.push({
                 id,
                 value,
                 name,
                 itemStyle: { color }
-              });
+              })
             }
           }
 
           //降順に並び替える
-          //TODO: a,bをrefactoring
-          function compare(a, b) {
-            let comparison = 0
-            if (a.value > b.value) {
-              comparison = 1
+          //チャート表示に必要
+          function compare(latestDate, oldestDate) {
+            let comparisonDate = 0
+            if (latestDate.value > oldestDate.value) {
+              comparisonDate = 1
             } else {
-              comparison = -1
+              comparisonDate = -1
             }
-            return comparison * -1
+            return comparisonDate * -1
           }
 
           // 計測期間が長い順に並び替え
           data.sort(compare)
           // 秒を時間に変換
-          for (let i = 0; i < data.length; i++) {
-            data[i].value = Math.round((data[i].value / 3600) * 10) / 10
+          for (let longMeasurementPeriod = 0; longMeasurementPeriod < data.length; longMeasurementPeriod++) {
+            data[longMeasurementPeriod].value = Math.round((data[longMeasurementPeriod].value / 3600) * 10) / 10
           }
           this.chartPie.series[0].data = data
           this.loading.pie = false
@@ -440,32 +431,32 @@ export default {
 
 
         // 今週のデータが空でない場合のみ実行
-        if (!this.isEmpty(timers_this_week)) {
+        if (!this.isEmpty(timersThisWeek)) {
           let series = [
             {
-              id: timers_this_week[0]["category_id"],
-              name: timers_this_week[0]["category_name"],
+              id: timersThisWeek[0]["category_id"],
+              name: timersThisWeek[0]["category_name"],
               type: "bar",
-              color: timers_this_week[0]["category_color"],
+              color: timersThisWeek[0]["category_color"],
               stack: "vistors",
-              barWidth: "50%"
+              barWidth: "60%"
             }
           ]
 
-          for (let i = 1; i < timers_this_week.length; i++) {
-            let isSame = false;
-            for (let j = 0; j < series.length; j++) {
-              if (series[j]["id"] === timers_this_week[i]["category_id"]) {
+          for (let weeklyStackObject = 1; weeklyStackObject < timersThisWeek.length; weeklyStackObject++) {
+            let isSame = false
+            for (let seriesInStackObject = 0; seriesInStackObject < series.length; seriesInStackObject++) {
+              if (series[seriesInStackObject]["id"] === timersThisWeek[weeklyStackObject]["category_id"]) {
                 isSame = true
                 break
               }
             }
             if (isSame === false) {
               series.push({
-                id: timers_this_week[i]["category_id"],
-                name: timers_this_week[i]["category_name"],
+                id: timersThisWeek[weeklyStackObject]["category_id"],
+                name: timersThisWeek[weeklyStackObject]["category_name"],
                 type: "bar",
-                color: timers_this_week[i]["category_color"],
+                color: timersThisWeek[weeklyStackObject]["category_color"],
                 stack: "vistors",
                 barWidth: "50%"
               })
@@ -473,39 +464,37 @@ export default {
           }
           // それぞれのカテゴリーで下記形式の日毎のデータを生成する
           // [日, 月, 火, 水, 木, 金, 土]
-          // [79, 52, 200, 334, 390, 330, 220]
           // まずはカテゴリーごとに分類
           // 最初のデータでオブジェクトを生成
           let categories = [
             {
-              id: timers_this_week[0]["category_id"],
-              data: [timers_this_week[0]]
+              id: timersThisWeek[0]["category_id"],
+              data: [timersThisWeek[0]]
             }
           ]
-          for (let i = 1; i < timers_this_week.length; i++) {
+          for (let dataForStackChart = 1; dataForStackChart < timersThisWeek.length; dataForStackChart++) {
             let isSame = false;
-            for (let j = 0; j < categories.length; j++) {
-              if (categories[j]["id"] === timers_this_week[i]["category_id"]) {
+            for (let categoryInStackChart = 0; categoryInStackChart < categories.length; categoryInStackChart++) {
+              if (categories[categoryInStackChart]["id"] === timersThisWeek[dataForStackChart]["category_id"]) {
                 isSame = true
-                categories[j]["data"].push(timers_this_week[i])
+                categories[categoryInStackChart]["data"].push(timersThisWeek[dataForStackChart])
                 break
               }
             }
             if (isSame === false) {
               categories.push({
-                id: timers_this_week[i]["category_id"],
-                data: [timers_this_week[i]]
+                id: timersThisWeek[dataForStackChart]["category_id"],
+                data: [timersThisWeek[dataForStackChart]]
               })
             }
           }
 
           // 日毎のデータ作成
-          //TODO: i,jをrefactoring
-          for (let i = 0; i < categories.length; i++) {
-            let data = [0, 0, 0, 0, 0, 0, 0];
-            for (let j = 0; j < categories[i].data.length; j++) {
-              const started_at = moment(categories[i].data[j].started_at)
-              const stopped_at = moment(categories[i].data[j].stopped_at)
+          for (let stackChart = 0; stackChart < categories.length; stackChart++) {
+            let data = [0, 0, 0, 0, 0, 0, 0]
+            for (let categoryDetail = 0; categoryDetail < categories[stackChart].data.length; categoryDetail++) {
+              const started_at = moment(categories[stackChart].data[categoryDetail].started_at)
+              const stopped_at = moment(categories[stackChart].data[categoryDetail].stopped_at)
               const diff = stopped_at.diff(started_at, "seconds")
               const day = started_at.day()
 
@@ -533,33 +522,36 @@ export default {
                   break
               }
             }
-            categories[i].data = data;
+            categories[stackChart].data = data
           }
-          for (let i = 0; i < series.length; i++) {
-            for (let j = 0; j < categories.length; j++) {
-              if (series[i].id === categories[j].id) {
-                series[i] = Object.assign(series[i], categories[j]);
-                break;
+          // seriesオブジェクトにcategoriesオブジェクトをマージする
+          for (let seriesObject = 0; seriesObject < series.length; seriesObject++) {
+            for (let categoriesObject = 0; categoriesObject < categories.length; categoriesObject++) {
+              if (series[seriesObject].id === categories[categoriesObject].id) {
+                series[seriesObject] = Object.assign(series[seriesObject], categories[categoriesObject])
+                break
               }
             }
           }
-          for (let i = 0; i < series.length; i++) {
-            for (let j = 0; j < series[i].data.length; j++) {
-              series[i].data[j] =
-                Math.round((series[i].data[j] / 60) * 10) / 10
+          // dataの秒を分に整形
+          for (let stackChartObject = 0; stackChartObject < series.length; stackChartObject++) {
+            for (let seriesObject = 0; seriesObject < series[stackChartObject].data.length; seriesObject++) {
+              series[stackChartObject].data[seriesObject] =
+                Math.round((series[stackChartObject].data[seriesObject] / 60) * 10) / 10
             }
           }
-          this.chartStackWeek.series = series;
-          this.loading.stack = false;
+          this.stackChartWeek.series = series
+          this.loading.stack = false
         }
         else{
-          this.loading.stack = false;
+          this.loading.stack = false
         }
       }
     }
   }
 }
 </script>
+
 <style scoped>
 .echarts {
   width: 100%;

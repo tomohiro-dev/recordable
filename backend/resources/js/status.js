@@ -2,7 +2,7 @@
  * クッキーの値を取得する
  * @param {String} searchKey 検索するキー
  * @returns {String} キーに対応する値
- *source: https://bit.ly/3uzDfqL
+ *参照source: https://bit.ly/3uzDfqL
  */
 export function getCookieValue(searchKey) {
   if (typeof searchKey === 'undefined') {

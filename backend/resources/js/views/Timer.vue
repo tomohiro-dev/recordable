@@ -33,10 +33,7 @@
       An error has occurred. message：{{ errorMessage }}
       <v-btn text @click="snackbar.error = false">CLOSE</v-btn>
     </v-snackbar>
-    <!-- TODO: snackbarをcomponentとして切り出す fin-->
 
-
-    <!-- タイマー追加ボタン -->
     <v-speed-dial
       v-model="fab"
       fab
@@ -82,9 +79,7 @@
         <v-icon>mdi-book-edit-outline</v-icon>
       </v-btn>
     </v-speed-dial>
-    <!-- タイマー追加ボタン fin -->
 
-   <!-- loading animation -->
     <template v-if="loading">
       <v-row :style="`height:${windowSize.height}px`" align="center" justify="center">
         <v-col>
@@ -92,9 +87,7 @@
         </v-col>
       </v-row>
     </template>
-      <!-- loading animation fin -->
 
-    <!-- 一覧表示 (loadingがv-if) v-else -->
     <template>
       <template v-if="!isEmpty(timersArray[0][0])">
         <template v-for="timers in timersArray">
@@ -147,7 +140,6 @@
           </v-row>
       </template>
 
-          <!-- 記録がない時の画面 -->
       <v-row v-else :style="`height:${windowSize.height}px`" align="center" justify="center">
         <v-col cols="10" md="4">
           <v-img :src="'./svg/noDataTimer.svg'"></v-img>
@@ -157,8 +149,6 @@
       </v-row>
     </template>
 
-
-    <!-- 新規作成タイマー -->
     <div class="text-center">
       <v-dialog v-model="dialog.newTimer" width="500">
         <v-card>
@@ -208,6 +198,7 @@
                       :rules="rules.category"
                     ></v-select>
                   </v-col>
+
                   <!-- カテゴリ追加ボタン -->
                   <div class="text-center">
                     <v-menu
@@ -324,7 +315,6 @@
       </v-dialog>
     </div>
 
-    <!-- Editing -->
     <div class="text-center">
       <v-dialog v-model="dialog.saveTimer" width="500">
         <v-card>
@@ -717,8 +707,6 @@
 
 <script>
 import moment from "moment"
-// import { TheMask } from "vue-the-mask"
-//TOOD: DELETE
 
 export default {
   data() {
@@ -768,16 +756,15 @@ export default {
         saveTimerColor: false,
         delete: false,
       },
-        // inputTimerRules（名前変えるかも）
-        rules: {
-          category: [value => !!value || 'Make a section.'],
-          memo: [value => (value || '').length <= 140 || 'Up to 140 characters.'],
-          require: [value => !!value || 'Enter your information.'],
-          name: [
-            value => !!value || 'Enter your information.',
-            value => (value || '').length <= 30 || 'Up to 30 characters.'
-          ]
-        },
+      rules: {
+        category: [value => !!value || 'Make a section.'],
+        memo: [value => (value || '').length <= 140 || 'Up to 140 characters.'],
+        require: [value => !!value || 'Enter your information.'],
+        name: [
+          value => !!value || 'Enter your information.',
+          value => (value || '').length <= 30 || 'Up to 30 characters.'
+        ]
+      },
       time: {
         hours: [],
         minutes: [],
@@ -787,7 +774,6 @@ export default {
       timersArray: [[]],
       categories: [],
       headers: [
-        // TODO: barみたいな名前にrefactoring
         {
           text: "Contents",
           align: "start",
@@ -826,7 +812,7 @@ export default {
       activeTimerString: "Calculating...",
       newTimerValid: false,
       errorMessage: "",
-      mask: '!#XXXXXXXX', //カラーコードの入力制御(colorCodeMaskにするかも) ...そもそも不要かも
+      mask: '!#XXXXXXXX', //カラーコードの入力制御
       loading: true,
       infiniteLoading: false,
       lastPage: false,
@@ -836,7 +822,7 @@ export default {
       },
       textFieldProps: {
         prependIcon: 'mdi-camera-timer',
-        color: '#696969' //TODO: 色変更
+        color: '#696969' //TODO: 色変更（次回のアップデートで検討）
       },
       timePickerProps: {
         format: '24hr',
@@ -942,10 +928,10 @@ export default {
       window.axios
         .post(`/api/timers/stop`)
         .then(response => {
-          // activeTimerをストップ TODO:stopActiveTimerへ変更したい
           const activeTimer = this.timers.find(
             timer => timer.id === this.counter.timer.id
           )
+          // activeTimerをストップ
           activeTimer.stopped_at = response.data.stopped_at
           // tickerをストップする
           clearInterval(this.counter.ticker)
@@ -954,7 +940,7 @@ export default {
           this.snackbar.activeTimer = false;
           this.snackbar.done = true
 
-          // confetti({
+          // confetti
           var end = Date.now() + (3 * 1000);
           // go Buckeyes!
           var colors = ['#bb0000', '#ffffff'];
@@ -992,7 +978,7 @@ export default {
           category_id: this.newTimer.category["id"],
           category_name: this.newTimer.category["name"]
             ? this.newTimer.category["name"]
-            : "カテゴリー未登録",
+            : "No categories",
           category_color: this.newTimer.category["color"]
             ? this.newTimer.category["color"]
             : "#696969"
@@ -1143,10 +1129,9 @@ export default {
           }
           //もし日付が更新されたら
           //timersを日付の新しい順番に並び替える
-          //TODO: refactoring to a(beforeUpdateTimerとか) and b(updatedTimerとか)
           if (!startedBefore.isSame(startedAfter)) {
-            this.timers.sort(function(a, b) {
-              return a.started_at < b.started_at ? 1 : -1
+            this.timers.sort(function(beforeUpdateTimer, updatedTimer) {
+              return beforeUpdateTimer.started_at < updatedTimer.started_at ? 1 : -1
             })
           }
 
@@ -1212,18 +1197,16 @@ export default {
       //値を返す
     },
     _arrayHours() {
-      let i = 0
-      //TODO: refactoringする | hourPullDownとか
-      for (i; i <= 24; i++) {
-        this.time.hours.push(i)
+      let hourPullDown = 0
+      for (hourPullDown; hourPullDown <= 24; hourPullDown++) {
+        this.time.hours.push(hourPullDown)
       }
     },
     _arrayMinutes() {
-      let i = 0
-      //TODO: refactoringする | hourPullDownとか
-      for (i; i <= 59; i++) {
-        this.time.minutes.push(i)
-        this.time.seconds.push(i)
+      let minAndSecPullDown = 0
+      for (minAndSecPullDown; minAndSecPullDown <= 59; minAndSecPullDown++) {
+        this.time.minutes.push(minAndSecPullDown)
+        this.time.seconds.push(minAndSecPullDown)
       }
     }
   },
@@ -1261,7 +1244,7 @@ export default {
             m: this.editTimer.time.minutes,
             s: this.editTimer.time.seconds
           })
-          .toDate();
+          .toDate()
       }
     },
     //saveTimer.stopped_at計算用
@@ -1295,22 +1278,22 @@ export default {
           // timers[0]をtimesArray[0]に格納
           this.timersArray[0].push(this.timers[0]);
           //timersでループを回す
-          for (let i = 0; i < this.timers.length - 1; i++) {
+          for (let timersList = 0; timersList < this.timers.length - 1; timersList++) {
             // timers[1]のstarted_atの年月日がtimers[0]のstarted_atの年月日と同じ場合、timers[1]を配列に格納
             if (
-              moment(this.timers[i].started_at).isSame(
-                moment(this.timers[i + 1].started_at),
+              moment(this.timers[timersList].started_at).isSame(
+                moment(this.timers[timersList + 1].started_at),
                 "day"
               )
             ) {
               this.timersArray[this.timersArray.length - 1].push(
-                this.timers[i + 1]
-              );
+                this.timers[timersList + 1]
+              )
             } else {
               // 異なる場合は新たに配列を作成する
-              this.timersArray.push([]);
+              this.timersArray.push([])
               this.timersArray[this.timersArray.length - 1].push(
-                this.timers[i + 1]
+                this.timers[timersList + 1]
               );
             }
           }
