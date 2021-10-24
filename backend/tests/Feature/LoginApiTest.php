@@ -2,10 +2,9 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
 use App\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class LoginApiTest extends TestCase
 {
@@ -18,7 +17,7 @@ class LoginApiTest extends TestCase
         $this->user = factory(User::class)->create();
     }
 
-     /**
+    /**
      * @test
      */
     public function should_returnRegisterdNewUser()
@@ -34,5 +33,4 @@ class LoginApiTest extends TestCase
 
         $this->assertAuthenticatedAs($this->user);
     }
-
 }
