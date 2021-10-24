@@ -38,7 +38,7 @@
             <ICountUp :endVal="record.thisMonth" />
             <span class="headline">hours</span>
           </v-card-text>
-          <v-card-title class="pb-2">This Month({{ thisMonthEng }})</v-card-title>
+          <v-card-title class="pb-2">This Month({{ thisMonthEngText }})</v-card-title>
         </v-card>
       </v-col>
 
@@ -80,8 +80,8 @@
 
               <div class="py-4" v-else>
                 <chart
-                 v-if="!isEmpty(this.chartStackWeek.series)"
-                 :options="chartStackWeek"
+                 v-if="!isEmpty(this.stackChartWeek.series)"
+                 :options="stackChartWeek"
                  autoresize
                 >
                 </chart>
@@ -109,7 +109,7 @@
         </span>
 
         <v-tabs v-model="pie" color="#00CED1">
-          <v-tab>{{ thisMonthEng }}(HOUR)</v-tab>
+          <v-tab>{{ thisMonthEngText }}(HOUR)</v-tab>
         </v-tabs>
 
         <v-tabs-items v-model="pie">
@@ -182,7 +182,7 @@ export default {
         total: 0
       },
       recordEngNotation: {
-        thisMonthEng: ''
+        thisMonthEngText: ''
       },
       stack: "",
       pie: "",
@@ -205,14 +205,13 @@ export default {
             type: "pie",
             roseType: "radius",
             radius: [25, 100],
-            //radius: '55%',
             center: ["50%", "40%"],
             data: [],
             animationEasing: "cubicInOut"
           }
         ]
       },
-      chartStackWeek: {
+      stackChartWeek: {
         tooltip: {
           trigger: "axis",
           axisPointer: {
@@ -293,14 +292,14 @@ export default {
       return moment()
         .format("M,YYYY")
     },
-    thisMonthEng() {
+    thisMonthEngText() {
       return moment()
         .format("MMM, YYYY")
     }
   },
   watch: {
     "timers.month": {
-      handler: function() { //val削除中
+      handler: function() {
         const now = moment()
 
         function today(val) {
@@ -378,7 +377,7 @@ export default {
           // パイチャート用に渡すデータ
           // 今月の記録でループを回す
           for (let recordOfTheMonth = 1; recordOfTheMonth < this.timers.month.length; recordOfTheMonth++) {
-            // 計算中のタイマーは含めないので回避
+            // 計算中のタイマーは含めないので回避する
             if (this.timers.month[recordOfTheMonth].stopped_at === null) {
               continue
             }
@@ -386,9 +385,9 @@ export default {
             let stopped_at = moment(this.timers.month[recordOfTheMonth].stopped_at)
             let value = stopped_at.diff(started_at, "seconds")
             let added = false
-            for (let j = 0; j < data.length; j++) {
-              if (data[j]["id"] === this.timers.month[recordOfTheMonth].category_id) {
-                data[j]["value"] += value
+            for (let dataForPieChart = 0; dataForPieChart < data.length; dataForPieChart++) {
+              if (data[dataForPieChart]["id"] === this.timers.month[recordOfTheMonth].category_id) {
+                data[dataForPieChart]["value"] += value
                 added = true
                 break
               }
@@ -444,7 +443,6 @@ export default {
             }
           ]
 
-          //weeklyStackObject
           for (let weeklyStackObject = 1; weeklyStackObject < timersThisWeek.length; weeklyStackObject++) {
             let isSame = false
             for (let seriesInStackObject = 0; seriesInStackObject < series.length; seriesInStackObject++) {
@@ -466,7 +464,6 @@ export default {
           }
           // それぞれのカテゴリーで下記形式の日毎のデータを生成する
           // [日, 月, 火, 水, 木, 金, 土]
-          // [79, 52, 200, 334, 390, 330, 220]
           // まずはカテゴリーごとに分類
           // 最初のデータでオブジェクトを生成
           let categories = [
@@ -475,32 +472,29 @@ export default {
               data: [timersThisWeek[0]]
             }
           ]
-          //weeklyReportStackCategory
-          for (let i = 1; i < timersThisWeek.length; i++) {
+          for (let dataForStackChart = 1; dataForStackChart < timersThisWeek.length; dataForStackChart++) {
             let isSame = false;
-            for (let j = 0; j < categories.length; j++) {
-              if (categories[j]["id"] === timersThisWeek[i]["category_id"]) {
+            for (let categoryInStackChart = 0; categoryInStackChart < categories.length; categoryInStackChart++) {
+              if (categories[categoryInStackChart]["id"] === timersThisWeek[dataForStackChart]["category_id"]) {
                 isSame = true
-                categories[j]["data"].push(timersThisWeek[i])
+                categories[categoryInStackChart]["data"].push(timersThisWeek[dataForStackChart])
                 break
               }
             }
             if (isSame === false) {
               categories.push({
-                id: timersThisWeek[i]["category_id"],
-                data: [timersThisWeek[i]]
+                id: timersThisWeek[dataForStackChart]["category_id"],
+                data: [timersThisWeek[dataForStackChart]]
               })
             }
           }
 
           // 日毎のデータ作成
-          //TODO: i,jをrefactoring
-          //i→weeklyReportStackCategoryDetail
-          for (let i = 0; i < categories.length; i++) {
+          for (let stackChart = 0; stackChart < categories.length; stackChart++) {
             let data = [0, 0, 0, 0, 0, 0, 0]
-            for (let j = 0; j < categories[i].data.length; j++) {
-              const started_at = moment(categories[i].data[j].started_at)
-              const stopped_at = moment(categories[i].data[j].stopped_at)
+            for (let categoryDetail = 0; categoryDetail < categories[stackChart].data.length; categoryDetail++) {
+              const started_at = moment(categories[stackChart].data[categoryDetail].started_at)
+              const stopped_at = moment(categories[stackChart].data[categoryDetail].stopped_at)
               const diff = stopped_at.diff(started_at, "seconds")
               const day = started_at.day()
 
@@ -528,9 +522,9 @@ export default {
                   break
               }
             }
-            categories[i].data = data;
+            categories[stackChart].data = data
           }
-          // seriesオブジェクトにcategoriesのdataオブジェクトをマージする
+          // seriesオブジェクトにcategoriesオブジェクトをマージする
           for (let seriesObject = 0; seriesObject < series.length; seriesObject++) {
             for (let categoriesObject = 0; categoriesObject < categories.length; categoriesObject++) {
               if (series[seriesObject].id === categories[categoriesObject].id) {
@@ -540,15 +534,13 @@ export default {
             }
           }
           // dataの秒を分に整形
-          // i→seriesObject
-          // j→
-          for (let i = 0; i < series.length; i++) {
-            for (let j = 0; j < series[i].data.length; j++) {
-              series[i].data[j] =
-                Math.round((series[i].data[j] / 60) * 10) / 10
+          for (let stackChartObject = 0; stackChartObject < series.length; stackChartObject++) {
+            for (let seriesObject = 0; seriesObject < series[stackChartObject].data.length; seriesObject++) {
+              series[stackChartObject].data[seriesObject] =
+                Math.round((series[stackChartObject].data[seriesObject] / 60) * 10) / 10
             }
           }
-          this.chartStackWeek.series = series
+          this.stackChartWeek.series = series
           this.loading.stack = false
         }
         else{
@@ -559,6 +551,7 @@ export default {
   }
 }
 </script>
+
 <style scoped>
 .echarts {
   width: 100%;

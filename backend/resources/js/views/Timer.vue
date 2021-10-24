@@ -787,7 +787,6 @@ export default {
       timersArray: [[]],
       categories: [],
       headers: [
-        // TODO: barみたいな名前にrefactoring
         {
           text: "Contents",
           align: "start",
@@ -1261,7 +1260,7 @@ export default {
             m: this.editTimer.time.minutes,
             s: this.editTimer.time.seconds
           })
-          .toDate();
+          .toDate()
       }
     },
     //saveTimer.stopped_at計算用
