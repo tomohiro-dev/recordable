@@ -42,7 +42,7 @@
     >
     <link
         rel="manifest"
-        href="{{asset('favicon/favicon/manifest.json')}}"
+        href="{{asset('favicon/manifest.json')}}"
     >
     <meta
         name="msapplication-TileColor"

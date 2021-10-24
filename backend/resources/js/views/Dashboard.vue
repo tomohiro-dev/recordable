@@ -40,7 +40,7 @@
             <ICountUp :endVal="record.thisMonth" />
             <span class="headline">hours</span>
           </v-card-text>
-          <v-card-title class="pb-2">This Month({{ thisMonth }})</v-card-title>
+          <v-card-title class="pb-2">This Month({{ thisMonthEng }})</v-card-title>
         </v-card>
       </v-col>
 
@@ -116,7 +116,7 @@
         </span>
 
         <v-tabs v-model="pie" color="#00CED1">
-          <v-tab>{{ thisMonth }}(HOUR)</v-tab>
+          <v-tab>{{ thisMonthEng }}(HOUR)</v-tab>
         </v-tabs>
 
         <!-- パイチャート -->
@@ -187,8 +187,11 @@ export default {
       record: {
         today: 0,
         thisWeek: 0,
-        thisMonth: '', //ローマ字表記
+        thisMonth: 0, //TODOローマ字表記 dashboard表示用に追加？
         total: 0
+      },
+      recordEngNotation: {
+        thisMonthEng: ''
       },
       stack: "",
       pie: "",
@@ -297,7 +300,11 @@ export default {
     },
     thisMonth() {
       return moment()
-        .format("MMM,YYYY")
+        .format("M,YYYY")
+    },
+    thisMonthEng() {
+      return moment()
+        .format("MMM, YYYY")
     }
   },
   watch: {
