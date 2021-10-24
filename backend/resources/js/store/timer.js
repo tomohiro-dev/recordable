@@ -1,4 +1,4 @@
-import { OK } from '../util'
+import { OK } from '../status'
 
 const state = {
   timers: [],
