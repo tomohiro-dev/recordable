@@ -1,10 +1,10 @@
 <template>
   <v-row>
     <v-spacer></v-spacer>
-    <v-col cols="9" md="6" class="mt-n11">
-      <!-- <v-img>TODO: 画像を追加</v-img> -->
+    <v-col cols="12" md="6" class="mt-n8 pt-12">
+      <v-img :src="'./svg/login.svg'"></v-img>
     </v-col>
-    <v-spacer></v-spacer>
+    <!-- <v-spacer></v-spacer> -->
     <v-col cols="12" md="5">
       <!-- <v-card elevation="0" style="background-color: var(--v-background-base)"> -->
       <v-card>
