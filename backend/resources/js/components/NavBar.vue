@@ -1,10 +1,6 @@
 <template>
   <v-app-bar v-if="!isLogin" color="transparent" app flat hide-on-scroll>
-    <!-- <v-img>ロゴを追加</v-img> -->
-    <v-toolbar-title>
-      Recordable
-      <!-- todo: ロゴを追加する時に削除する -->
-    </v-toolbar-title>
+    <v-img :src="'./svg/recordableRogo.svg'" max-height="40" max-width="240"></v-img>
     <v-spacer></v-spacer>
     <v-btn class="me-7" to="/login" text>LOGIN</v-btn>
     <v-btn to="/register" text>REGISTER</v-btn>

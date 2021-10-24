@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1470.388" height="318" viewBox="0 0 1470.388 318">
+  <g id="グループ_66" data-name="グループ 66" transform="translate(2272 3513)">
+    <text id="Recordable" transform="translate(-2260 -3258)" fill="#6a6a6a" font-size="220" font-family="NotoSansJP-Bold, Noto Sans JP" font-weight="700"><tspan x="0" y="0">Recordable</tspan></text>
+    <text id="Recordable-2" data-name="Recordable" transform="translate(-2272 -3258)" fill="#02e3ff" font-size="220" font-family="NotoSansJP-Bold, Noto Sans JP" font-weight="700"><tspan x="0" y="0" fill="#000">Record</tspan><tspan y="0" fill="#02e3ff">able</tspan></text>
+    <g id="グループ_56" data-name="グループ 56" transform="translate(-2318.821 -3619.862)">
+      <path id="パス_1" data-name="パス 1" d="M75.107,9.424c8.135-14.5,28.424-14.826,36.109-.576L181.987,140.07c7.525,13.952-2.721,31.485-18.546,31.738L17.758,174.132C1.933,174.384-7.77,157.169.2,142.97Z" transform="matrix(0.875, -0.485, 0.485, 0.875, 1271.414, 238.917)" fill="#6a6a6a"/>
+      <path id="パス_2" data-name="パス 2" d="M74.261,9.557C82.365-5.1,102.848-5.428,110.5,8.979l69.984,131.794c7.409,13.952-2.842,31.37-18.609,31.622l-144.125,2.3C1.981,174.944-7.73,157.845.119,143.649Z" transform="matrix(0.875, -0.485, 0.485, 0.875, 1260.986, 229.341)" fill="#02e3ff"/>
+    </g>
+  </g>
+</svg>
