@@ -243,7 +243,7 @@ export default {
             }
           }
         ],
-        //データのこと
+        //stackチャート内のデータ
         series: []
       }
     }
@@ -444,21 +444,21 @@ export default {
             }
           ]
 
-          //weeklyReportStack
-          for (let i = 1; i < timersThisWeek.length; i++) {
+          //weeklyStackObject
+          for (let weeklyStackObject = 1; weeklyStackObject < timersThisWeek.length; weeklyStackObject++) {
             let isSame = false
-            for (let j = 0; j < series.length; j++) {
-              if (series[j]["id"] === timersThisWeek[i]["category_id"]) {
+            for (let seriesInStackObject = 0; seriesInStackObject < series.length; seriesInStackObject++) {
+              if (series[seriesInStackObject]["id"] === timersThisWeek[weeklyStackObject]["category_id"]) {
                 isSame = true
                 break
               }
             }
             if (isSame === false) {
               series.push({
-                id: timersThisWeek[i]["category_id"],
-                name: timersThisWeek[i]["category_name"],
+                id: timersThisWeek[weeklyStackObject]["category_id"],
+                name: timersThisWeek[weeklyStackObject]["category_name"],
                 type: "bar",
-                color: timersThisWeek[i]["category_color"],
+                color: timersThisWeek[weeklyStackObject]["category_color"],
                 stack: "vistors",
                 barWidth: "50%"
               })
@@ -531,15 +531,17 @@ export default {
             categories[i].data = data;
           }
           // seriesオブジェクトにcategoriesのdataオブジェクトをマージする
-          for (let i = 0; i < series.length; i++) {
-            for (let j = 0; j < categories.length; j++) {
-              if (series[i].id === categories[j].id) {
-                series[i] = Object.assign(series[i], categories[j])
+          for (let seriesObject = 0; seriesObject < series.length; seriesObject++) {
+            for (let categoriesObject = 0; categoriesObject < categories.length; categoriesObject++) {
+              if (series[seriesObject].id === categories[categoriesObject].id) {
+                series[seriesObject] = Object.assign(series[seriesObject], categories[categoriesObject])
                 break
               }
             }
           }
           // dataの秒を分に整形
+          // i→seriesObject
+          // j→
           for (let i = 0; i < series.length; i++) {
             for (let j = 0; j < series[i].data.length; j++) {
               series[i].data[j] =
