@@ -26,7 +26,7 @@
         rel="icon"
         type="image/png"
         sizes="32x32"
-        href="{{asset('favicon/favicon-32x32.png')}}"
+        href="{{asset('favicon/favicon-32x32.ico')}}"
     >
     <link
         rel="icon"
@@ -38,7 +38,7 @@
         rel="icon"
         type="image/png"
         sizes="16x16"
-        href="{{asset('favicon/favicon-16x16.png')}}"
+        href="{{asset('favicon/favicon-16x16.ico')}}"
     >
     <link
         rel="manifest"
