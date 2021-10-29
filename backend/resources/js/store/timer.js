@@ -6,10 +6,10 @@ const state = {
 }
 
 const mutations = {
-  SET_TIMERS(state, timers) {
+  setTimers(state, timers) {
     state.timers = timers
   },
-  SET_ACTIVETIMER(state, bool) {
+  setTimerActive(state, bool) {
     state.active = bool
   }
 }
@@ -20,14 +20,14 @@ const actions = {
 
     //もし通信に失敗したら、エラーをcommitする
     if (response.status !== OK) {
-      this.$store.commit('error/SET_CODE', response.data)
+      this.$store.commit('error/setCode', response.data)
 
       return false
     }
-    context.commit('SET_TIMERS', response.data)
+    context.commit('setTimers', response.data)
   },
   fetchActive(context, bool) {
-    context.commit('SET_ACTIVETIMER', bool)
+    context.commit('setTimerActive', bool)
   }
 }
 
