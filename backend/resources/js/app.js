@@ -23,7 +23,7 @@ import '@mdi/font/css/materialdesignicons.css'
 import VueTheMask from 'vue-the-mask'
 import DatetimePicker from 'vuetify-datetime-picker'
 import VueLoading from 'vue-loading-template'
-import './echarts'
+import './plugin/echarts'
 
 // window.Vue = require('vue')
 window.Vue = Vue

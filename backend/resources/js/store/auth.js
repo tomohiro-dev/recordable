@@ -1,4 +1,4 @@
-import { OK, CREATED, UNPROCESSABLE_ENTITY } from '../status'
+import { OK, CREATED, UNPROCESSABLE_ENTITY } from '../plugin/status'
 
 const state = {
   user: null,
