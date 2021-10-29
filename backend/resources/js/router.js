@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Login from './views/Login.vue'
+import Login from './views/Login/Page.vue'
 import Register from './views/Register.vue'
 import Dashboard from './views/Dashboard.vue'
 import Timer from './views/Timer.vue'
