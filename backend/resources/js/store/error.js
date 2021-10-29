@@ -3,7 +3,7 @@ const state = {
 }
 
 const mutations = {
-  SET_CODE(state, code) {
+  setCode(state, code) {
     state.code = code
   }
 }

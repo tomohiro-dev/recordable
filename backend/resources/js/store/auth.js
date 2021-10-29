@@ -13,7 +13,7 @@ const getters = {
 }
 
 const mutations = {
-  SET_USER(state, user) {
+  setUserLogin(state, user) {
     state.user = user
   },
   SET_API_STATUS(state, status) {
@@ -30,11 +30,14 @@ const mutations = {
 const actions = {
   async register(context, data) {
     context.commit('SET_API_STATUS', null)
-    const response = await axios.post('/api/register', data)
+    const response = await axios
+      .post('/api/register', data)
+
+      .catch((err) => err.response || err)
 
     if (response.status === CREATED) {
       context.commit('SET_API_STATUS', true)
-      context.commit('SET_USER', response.data)
+      context.commit('setUserLogin', response.data)
       return false
     }
 
@@ -42,7 +45,7 @@ const actions = {
     if (response.status === UNPROCESSABLE_ENTITY) {
       context.commit('SET_REGISTER_ERROR_MESSAGES', response.data.errors)
     } else {
-      context.commit('error/SET_CODE', response.status, {
+      context.commit('error/setCode', response.status, {
         root: true
       })
     }
@@ -54,7 +57,7 @@ const actions = {
 
     if (response.status === OK) {
       context.commit('SET_API_STATUS', true)
-      context.commit('SET_USER', response.data)
+      context.commit('setUserLogin', response.data)
       return false
     }
 
@@ -62,7 +65,7 @@ const actions = {
     if (response.status === UNPROCESSABLE_ENTITY) {
       context.commit('SET_LOGIN_ERROR_MESSAGES', response.data.errors)
     } else {
-      context.commit('error/SET_CODE', response.status, {
+      context.commit('error/setCode', response.status, {
         root: true
       })
     }
@@ -74,12 +77,12 @@ const actions = {
 
     if (response.status === OK) {
       context.commit('SET_API_STATUS', true)
-      context.commit('SET_USER', null)
+      context.commit('setUserLogin', null)
       return false
     }
 
     context.commit('SET_API_STATUS', false)
-    context.commit('error/SET_CODE', response.status, {
+    context.commit('error/setCode', response.status, {
       root: true
     })
   },
@@ -90,12 +93,12 @@ const actions = {
     const user = response.data || null
     if (response.status === OK) {
       context.commit('SET_API_STATUS', true)
-      context.commit('SET_USER', user)
+      context.commit('setUserLogin', user)
       return false
     }
 
     context.commit('SET_API_STATUS', false)
-    context.commit('error/SET_CODE', response.status, {
+    context.commit('error/setCode', response.status, {
       root: true
     })
   }

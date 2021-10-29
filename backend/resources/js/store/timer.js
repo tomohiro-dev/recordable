@@ -20,7 +20,7 @@ const actions = {
 
     //もし通信に失敗したら、エラーをcommitする
     if (response.status !== OK) {
-      this.$store.commit('error/SET_CODE', response.data)
+      this.$store.commit('error/setCode', response.data)
 
       return false
     }

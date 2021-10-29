@@ -43,6 +43,7 @@ export default {
       handler(val) {
         if (val === INTERNAL_SERVER_ERROR) {
           this.systemErrorSnackbar = true
+          this.$router.push('/500')
         }
       },
       //createdで呼び出し
@@ -50,7 +51,7 @@ export default {
     },
     //同じrouteの異なるパラメータで画面遷移しても、vue-routerは画面を再描画しないのでwatchで監視する
     $route() {
-      this.$store.commit('error/SET_CODE', null)
+      this.$store.commit('error/setCode', null)
     }
   }
 }

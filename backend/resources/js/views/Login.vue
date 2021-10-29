@@ -123,8 +123,10 @@ export default {
 
       if (this.apiStatus) {
         this.$router.push('/')
+        console.log('login success!!')
+      } else {
+        console.log('login failed!')
       }
-      console.log('login success!!')
     },
     clearError() {
       this.$store.commit('auth/SET_LOGIN_ERROR_MESSAGES', null)
