@@ -128,15 +128,17 @@ export default {
       // authストアのresigterアクションを呼び出す
       await this.$store.dispatch('auth/register', this.registerForm)
 
-      // 通信に成功した場合は
+      // 通信に成功した場合はトップページに遷移
       if (this.apiStatus) {
         // トップページに移動する
         this.$router.push('/')
+        console.log('Wow, Register success!!')
+      } else {
+        console.log('woops! register failed!!')
       }
-      console.log('Wow, Register success!!')
     },
     clearError() {
-      this.$store.commit('auth/SET_REGISTER_ERROR_MESSAGES', null)
+      this.$store.commit('auth/setRegisterErrorMessages', null)
     }
   },
   computed: {

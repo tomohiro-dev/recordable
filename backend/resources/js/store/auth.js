@@ -16,34 +16,34 @@ const mutations = {
   setUserLogin(state, user) {
     state.user = user
   },
-  SET_API_STATUS(state, status) {
+  setApiStatus(state, status) {
     state.apiStatus = status
   },
-  SET_LOGIN_ERROR_MESSAGES(state, messages) {
+  setLoginErrorMessages(state, messages) {
     state.loginErrorMessages = messages
   },
-  SET_REGISTER_ERROR_MESSAGES(state, messages) {
+  setRegisterErrorMessages(state, messages) {
     state.registerErrorMessages = messages
   }
 }
 
 const actions = {
   async register(context, data) {
-    context.commit('SET_API_STATUS', null)
+    context.commit('setApiStatus', null)
     const response = await axios
       .post('/api/register', data)
 
       .catch((err) => err.response || err)
 
     if (response.status === CREATED) {
-      context.commit('SET_API_STATUS', true)
+      context.commit('setApiStatus', true)
       context.commit('setUserLogin', response.data)
       return false
     }
 
-    context.commit('SET_API_STATUS', false)
+    context.commit('setApiStatus', false)
     if (response.status === UNPROCESSABLE_ENTITY) {
-      context.commit('SET_REGISTER_ERROR_MESSAGES', response.data.errors)
+      context.commit('setRegisterErrorMessages', response.data.errors)
     } else {
       context.commit('error/setCode', response.status, {
         root: true
@@ -52,18 +52,18 @@ const actions = {
   },
 
   async login(context, data) {
-    context.commit('SET_API_STATUS', null)
+    context.commit('setApiStatus', null)
     const response = await axios.post('/api/login', data)
 
     if (response.status === OK) {
-      context.commit('SET_API_STATUS', true)
+      context.commit('setApiStatus', true)
       context.commit('setUserLogin', response.data)
       return false
     }
 
-    context.commit('SET_API_STATUS', false)
+    context.commit('setApiStatus', false)
     if (response.status === UNPROCESSABLE_ENTITY) {
-      context.commit('SET_LOGIN_ERROR_MESSAGES', response.data.errors)
+      context.commit('setLoginErrorMessages', response.data.errors)
     } else {
       context.commit('error/setCode', response.status, {
         root: true
@@ -72,32 +72,32 @@ const actions = {
   },
 
   async logout(context) {
-    context.commit('SET_API_STATUS', null)
+    context.commit('setApiStatus', null)
     const response = await axios.post('/api/logout')
 
     if (response.status === OK) {
-      context.commit('SET_API_STATUS', true)
+      context.commit('setApiStatus', true)
       context.commit('setUserLogin', null)
       return false
     }
 
-    context.commit('SET_API_STATUS', false)
+    context.commit('setApiStatus', false)
     context.commit('error/setCode', response.status, {
       root: true
     })
   },
 
   async currentUser(context) {
-    context.commit('SET_API_STATUS', null)
+    context.commit('setApiStatus', null)
     const response = await axios.get('/api/user')
     const user = response.data || null
     if (response.status === OK) {
-      context.commit('SET_API_STATUS', true)
+      context.commit('setApiStatus', true)
       context.commit('setUserLogin', user)
       return false
     }
 
-    context.commit('SET_API_STATUS', false)
+    context.commit('setApiStatus', false)
     context.commit('error/setCode', response.status, {
       root: true
     })

@@ -129,7 +129,7 @@ export default {
       }
     },
     clearError() {
-      this.$store.commit('auth/SET_LOGIN_ERROR_MESSAGES', null)
+      this.$store.commit('auth/setLoginErrorMessages', null)
     }
   },
   computed: {
