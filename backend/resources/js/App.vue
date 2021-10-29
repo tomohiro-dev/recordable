@@ -20,7 +20,7 @@ import NavBar from './components/NavBar.vue'
 import NavDrawer from './components/NavDrawer.vue'
 import MobileNav  from './components/MobileNav.vue'
 
-import { INTERNAL_SERVER_ERROR } from './status'
+import { INTERNAL_SERVER_ERROR } from './plugin/status'
 
 export default {
   components: {

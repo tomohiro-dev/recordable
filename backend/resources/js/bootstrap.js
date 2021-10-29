@@ -1,4 +1,4 @@
-import { getCookieValue } from './status'
+import { getCookieValue } from './plugin/status'
 
 window._ = require('lodash')
 

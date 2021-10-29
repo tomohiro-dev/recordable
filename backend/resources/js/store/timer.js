@@ -1,4 +1,4 @@
-import { OK } from '../status'
+import { OK } from '../plugin/status'
 
 const state = {
   timers: [],
