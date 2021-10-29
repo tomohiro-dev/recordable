@@ -30,7 +30,7 @@ window.Vue = Vue
 Vue.use(Vuetify)
 Vue.use(VueTheMask)
 Vue.use(VueRouter)
-Vue.use(DatetimePicker) //不要なら削除
+Vue.use(DatetimePicker)
 Vue.use(VueLoading)
 
 const createApp = async () => {

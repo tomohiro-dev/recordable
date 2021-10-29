@@ -6,10 +6,10 @@ const state = {
 }
 
 const mutations = {
-  SET_TIMERS(state, timers) {
+  setTimers(state, timers) {
     state.timers = timers
   },
-  SET_ACTIVETIMER(state, bool) {
+  setTimerActive(state, bool) {
     state.active = bool
   }
 }
@@ -24,10 +24,10 @@ const actions = {
 
       return false
     }
-    context.commit('SET_TIMERS', response.data)
+    context.commit('setTimers', response.data)
   },
   fetchActive(context, bool) {
-    context.commit('SET_ACTIVETIMER', bool)
+    context.commit('setTimerActive', bool)
   }
 }
 
