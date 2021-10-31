@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      # - feature/3004_pushImagesToEcr
       - feature/cicd_pushImagesToEcr
 
 env:
