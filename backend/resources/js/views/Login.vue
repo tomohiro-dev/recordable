@@ -9,7 +9,7 @@
         <!-- TODO:次回リリース時に対応↑ -->
       <v-card>
         <v-card-title>
-          <h1>Welcome to Recordable!</h1>
+          <h1 class="display-1 font-weight-bold">Visualize the learning process.</h1>
         </v-card-title>
 
         <v-card-text>
