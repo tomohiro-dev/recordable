@@ -8,6 +8,9 @@ on:
 
 env:
   AWS_REGION: ap-northeast-1
+  IMAGE_TAG: ${{ github.sha }}
+  SYSTEM_NAME: infra
+  SERVICE_NAME: recordable
 
 jobs:
   deploy:
