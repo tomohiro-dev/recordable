@@ -42,7 +42,7 @@ jobs:
         id: cache-composer
         uses: actions/cache@v2
         with:
-          path:backend/vendor
+          path: backend/vendor
           key: composer-v1-${{ hashFiles('backend/composer.lock') }}
 
       - run: docker compose exec -T app composer install -n --prefer-dist --no-dev
@@ -51,8 +51,9 @@ jobs:
       - name: Cache npm
         id: cache-npm-ci
         uses: actions/cache@v2
-        with: path: backend/node_modules
-        key: npm-v1${{ hashFiles('backend/package-lock.json') }}
+        with:
+          path: backend/node_modules
+          key: npm-v1${{ hashFiles('backend/package-lock.json') }}
 
       - run: docker-compose exec -T web npm ci
         if: ${{ !steps.cache-npm-ci.outputs.cache-hit }}
