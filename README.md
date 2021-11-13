@@ -12,6 +12,8 @@
 <img src="https://img.shields.io/badge/-Docker-EEE.svg?logo=docker&style=flat"> 
 
 （下記は次回以降のアップデートで導入予定） \
+※初期リリースでの使用を中止しました。 \
+https://bit.ly/3Djm7ZW \
 <img src="https://img.shields.io/badge/-Terraform-EEE.svg?logo=terraform&logoColor=7B42BC">
 <img src="https://img.shields.io/badge/-GithubActions-EEE.svg?logo=githubactions&logoColor=black">
 
