@@ -10,6 +10,8 @@
 ![mysql 8.0.26](https://img.shields.io/badge/MySQL-8.0.26-blue) 
 ![nginx 1.20.1](https://img.shields.io/badge/nginx-1.20.1-darkgreen) 
 <img src="https://img.shields.io/badge/-Docker-EEE.svg?logo=docker&style=flat"> 
+
+下記は次回以降のアップデートで導入予定 \
 <img src="https://img.shields.io/badge/-Terraform-EEE.svg?logo=terraform&logoColor=7B42BC">
 <img src="https://img.shields.io/badge/-GithubActions-EEE.svg?logo=githubactions&logoColor=black">
 
