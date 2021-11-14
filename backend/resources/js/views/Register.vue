@@ -84,7 +84,8 @@
       </v-card>
     </v-col>
     <v-spacer></v-spacer>
-    <template v-if="registerErrors">
+
+    <!-- <template v-if="registerErrors">
       <v-snackbar v-model="snackbar" multi-line vertical color="error" right bottom>
         <ul v-if="registerErrors.email">
           <li v-for="msg in registerErrors.email" :key="msg">
@@ -98,15 +99,22 @@
         </ul>
         <v-btn text dark @click="snackbar = false">CLOSE</v-btn>
       </v-snackbar>
-    </template>
+    </template> -->
+    <resgister-errors />
+
   </v-row>
 </template>
 
 <script>
+import ResgisterErrors from '../components/snackbar/RegisterErrors.vue'
+
 export default {
+  components: {
+    ResgisterErrors
+  },
   data() {
     return {
-      snackbar: false,
+      // snackbar: false,
       showPassword: false,
       registerForm: {
         name: '',
@@ -144,11 +152,11 @@ export default {
   computed: {
     apiStatus() {
       return this.$store.state.auth.apiStatus
-    },
-    registerErrors() {
-      this.snackbar = true
-      return this.$store.state.auth.registerErrorMessages
     }
+    // registerErrors() {
+    //   this.snackbar = true
+    //   return this.$store.state.auth.registerErrorMessages
+    // }
   }
 }
 </script>
