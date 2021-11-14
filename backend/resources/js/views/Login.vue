@@ -75,26 +75,8 @@
         </v-card-actions>
       </v-card>
     </v-col>
-
     <v-spacer></v-spacer>
-
-    <!-- <template v-if="loginErrors">
-      <v-snackbar v-model="snackbar" multi-line vertical color="error" right bottom>
-        <ul v-if="loginErrors.email">
-          <li v-for="msg in loginErrors.email" :key="msg">
-            <span>{{ msg }}</span>
-          </li>
-        </ul>
-        <ul v-if="loginErrors.password">
-          <li v-for="msg in loginErrors.password" :key="msg">
-            <span>{{ msg }}</span>
-          </li>
-        </ul>
-        <v-btn text dark @click="snackbar = false">CLOSE</v-btn>
-      </v-snackbar>
-    </template> -->
     <LoginErrors />
-
   </v-row>
 </template>
 
@@ -107,7 +89,6 @@ export default {
   },
   data() {
     return {
-      // snackbar: false,
       showPassword: false,
       loginForm: {
         email: '',
