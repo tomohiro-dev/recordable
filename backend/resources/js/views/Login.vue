@@ -77,7 +77,8 @@
     </v-col>
 
     <v-spacer></v-spacer>
-    <template v-if="loginErrors">
+
+    <!-- <template v-if="loginErrors">
       <v-snackbar v-model="snackbar" multi-line vertical color="error" right bottom>
         <ul v-if="loginErrors.email">
           <li v-for="msg in loginErrors.email" :key="msg">
@@ -91,15 +92,22 @@
         </ul>
         <v-btn text dark @click="snackbar = false">CLOSE</v-btn>
       </v-snackbar>
-    </template>
+    </template> -->
+    <LoginErrors />
+
   </v-row>
 </template>
 
 <script>
+import LoginErrors from "../components/snackbar/LoginErrors.vue"
+
 export default {
+  components: {
+    LoginErrors
+  },
   data() {
     return {
-      snackbar: false,
+      // snackbar: false,
       showPassword: false,
       loginForm: {
         email: '',
@@ -135,17 +143,14 @@ export default {
   computed: {
     apiStatus() {
       return this.$store.state.auth.apiStatus
-    },
-    loginErrors() {
-      this.snackbar = true
-      return this.$store.state.auth.loginErrorMessages
     }
+    // loginErrors() {
+    //   this.snackbar = true
+    //   return this.$store.state.auth.loginErrorMessages
+    // }
   }
 }
 </script>
 
-<style scoped>
-ul {
-  list-style: none;
-}
+<style>
 </style>

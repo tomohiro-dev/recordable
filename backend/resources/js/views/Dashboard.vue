@@ -158,7 +158,7 @@
 <script>
 import ICountUp from "vue-countup-v2"
 import moment from "moment"
-import DashboardError from '../components/snackbar/DashboardError.vue'
+import DashboardError from "../components/snackbar/DashboardError.vue"
 
 export default {
   components: {
