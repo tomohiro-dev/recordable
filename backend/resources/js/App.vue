@@ -1,9 +1,5 @@
 <template>
   <v-app>
-    <v-snackbar top v-model="systemErrorSnackbar" color="error">
-      A system error has occurred.
-      <v-btn text @click="systemErrorSnackbar = false">CLOSE</v-btn>
-    </v-snackbar>
     <NavBar />
     <NavDrawer />
     <v-main>
@@ -12,6 +8,7 @@
       </v-container>
     </v-main>
     <MobileNav />
+    <SystemError />
   </v-app>
 </template>
 
@@ -19,6 +16,7 @@
 import NavBar from './components/NavBar.vue'
 import NavDrawer from './components/NavDrawer.vue'
 import MobileNav  from './components/MobileNav.vue'
+import SystemError from './components/snackbar/SystemError.vue'
 
 import { INTERNAL_SERVER_ERROR } from './plugin/status'
 
@@ -26,12 +24,8 @@ export default {
   components: {
     NavBar,
     NavDrawer,
-    MobileNav
-  },
-  data() {
-    return {
-      systemErrorSnackbar: false
-    }
+    MobileNav,
+    SystemError
   },
   computed: {
     errorCode() {
@@ -42,11 +36,11 @@ export default {
     errorCode: {
       handler(val) {
         if (val === INTERNAL_SERVER_ERROR) {
-          this.systemErrorSnackbar = true
+          this.snackbarSystemError = true
           this.$router.push('/500')
         }
       },
-      //createdで呼び出し
+      //beforeCreatedとcreatedの間で呼び出す
       immediate: true
     },
     //同じrouteの異なるパラメータで画面遷移しても、vue-routerは画面を再描画しないのでwatchで監視する
