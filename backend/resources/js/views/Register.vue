@@ -84,6 +84,7 @@
       </v-card>
     </v-col>
     <v-spacer></v-spacer>
+
     <resgister-errors />
 
   </v-row>

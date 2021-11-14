@@ -6,7 +6,7 @@
     </v-col>
     <v-col cols="12" md="5">
       <!-- <v-card elevation="0" style="background-color: var(--v-background-base)"> -->
-        <!-- TODO:次回リリース時に対応↑ -->
+        <!-- TODO:次回リリース時に対応（検討中）-->
       <v-card>
         <v-card-title>
           <h1 class="display-1 font-weight-bold">Visualize the learning process.</h1>
@@ -76,7 +76,9 @@
       </v-card>
     </v-col>
     <v-spacer></v-spacer>
-    <LoginErrors />
+
+    <login-errors/>
+
   </v-row>
 </template>
 
