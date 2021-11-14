@@ -1,6 +1,7 @@
 <template>
   <div v-if="loginErrors">
     <v-snackbar v-model="snackbar" multi-line vertical color="error" right bottom>
+      <!-- TODO: email, password毎に表示するメッセージを変更する 【時期update】-->
       <ul v-if="loginErrors.email">
         <li v-for="msg in loginErrors.email" :key="msg">
           <span>{{ msg }}</span>
