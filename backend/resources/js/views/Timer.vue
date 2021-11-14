@@ -2,8 +2,9 @@
   <div class="body" v-resize="onResize">
     <!-- TODO: snackbarをcomponentとして切り出す（リリース後のアップデート時に実施）-->
     <div v-if="!isEmpty(timers)">
+
       <v-snackbar
-        v-model="snackbar.activeTimer"
+        v-model="snackbar.timerActive"
         :multi-line="true"
         top
         right
@@ -11,11 +12,12 @@
         :color="counter.timer.category_color"
       >
       <strong class="timer-name pr-4">{{ counter.timer.name }}</strong>
-      {{ activeTimerString }}
+      {{ timerActiveString }}
         <v-btn text @click="stopTimer()">
           <v-icon x-large>mdi-stop</v-icon>
         </v-btn>
       </v-snackbar>
+
     </div>
 
     <v-snackbar top v-model="snackbar.done" color="#02E3FF" :multi-line="true">
@@ -127,7 +129,7 @@
                 </template>
 
               <template v-slot:item.time="{ item }">
-                <span v-if="showTimer(item)">{{ activeTimerString }}</span>
+                <span v-if="showTimer(item)">{{ timerActiveString }}</span>
                 <span v-else>{{ calculateTimeSpent(item) }}</span>
               </template>
             </v-data-table>
@@ -712,7 +714,7 @@ export default {
   data() {
     return {
       snackbar: {
-        activeTimer: false,
+        timerActive: false,
         done: false,
         updated: false,
         deleted: false,
@@ -809,7 +811,7 @@ export default {
       page: 1,
       fab: false, //floatingActionBtn（名前変えるかも）
       counter: { seconds: 0, timer: { name: '', category: '' } },
-      activeTimerString: "Calculating...",
+      timerActiveString: "Calculating...",
       newTimerValid: false,
       errorMessage: "",
       mask: '!#XXXXXXXX', //カラーコードの入力制御
@@ -920,24 +922,24 @@ export default {
       );
       this.counter.ticker = setInterval(() => {
         const time = this._readableTimeFromSeconds(++this.counter.seconds)
-        this.activeTimerString = `${time.hours}:${time.minutes}:${time.seconds}`
+        this.timerActiveString = `${time.hours}:${time.minutes}:${time.seconds}`
       }, 1000)
-      this.snackbar.activeTimer = true
+      this.snackbar.timerActive = true
     },
     stopTimer: function() {
       window.axios
         .post(`/api/timers/stop`)
         .then(response => {
-          const activeTimer = this.timers.find(
+          const timerActive = this.timers.find(
             timer => timer.id === this.counter.timer.id
           )
-          // activeTimerをストップ
-          activeTimer.stopped_at = response.data.stopped_at
+          // timerActiveをストップ
+          timerActive.stopped_at = response.data.stopped_at
           // tickerをストップする
           clearInterval(this.counter.ticker)
           this.counter = { seconds: 0, timer: { name: "", category: "" } }
-          this.activeTimerString = "Calculating..."
-          this.snackbar.activeTimer = false;
+          this.timerActiveString = "Calculating..."
+          this.snackbar.timerActive = false;
           this.snackbar.done = true
 
           // confetti
