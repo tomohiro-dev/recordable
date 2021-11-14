@@ -1,8 +1,7 @@
 <template>
   <div class="body" v-resize="onResize">
-    <!-- TODO: snackbarをcomponentとして切り出す（リリース後のアップデート時に実施）-->
+    <!-- TODO: timerActiveのSnackbarをcomponentとして切り出したい（リリース後のアップデート時に実施）-->
     <div v-if="!isEmpty(timers)">
-
       <v-snackbar
         v-model="snackbar.timerActive"
         :multi-line="true"
@@ -17,9 +16,9 @@
           <v-icon x-large>mdi-stop</v-icon>
         </v-btn>
       </v-snackbar>
-
     </div>
 
+    <!-- TODO: snackbarをcomponentとして切り出す（リリース後のアップデート時に実施）-->
     <v-snackbar top v-model="snackbar.done" color="#02E3FF" :multi-line="true">
       Good Job! You've learned a good deal today. Let's Try to beat your personal best again tomorow!
     </v-snackbar>
