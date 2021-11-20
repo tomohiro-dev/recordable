@@ -270,6 +270,19 @@ npm -v
 node -v
 ```
 
+## Buildコマンド
+dockerfileのビルドコマンド\
+appコンテナをビルド
+```
+docker build -t app -f infra/docker/php/Dockerfile .
+```
+
+webコンテナをビルド
+```
+docker build -t web -f infra/docker/nginx/Dockerfile .
+```
+
+
 -----------
 
 ## カラーコード
