@@ -1,2 +1,5 @@
 # Docker Compose
 .env
+
+# AWS ECS task definition
+ecs-task-definition-for-command.json
