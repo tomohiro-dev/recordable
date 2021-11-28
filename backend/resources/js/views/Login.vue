@@ -6,7 +6,7 @@
     </v-col>
     <v-col cols="12" md="5">
       <!-- <v-card elevation="0" style="background-color: var(--v-background-base)"> -->
-        <!-- TODO:次回リリース時に対応↑ -->
+        <!-- TODO:次回リリース時に対応（検討中）-->
       <v-card>
         <v-card-title>
           <h1 class="display-1 font-weight-bold">Visualize the learning process.</h1>
@@ -75,31 +75,22 @@
         </v-card-actions>
       </v-card>
     </v-col>
-
     <v-spacer></v-spacer>
-    <template v-if="loginErrors">
-      <v-snackbar v-model="snackbar" multi-line vertical color="error" right bottom>
-        <ul v-if="loginErrors.email">
-          <li v-for="msg in loginErrors.email" :key="msg">
-            <span>{{ msg }}</span>
-          </li>
-        </ul>
-        <ul v-if="loginErrors.password">
-          <li v-for="msg in loginErrors.password" :key="msg">
-            <span>{{ msg }}</span>
-          </li>
-        </ul>
-        <v-btn text dark @click="snackbar = false">CLOSE</v-btn>
-      </v-snackbar>
-    </template>
+
+    <login-errors/>
+
   </v-row>
 </template>
 
 <script>
+import LoginErrors from "../components/snackbar/LoginErrors.vue"
+
 export default {
+  components: {
+    LoginErrors
+  },
   data() {
     return {
-      snackbar: false,
       showPassword: false,
       loginForm: {
         email: '',
@@ -135,17 +126,14 @@ export default {
   computed: {
     apiStatus() {
       return this.$store.state.auth.apiStatus
-    },
-    loginErrors() {
-      this.snackbar = true
-      return this.$store.state.auth.loginErrorMessages
     }
+    // loginErrors() {
+    //   this.snackbar = true
+    //   return this.$store.state.auth.loginErrorMessages
+    // }
   }
 }
 </script>
 
-<style scoped>
-ul {
-  list-style: none;
-}
+<style>
 </style>

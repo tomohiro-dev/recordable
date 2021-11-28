@@ -10,6 +10,10 @@
 ![mysql 8.0.26](https://img.shields.io/badge/MySQL-8.0.26-blue) 
 ![nginx 1.20.1](https://img.shields.io/badge/nginx-1.20.1-darkgreen) 
 <img src="https://img.shields.io/badge/-Docker-EEE.svg?logo=docker&style=flat"> 
+
+（下記は次回以降のアップデートで導入予定） \
+※初期リリースでの使用を中止しました。 \
+https://bit.ly/3Djm7ZW \
 <img src="https://img.shields.io/badge/-Terraform-EEE.svg?logo=terraform&logoColor=7B42BC">
 <img src="https://img.shields.io/badge/-GithubActions-EEE.svg?logo=githubactions&logoColor=black">
 
@@ -23,8 +27,11 @@ Asana内で管理している、他のチケット番号と被らないよう注
 
 ## Project構成
 本Projectは、laravel-vue-docker-template-v2の`main` branchをベースに作成しています。 \
-環境構築手順は**Docker container build**以降を参考に進めてください。 \
-また、容量の肥大化を予防するために、Infrastructure（以下Infra）は別Repositoryで作成しています。 \
+環境構築手順は下記の**Docker container build**以降を参考に進めてください。 
+
+（下記は次回以降のアップデートで導入予定） \
+※初期リリースでの使用を中止しました。 \
+また、容量の肥大化を予防するために、Infrastructure（以下Infra）は別Repositoryで作成を検討中。 \
 Infraの設定は**recordable-infra** Repository下で`main` branchから独自でBranchを切って開発を進めてください。 \
 https://github.com/soregashi-27/recordable-infra
 
@@ -262,6 +269,19 @@ npm -v
 ```
 node -v
 ```
+
+## Buildコマンド
+dockerfileのビルドコマンド\
+appコンテナをビルド
+```
+docker build -t app -f infra/docker/php/Dockerfile .
+```
+
+webコンテナをビルド
+```
+docker build -t web -f infra/docker/nginx/Dockerfile .
+```
+
 
 -----------
 

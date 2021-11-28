@@ -1,10 +1,10 @@
 <template>
   <div>
-    <v-snackbar top v-model="snackbar.error" color="error">
+    <!-- <v-snackbar top v-model="snackbar.error" color="error">
       An error has occurred. message：{{ errorMessage }}
       <v-btn text @click="snackbar.error = false">CLOSE</v-btn>
-    </v-snackbar>
-
+    </v-snackbar> -->
+    <DashboardError />
     <span class="title">
       <v-icon class="mr-2 mb-1" color="#02E3FF">mdi-archive-clock</v-icon>My Record
     </span>
@@ -158,10 +158,12 @@
 <script>
 import ICountUp from "vue-countup-v2"
 import moment from "moment"
+import DashboardError from "../components/snackbar/DashboardError.vue"
 
 export default {
   components: {
-    ICountUp
+    ICountUp,
+    DashboardError
   },
   data() {
     return {
