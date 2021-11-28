@@ -3,3 +3,4 @@
 
 # AWS ECS task definition
 ecs-task-definition-for-command.json
+ecs-task-definition-for-web.json
