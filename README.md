@@ -271,7 +271,10 @@ node -v
 ```
 
 ## Buildコマンド
-dockerfileのビルドコマンド\
+dockerfileのビルドコマンド \
+ECRへpushする前は使う \
+※github actionsで自動化したいところ
+
 appコンテナをビルド
 ```
 docker build -t app -f infra/docker/php/Dockerfile .
@@ -312,15 +315,17 @@ docker compose down --rmi all --volumes --remove-orphans
 
 ### Laravelのキャッシュクリアコマンド
 ```
-// 基本これ2つ
+// 基本これ1つ
 php artisan cache:clear
-php artisan config:clear
 
 //Routingの部分を実装しているとき
 php artisan route:clear
 
 //Viewの部分を実装しているとき
 php artisan view:clear
+
+//基本つかわない（本番環境を使う時に使う場合がある）
+php artisan config:clear
 ```
 
 ### `"ERR! code ELIFECYCLE"`が発生した時
