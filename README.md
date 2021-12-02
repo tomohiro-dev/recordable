@@ -355,6 +355,15 @@ npm install
 npm run dev
 ```
 
+## ロゴデザインについて
+立体的なデザインにした理由としては、ついボタンを押したくなるような見た目は何かを \
+考えた時に、「立体的なものであれば無意識に押したくなるのでは？」と考えて自ら作成しました。 \
+ターコイズブルーを選んだ理由は、色彩心理学の観点から「創造性や表現力」を強化する働きがあると \
+言われていることがきっかけです。「-able」を強調しました。
+日本語学習の目的は様々ですが、自己実現の手段の一つになるはずです。 \
+「日本語を学習したい！」という初心を忘れず、日本語を創造性や自己表現をするツールにしてほしい \
+という思いから生まれたデザインです。
+
 ## Credit
 Big thanks to Jonathan(Non-developer), who is a my language exchange mate living in Austria. \
 We are learning English and Japanese. We make this app together. \
