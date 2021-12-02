@@ -1,4 +1,4 @@
-<img src="https://user-images.githubusercontent.com/51843368/144446810-168f713c-f568-4dbc-9216-f171a444f516.png" width="500px" align="center">
+<img src="https://user-images.githubusercontent.com/51843368/144446810-168f713c-f568-4dbc-9216-f171a444f516.png" width="500px" padding="30px" align="center">
 
 # Recordable
 日本語学習の仕組みを創るためのサービス提供プロジェクト。
