@@ -28,7 +28,7 @@ Build errorが出た場合は、エラーの内容に従って都度修正を行
 Asana内で管理している、他のチケット番号と被らないよう注意してください。
 
 ## Project構成
-本Projectは、laravel-vue-docker-template-v2の`main` branchをベースに作成しています。 \
+本Projectは、laravel6-vue2-docker-template-v2の`main` branchをベースに作成しています。 \
 環境構築手順は下記の**Docker container build**以降を参考に進めてください。 
 
 （下記は次回以降のアップデートで導入予定） \
