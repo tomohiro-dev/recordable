@@ -10,7 +10,7 @@
     <title>Recordable</title>
 
     <script
-        src="{{ asset('js/app.js') }}"
+        src="{{ mix('js/app.js') }}"
         defer
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.2.0/dist/confetti.browser.min.js"></script>
@@ -19,7 +19,7 @@
 
     <link
         rel="stylesheet"
-        href="{{asset('css/app.css')}}"
+        href="{{ mix('css/app.css') }}"
     >
 
     <link
