@@ -83,12 +83,12 @@ php artisan -V
 composer require --dev friendsofphp/php-cs-fixer:v2.19.x
 ```
 
-バージョンの確認
+バージョンを確認する
 ```
 ./vendor/bin/php-cs-fixer --version
 ```
 
-ローカルホストへ接続
+ローカルホストへ接続する
 ```
 http://127.0.0.1/
 ```
@@ -152,7 +152,7 @@ docker compose up -d --build
 docker ps -a
 ```
 
-### バージョンの確認
+### Versionを確認する
 ・Laravel
 Docker立ち上げ後確認
 ```
@@ -197,7 +197,7 @@ http://127.0.0.1:80/
 http://127.0.0.1:8080/
 ```
 
-## データベースの設定
+## Databaseをset upする
 ### `.env`ファイルの設定を確認する
 `.env.example`ファイルを書き換えてコピーする \
 （事前に終わっていたら飛ばす）
@@ -212,7 +212,11 @@ php artisan migrate
 http://127.0.0.1:8080/
 ```
 
-## ログの設定
+## Logを設定する
+Docker composeでコンテナを立ち上げている間に、コマンドプロンプトで \
+Logを表示させる。
+**※この場合はBack groundでコンテナを立ちあげてください。**
+
 ### Laravelのログをコンテナログに表示させる
 `backend/.env` を修正する
 ```
