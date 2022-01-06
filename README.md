@@ -44,7 +44,7 @@ Asana内で管理している、他のチケット番号と被らないよう注
 環境構築手順は下記の**Docker container build**以降を参考に進めてください。 
 
 （下記は次回以降のアップデートで導入予定） \
-※初期リリースでの使用を中止しました。 \
+**※初期リリースでの使用を中止しました。** \
 また、容量の肥大化を予防するために、Infrastructure（以下Infra）は別Repositoryで作成を検討中。 \
 Infraの設定は**recordable-infra** Repository下で`main` branchから独自でBranchを切って開発を進めてください。 \
 https://github.com/soregashi-27/recordable-infra
