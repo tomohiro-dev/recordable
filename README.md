@@ -54,6 +54,11 @@ https://github.com/soregashi-27/recordable-infra
 infraにterraformを追加したら書きたい \
 【TODO:ディレクトリツリーを追加する】
 
+## 開発環境のURL
+```
+http://localhost/login
+```
+
 ## 環境構築手順
 
 ### Docker container build
